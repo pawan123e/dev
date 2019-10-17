@@ -1,0 +1,27 @@
+{
+  "name": "devconnectors",
+  "version": "1.0.0",
+  "description": "connect to the devs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "prodserver": "set NODE_ENV=production&& nodemon server",
+    "server": "set NODE_ENV=development&& nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run prodserver\" \"npm run client\""
+  },
+  "author": "pawan",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^4.1.2",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "gravatar": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.1",
+    "nodemon": "^1.19.2",
+    "request": "^2.88.0",
+    "validator": "^11.1.0"
+  }
+}
