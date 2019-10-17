@@ -1,13 +1,15 @@
 import React , {useEffect}from 'react'
 import {connect} from 'react-redux'
-import {getAllProfiles} from '../../actions/profile'
+import {getAllProfiles, clearProfile} from '../../actions/profile'
 import Spinner from '../layout/Spinner'
 import Profiles from '../profiles/Profiles'
-const Developers = ({getAllProfiles, profiles}) => {
+const Developers = ({getAllProfiles, profiles, clearProfile}) => {
 
     useEffect(() => {
         document.title = 'Developers'
+        clearProfile();
         getAllProfiles();
+
      },[getAllProfiles])
 
     return (
@@ -29,4 +31,4 @@ const mapStateToProps = state => ({
     profiles: state.profile.profiles
 })
 
-export default connect(mapStateToProps, {getAllProfiles})(Developers)
+export default connect(mapStateToProps, {getAllProfiles, clearProfile})(Developers)

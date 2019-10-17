@@ -20,17 +20,16 @@ const Register = ({error, isAuthenticated, setAlert, clearError, registerUser, h
     
     useEffect(() => {
         document.title = 'Welcome to Dev Connector'
-        clearProfile();
         if(isAuthenticated) {
             history.push('/dashboard')
         }
-
-        if(error === 'User already exists') {
+        clearProfile();
+       if(error === 'User already exists') {
             setAlert(error, 'danger');      
             clearError();
         } 
        
-    }, [ error])
+    }, [ error, isAuthenticated])
     
     const onChange = e => setUser({...user, [e.target.name]: e.target.value})
     
