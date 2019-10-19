@@ -2,7 +2,10 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {deletePost, likePost, unLikePost} from '../../actions/posts'
-const PostItem = ({post, user, deletePost, likePost, unLikePost}) => {
+const PostItem = ({post, user, deletePost, likePost, unLikePost, error}) => {
+
+   
+
     return (
         <div className="posts" key={post._id}>
            <div className="post bg-white p-1 my-1">
@@ -23,11 +26,11 @@ const PostItem = ({post, user, deletePost, likePost, unLikePost}) => {
                 <p className="post-date">
                    Posted on {post.date.split('').splice(0,10).join('').toString().split('-').join('/')}
                </p>
-               <button type="button" className="btn btn-light" onClick= {() => likePost(post._id)}>
+               <button type="button" className="btn btn-light" onClick= {() => likePost(post._id, post.like, user._id)}>
                  <i className="fas fa-thumbs-up"></i>
                  <span>{post.like.length > 0 && <span>{post.like.length}</span>}</span>
                </button>
-               <button type="button" className="btn btn-light" onClick= {() => unLikePost(post._id)}>
+               <button type="button" className="btn btn-light" onClick= {() => unLikePost(post._id, post.like, user._id)}>
                  <i className="fas fa-thumbs-down"></i>
                </button>
                <Link to= {`/posts/${post._id}`} className="btn btn-primary">
@@ -49,4 +52,8 @@ const PostItem = ({post, user, deletePost, likePost, unLikePost}) => {
     )
 }
 
-export default connect(null, {deletePost, likePost, unLikePost})(PostItem)
+const mapStateToProps = state => ({
+  error: state.post.error
+})
+
+export default connect(mapStateToProps, {deletePost, likePost, unLikePost})(PostItem)

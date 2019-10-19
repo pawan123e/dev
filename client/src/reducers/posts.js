@@ -1,4 +1,4 @@
-import {CREATE_POST, GET_POSTS, POST_ERROR, DELETE_POST, UPDATE_LIKES, GET_POST, CREATE_COMMENT, DELETE_COMMENT, DELETE_PROFILE} from '../actions/types';
+import {CREATE_POST, GET_POSTS, POST_ERROR, DELETE_POST, UPDATE_LIKES, GET_POST, CREATE_COMMENT, DELETE_COMMENT, DELETE_PROFILE, LIKE_POST, UNLIKE_POST} from '../actions/types';
 
 const initialState = {
     posts: [],
@@ -35,8 +35,9 @@ export default (state= initialState, action) => {
         case UPDATE_LIKES: 
               return {
                   ...state,
+                  posts: state.posts.map(post => post._id === action.payload.id ? {...post, like: action.payload.like}: post),
                   loading: false,
-                  posts: state.posts.map(post => post._id === action.payload.id ? {...post, like: action.payload.like}: post) 
+                  error: 'No error'
               } 
         case GET_POST: 
               return {
@@ -52,7 +53,18 @@ export default (state= initialState, action) => {
                   post: {...state.post, comments: action.payload}
               }
         }
-                   
+        case LIKE_POST: 
+               return {
+                   ...state,
+                   loading: false,
+                   posts: state.posts.map(post => post._id === action.payload.id ? {...post, like: [...post.like, action.payload.liking]}: post)
+               }    
+        case UNLIKE_POST: 
+               return {
+                   ...state,
+                   loading: false,
+                   posts: state.posts.map(post => post._id === action.payload.id ? {...post, like: post.like.filter(item => item.user !== action.payload.user)}: post)
+               }             
         default: 
             return state;
     }
