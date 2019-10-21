@@ -13,7 +13,8 @@ export default (state=initialState, action) => {
           return {
               ...state,
               profile: action.payload,
-              loading: false
+              loading: false,
+              error: null
           }
         case PROFILE_ERROR:     
            return {
@@ -33,12 +34,14 @@ export default (state=initialState, action) => {
             return {
                 ...state,
                 profile: action.payload,
-                loading: false
+                loading: false,
+                error: null
             }
         case GET_PROFILES: 
             return {
                 ...state,
-                profiles: action.payload
+                profiles: action.payload,
+                error: null
             }         
        default :
          return state;   

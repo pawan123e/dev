@@ -7,7 +7,10 @@ import {
        LOGIN_SUCCESS,
        LOGIN_FAIL,
        LOGOUT,
-       DELETE_PROFILE
+       DELETE_PROFILE,
+       FORGOT_PASSWORD,
+       FORGOT_PASSWORD_ERROR,
+       CLEAR_FORGOT_PASSWORD
     } from '../actions/types';
 
 const initialState = {
@@ -16,7 +19,9 @@ const initialState = {
     loading: true,
     user: null,
     error: null,
-    user: null
+    user: null,
+    email: null,
+    recoverToken: null
 }
 
 export default (state = initialState, action) => {
@@ -29,7 +34,9 @@ export default (state = initialState, action) => {
                ...action.payload,
                isAuthenticated: true,
                loading: false,
-               error: null
+               error: null,
+               recoverToken:null,
+               email: null
            }
         case REGISTER_FAIL:
         case LOGIN_FAIL:
@@ -43,20 +50,50 @@ export default (state = initialState, action) => {
                 isAuthenticated: false,
                 loading: true,
                 user: null,
-                error:action.payload
+                error:action.payload,
+                recoverToken:null,
+                email: null
             } 
         case CLEAR_ERRORS: 
             return {
                 ...state,
-                error: null
+                error: null,
+                recoverToken:null,
+                email: null
             }
         case GET_USER: 
              return {
                  ...state,
                  isAuthenticated: true,
                  loading: false,
-                 user: action.payload
-             }       
+                 user: action.payload,
+                 recoverToken:null,
+                 email: null
+             } 
+        case FORGOT_PASSWORD: 
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                email: action.payload.email,
+                recoverToken: action.payload.token
+            }    
+        case FORGOT_PASSWORD_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+                email: null,
+                recoverToken:null
+            } 
+        case CLEAR_FORGOT_PASSWORD:
+            return {
+                ...state,
+                loading: true,
+                error: null,
+                email: null,
+                recoverToken:null
+            }              
         default :
            return state;   
     }

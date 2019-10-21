@@ -1,4 +1,15 @@
-import {CREATE_POST, GET_POSTS, POST_ERROR, DELETE_POST, UPDATE_LIKES, GET_POST, CREATE_COMMENT, DELETE_COMMENT, LIKE_POST, UNLIKE_POST } from './types';
+import {
+    CREATE_POST, 
+    GET_POSTS, 
+    POST_ERROR,
+    DELETE_POST, 
+    UPDATE_LIKES, 
+    GET_POST,
+    CLEAR_POST, 
+    CREATE_COMMENT,
+    DELETE_COMMENT, 
+    LIKE_POST, 
+    UNLIKE_POST } from './types';
 import {setAlert} from './alert'
 import axios from 'axios'
 
@@ -59,11 +70,13 @@ export const deletePost = id => async dispatch => {
 export const likePost = (id, likes, user) => async dispatch => {
     const finds = likes.find(like => like.user === user);
     if(!finds)
-    {
+    {   setTimeout(() => {
         dispatch({
         type: LIKE_POST,
         payload: {id:id, liking: {id: id, user: user}}
     })
+    }, 100)
+        
     }
     
     try {
@@ -84,11 +97,13 @@ export const likePost = (id, likes, user) => async dispatch => {
 export const unLikePost = (id, likes, user) => async dispatch => {
     const finds = likes.find(like => like.user === user);
     if(finds)
-    {
+    {   setTimeout(() => { 
         dispatch({
         type: UNLIKE_POST,
         payload: {id: id, user: user}
     })
+    },100)
+        
     }
     try {
         const res = await axios.put(`/api/posts/unlike/${id}`);
@@ -118,6 +133,12 @@ export const getPostById = id => async dispatch => {
             payload: err.response.data.message
             }) 
     }
+}
+
+export const clearPost = () => dispatch => {
+    dispatch({
+        type: CLEAR_POST
+    })
 }
 
 export const createComment = (id, text) => async dispatch => {

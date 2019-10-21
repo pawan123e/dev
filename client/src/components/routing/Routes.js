@@ -7,6 +7,9 @@ import ErrorPage from '../layout/ErrorPage'
 
 import Register from '../auth/Register';
 import Login from '../auth/Login';
+import ForgotPassword from '../auth/ForgotPassword'
+import RecoverPassword from '../auth/RecoverPassword'
+import ResetPassword from '../auth/ResetPassword'
 
 import Dashboard from '../dashboard/Dashboard'
 import PrivateRoute from './PrivateRoute'
@@ -26,6 +29,9 @@ const Routes = () => {
              <Route exact path="/login" component={Login}/>
              <Route exact path="/profiles" component={Developers}/>
              <Route exact path="/profiles/:id" component={CurrentProfile}/>
+             <Route exact path='/forgotPassword' component={ForgotPassword}/>
+             <Route exact path='/recoverPassword' component={RecoverPassword}/>
+             <Route exact path='/resetPassword' component={ResetPassword}/>
              <PrivateRoute exact path="/dashboard" component={Dashboard}/>
              <PrivateRoute exact path='/create-profile' component={CreateProfile}/>
              <PrivateRoute exact path='/edit-profile' component={EditProfile}/>

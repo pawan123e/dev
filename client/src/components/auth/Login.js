@@ -21,7 +21,7 @@ const Login = ({loginUser, setAlert, error, isAuthenticated, history, clearProfi
         if(error === 'Invalid credentials') {
             setAlert(error, 'danger')
         }
-    }, [error])
+    }, [error, isAuthenticated])
 
     const {email, password} = user;
     
@@ -68,6 +68,11 @@ const Login = ({loginUser, setAlert, error, isAuthenticated, history, clearProfi
             <p className="my-1">
                 Don't have an account? <Link to='/register'>
                     Sign Up
+                </Link>
+            </p>
+            <p className="my-1">
+                <Link to='/forgotPassword'>
+                   Forgot Password?
                 </Link>
             </p>
         </>

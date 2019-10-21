@@ -80,7 +80,7 @@ const Register = ({error, isAuthenticated, setAlert, clearError, registerUser, h
                     name='password' 
                     onChange={onChange}
                     value={password}
-                    minLength='6'
+                    minLength='8'
                     />
                 </div>
                 <div className="form-group">

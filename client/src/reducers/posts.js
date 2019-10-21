@@ -1,4 +1,4 @@
-import {CREATE_POST, GET_POSTS, POST_ERROR, DELETE_POST, UPDATE_LIKES, GET_POST, CREATE_COMMENT, DELETE_COMMENT, DELETE_PROFILE, LIKE_POST, UNLIKE_POST} from '../actions/types';
+import {CREATE_POST, GET_POSTS, POST_ERROR, DELETE_POST, UPDATE_LIKES, GET_POST, CREATE_COMMENT, DELETE_COMMENT, DELETE_PROFILE, LIKE_POST, UNLIKE_POST, CLEAR_POST} from '../actions/types';
 
 const initialState = {
     posts: [],
@@ -44,7 +44,12 @@ export default (state= initialState, action) => {
                   ...state,
                   loading: false,
                   post: action.payload
-              }  
+              } 
+        case CLEAR_POST: 
+              return {
+                  ...state,
+                  post: null
+              }       
         case CREATE_COMMENT:
         case DELETE_COMMENT:     {
               return {
