@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {getAllPosts, createPost, deletePost, likePost, unLikePost, clearPost} from '../../actions/posts'
+import {getAllPosts, createPost,  clearPost} from '../../actions/posts'
 import Spinner from '../layout/Spinner'
 import PostItem from './PostItem'
 import PostForm from './PostForm'
@@ -30,4 +30,4 @@ const mapStateToProps = state => ({
     user: state.auth.user
 })
 
-export default connect(mapStateToProps, {getAllPosts, clearPost, createPost, deletePost, likePost, unLikePost})(Post)
+export default connect(mapStateToProps, {getAllPosts, clearPost, createPost})(Post)

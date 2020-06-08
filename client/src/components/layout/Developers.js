@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {getAllProfiles, clearProfile} from '../../actions/profile'
 import Spinner from '../layout/Spinner'
 import Profiles from '../profiles/Profiles'
+import styled from 'styled-components'
+
 const Developers = ({getAllProfiles, profiles, clearProfile}) => {
 
     useEffect(() => {
@@ -13,7 +15,7 @@ const Developers = ({getAllProfiles, profiles, clearProfile}) => {
      },[getAllProfiles])
 
     return (
-        <div style={{width: '60vw', margin: 'auto'}}>
+        <DevWrap>
            <h1 className="large text-primary">Developers</h1>
            <p className="lead">
            <i className="fab fa-connectdevelop"></i> Browse and connect with developers
@@ -25,10 +27,24 @@ const Developers = ({getAllProfiles, profiles, clearProfile}) => {
           }
            </div>
            }
-        </div>)}
+        </DevWrap>)}
 
 const mapStateToProps = state => ({
     profiles: state.profile.profiles
 })
 
 export default connect(mapStateToProps, {getAllProfiles, clearProfile})(Developers)
+
+const DevWrap = styled.div`
+width: 100%;
+padding-left: 10%;
+padding-right: 10%;
+padding-top: 15vh;
+padding-bottom: 10vh;
+background: whitesmoke;
+.profiles{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 4rem;
+}
+` 

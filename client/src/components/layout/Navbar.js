@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logout} from '../../actions/auth';
 
+
 const Navbar = ({isAuthenticated, logout}) => {
 
     const privateNav = (
@@ -27,10 +28,9 @@ const Navbar = ({isAuthenticated, logout}) => {
 
     return (
         <nav className="navbar bg-dark">
-            <h1>
-            <Link to="/" ><i className="fas fa-code"/> DevConnector
+            
+            <Link to="/" className='logo'><i class="fa fa-link fa-2x" aria-hidden="true"></i> <h1 style = {{marginLeft: '0.5rem'}}>DevJunction</h1>
             </Link>
-            </h1>
             {isAuthenticated ? privateNav : publicNav}
         </nav>
     )

@@ -22,7 +22,7 @@ import Posts from '../posts/Post'
 import PostComment from  '../posts/PostComment'
 const Routes = () => {
     return (
-        <section className="container">
+        <section >
         <Alert/>
         <Switch>
              <Route exact path="/register" component={Register}/>
