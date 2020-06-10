@@ -62,12 +62,11 @@ const NavbarWrap = styled.div`
   @media(max-width: 700px) {
       .navbar{
          flex-direction: column; 
-         height: auto;
+         height: 18vh;
          padding-bottom: 0;
          ul{
              width: 95%;
              margin: auto;
-             margin-top: 1rem;
              justify-content: space-between;
              margin-bottom: 0;
              padding: 0;
