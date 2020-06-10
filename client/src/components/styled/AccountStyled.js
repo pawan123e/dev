@@ -109,7 +109,7 @@ align-items: center;
        align-items: center;
        width: 50%;
        margin: auto;
-       z-index: 3;
+       z-index: 1;
        .errorMessage{
            text-align: center;
            width: 100%;
@@ -140,7 +140,7 @@ align-items: center;
     .main {
         width: 90%;
         .accountAlert{ 
-        width: 80%;
+        width: 90%;
     }
     }
     

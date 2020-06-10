@@ -1,44 +1,96 @@
 import React from 'react'
 import {deleteEducation} from '../../actions/profile'
 import {connect} from 'react-redux';
+import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 const Education = ({education, deleteEducation}) => {
 
-    const educations = education.map(edu => 
-        (<tr key={edu._id}>
-        <td>{edu.school}</td>
-        <td className="hide-sm">{edu.degree}</td>
-        <td className="hide-sm">
-          {edu.from.split('').splice(0,10).join('').toString().split('-').join('/')} - 
-          {edu.current ? 'Now' : 
-          edu.to.split('').splice(0,10).join('').toString().split('-').join('/')}
-        </td>
-        <td>
-          <button 
-          onClick = {() => deleteEducation(edu._id)}
-          className="btn btn-danger">
-          Delete
+return (
+  <EducationWrap>
+    <div className="headPart">
+      <h2 className="heading">Education</h2>
+      <Link to="/add-education">
+        <i className="fas fa-plus"></i>
+      </Link>
+    </div>
+    {education.map((edu,idx) => (
+      <div className={(idx === (education.length - 1)) ? 'eduPart': 'eduPart yesBorder'} id={edu._id} >
+        <div className="eduDetail">
+          <p className="eduSchool">{edu.school}</p>
+          <p className="eduDegree">{edu.degree} {', '} {edu.fieldofstudy}</p>
+          <p className="eduDate">
+            {edu.from
+              .split("")
+              .splice(0, 10)
+              .join("")
+              .toString()
+              .split("-")
+              .join("/")}{" "}
+            -
+            {edu.current
+              ? "Now"
+              : edu.to
+                  .split("")
+                  .splice(0, 10)
+                  .join("")
+                  .toString()
+                  .split("-")
+                  .join("/")}{" "}
+          </p>
+        </div>
+        <div className="delEdu">
+          <button
+            onClick={() => deleteEducation(edu._id)}
+            className="btn btn-danger"
+          >
+            Delete
           </button>
-        </td>
-        </tr>))
-
-    return ( <>
-             <h2 className="my-2">Education Credentials</h2>
-             <table className="table">
-
-             <thead>
-             <tr>
-             <th>School</th>
-             <th className="hide-sm">Degree</th>
-             <th className="hide-sm">Years</th>
-             </tr>
-             </thead>
-
-             <tbody>
-             {educations}   
-             </tbody>
-
-             </table>
-             </>)
+        </div>
+      </div>
+    ))}
+  </EducationWrap> 
+);
 }
 
 export default connect(null, {deleteEducation})(Education)
+
+const EducationWrap = styled.div`
+width: 90%;
+margin: auto;
+  .headPart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    i {
+      color: #0e9aa7;
+      cursor: pointer;
+    }
+    .heading {
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+  }
+  .yesBorder{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    // padding-bottom: 2rem;
+
+  }
+  .eduPart {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    align-items: center;
+    .eduDetail{
+      .eduSchool{
+        font-size: 1rem;
+        font-weight: 700;
+      }
+      .eduDegree, .eduDate, .eduLocation{
+        font-size: 0.85rem;
+      }
+      .eduDate, .eduLocation{
+        color: #808080;
+      }
+    }
+  }
+`;

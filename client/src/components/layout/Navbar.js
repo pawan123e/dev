@@ -52,7 +52,7 @@ const NavbarWrap = styled.div`
     align-items: center;
     padding: 0.7rem 2rem;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
     top: 0;
     border-bottom: solid 1px var(--primary-color);
@@ -63,6 +63,7 @@ const NavbarWrap = styled.div`
       .navbar{
          flex-direction: column; 
          height: 18vh;
+         height: 105px;
          padding: 0;
          padding-top: 0.5rem;
          ul{
