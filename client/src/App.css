@@ -42,7 +42,7 @@ img {
   margin: auto;
   overflow: hidden;
   padding: 0 2rem;
-  margin-top: 6rem;
+  padding-top: 4rem;
   margin-bottom: 3rem;
 }
 
@@ -301,20 +301,7 @@ button {
 }
 
 /* Navbar */
-.navbar {
-  display: flex;
-  height: 10vh;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.7rem 2rem;
-  position: fixed;
-  z-index: 1;
-  width: 100%;
-  top: 0;
-  border-bottom: solid 1px var(--primary-color);
-  opacity: 0.9;
-  color: var(--text-color);
-}
+
 
 .navbar ul {
   display: flex;

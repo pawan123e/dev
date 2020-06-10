@@ -1,10 +1,10 @@
 import React,{useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
-import {loginUser} from '../../actions/auth';
-import {setAlert} from '../../actions/alert';
+import {loginUser, clearError } from '../../actions/auth';
 import {clearProfile} from '../../actions/profile'
-const Login = ({loginUser, setAlert, error, isAuthenticated, history, clearProfile}) => {
+import AccountWrap from '../styled/AccountStyled'
+const Login = ({loginUser, error, isAuthenticated, history, clearProfile, clearError}) => {
   
     const [user, setUser] = useState({
         email: '',
@@ -19,7 +19,9 @@ const Login = ({loginUser, setAlert, error, isAuthenticated, history, clearProfi
        }
 
         if(error === 'Invalid credentials') {
-            setAlert(error, 'danger')
+            setAlert(true)
+            setMessage(error)
+            setLoading(false);
         }
     }, [error, isAuthenticated])
 
@@ -29,17 +31,37 @@ const Login = ({loginUser, setAlert, error, isAuthenticated, history, clearProfi
     
     const onSubmit = e => {
         e.preventDefault();
+        setLoading(true);
         loginUser(user);
     }
 
+    const [alert, setAlert]  = useState(false);
+    const [message, setMessage] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if(alert) {
+          setTimeout(() => {
+            setAlert(false);
+            clearError()
+          },5000)
+        }
+  },[alert])
+
+
+
     return (
-        <>
-            <h1 className="large text-primary">Sign In</h1>
-            <p className="lead">
-                <i className="fas fa-user"/> Login Your Account
-            </p>
+        <AccountWrap type = 'login'>
+            <div className='main'>
+            <div className='upperPart'>
+            <h1 className="heading">Sign In</h1>
+            <img src = {require('../../img/authenticate.jpg')} alt = 'authenticateImg'/>
+            </div>
+            <div className='lowerPart'>
             <form onSubmit={onSubmit} className="form">
-                <div className="form-group">
+                <div className='formInput'>
+                    <span>Email</span>
+                <div className="inputForm">
                     <input 
                     type="email" 
                     placeholder='Email Address'
@@ -48,11 +70,12 @@ const Login = ({loginUser, setAlert, error, isAuthenticated, history, clearProfi
                     value={email}
                     required
                     />
-                    <small className="form-text">
-                        This site uses Gravatar so if you want a profile image, use a Gravatar email
-                    </small>
+                    <span className='line'></span>
                 </div>
-                <div className="form-group">
+                </div>
+                <div className='formInput'>
+                <span>Password</span>
+                <div className="inputForm">
                     <input 
                     type="password" 
                     placeholder='Password'
@@ -61,21 +84,33 @@ const Login = ({loginUser, setAlert, error, isAuthenticated, history, clearProfi
                     value={password}
                     minLength='8'
                     />
+                    <span className='line'></span>
                 </div>
-                 <input type="submit" className='btn btn-primary'
-                value='Login'/>
-            </form>
-            <p className="my-1">
-                Don't have an account? <Link to='/register'>
-                    Sign Up
-                </Link>
-            </p>
-            <p className="my-1">
+                </div>
+                <div className='btns'>
+                     <button type="submit" disable = {error}>
+                     {loading ? 'Loading...' : 'Login'}
+                </button>
+                <p className="my-1">
                 <Link to='/forgotPassword'>
                    Forgot Password?
                 </Link>
             </p>
-        </>
+                </div>
+               
+            </form>
+            <p className="my-1 link">
+                Don't have an account? <Link to='/register'>
+                    Sign Up
+                </Link>
+            </p>
+            </div>
+            {alert && <div className='accountAlert'> 
+        <i className="fas fa-info-circle"></i>
+        <p className='errorMessage'>{message}</p>
+        </div>}
+            </div>
+        </AccountWrap>
     )
 }
 
@@ -84,4 +119,4 @@ const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
 })
 
-export default connect(mapStateToProps, {loginUser, setAlert, clearProfile})(Login)
+export default connect(mapStateToProps, {loginUser, clearProfile, clearError})(Login)

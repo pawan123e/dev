@@ -42,9 +42,12 @@ padding-right: 10%;
 padding-top: 15vh;
 padding-bottom: 10vh;
 background: whitesmoke;
+min-height: 100vh;
 .profiles{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+    align-items: center;
+    justify-content: center;
     grid-gap: 4rem;
 }
 ` 

@@ -48,17 +48,19 @@ const errorControl = (err, req, res, next) =>{
       err.statusCode = err.statusCode || 500;
       err.status = err.status || 'error'
           
-      if(process.env.NODE_ENV === 'development'){
+      if(process.env.NODE_ENV === 'production'){
         let error = {...err}
+        console.log(error.code);
         error.message = err.message;
         if(error.name === 'CastError') error = castError();
           devError(error, res);
           
       }
 
-      else if(process.env.NODE_ENV === 'production'){
+      else if(process.env.NODE_ENV === 'development'){
           let error = {...err}
           error.message = err.message;
+          console.log(error.code);
           if(error.code === 11000) error = duplicateData(error);
           if(error.name === 'ValidationError') error = validationError(error);
           if(error.name === 'CastError') error = castError();

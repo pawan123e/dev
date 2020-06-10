@@ -1,110 +1,159 @@
-import React,{useState, useEffect} from 'react'
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom'
-import {setAlert} from '../../actions/alert'
-import {clearProfile} from '../../actions/profile'
-import {
-        registerUser, 
-        clearError
-    } from '../../actions/auth'
-const Register = ({error, isAuthenticated, setAlert, clearError, registerUser, history, clearProfile}) => {
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { clearProfile } from "../../actions/profile";
+import AccountWrap from "../styled/AccountStyled";
+import { registerUser, clearError } from "../../actions/auth";
 
-    const [user, setUser] = useState({
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-    })
+const Register = ({
+  error,
+  isAuthenticated,
+  clearError,
+  registerUser,
+  history,
+  clearProfile
+}) => {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
 
-    const {name, email, password, confirmPassword} = user;
-    
-    useEffect(() => {
-        document.title = 'Welcome to Dev Connector'
-        if(isAuthenticated) {
-            history.push('/dashboard')
-        }
-        clearProfile();
-       if(error === 'User already exists') {
-            setAlert(error, 'danger');      
+  const { name, email, password, confirmPassword } = user;
+  const [alert, setAlert]  = useState(false);
+  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+        if(alert) {
+          setTimeout(() => {
+            setAlert(false);
             clearError();
-        } 
-       
-    }, [ error, isAuthenticated])
-    
-    const onChange = e => setUser({...user, [e.target.name]: e.target.value})
-    
-    const onSubmit = e => {
-        e.preventDefault();
-        if(password !== confirmPassword) {
-            setAlert('Passwords do not match', 'danger')
-        } else {
-            console.log('this is register')
-            registerUser(user);
+          },5000)
         }
-    }
+  },[alert])
 
-    return (
-        <>
-            <h1 className="large text-primary">Sign Up</h1>
-            <p className="lead">
-                <i className="fas fa-user"/> Create Your Account
-            </p>
-            <form onSubmit={onSubmit} className="form">
-                <div className="form-group">
-                    <input 
-                    type="text" 
-                    placeholder="Name" 
-                    name='name'
-                    onChange={onChange}
-                    value={name}
-                    required
-                    />
-                </div>
-                <div className="form-group">
-                    <input 
-                    type="email" 
-                    placeholder='Email Address'
-                    name='email' 
-                    onChange={onChange}
-                    value={email}
-                    required
-                    />
-                    <small className="form-text">
-                        This site uses Gravatar so if you want a profile image, use a Gravatar email
-                    </small>
-                </div>
-                <div className="form-group">
-                    <input 
-                    type="password" 
-                    placeholder='Password'
-                    name='password' 
-                    onChange={onChange}
-                    value={password}
-                    minLength='8'
-                    />
-                </div>
-                <div className="form-group">
-                    <input type="password" 
-                    placeholder='Confirm Password'
-                    name='confirmPassword'
-                    onChange={onChange}
-                    value={confirmPassword}
-                    />
-                </div>
-                 <input type="submit" className='btn btn-primary'
-                value='Register'/>
-            </form>
-            <p className="my-1">
-                Already have an account? <Link to='/login'>
-                    Sign In
-                </Link>
-            </p>
-        </>
-    )
-}
+  useEffect(() => {
+    document.title = "Welcome to Dev Connector";
+    if (isAuthenticated) {
+      history.push("/dashboard");
+    }
+    clearProfile();
+    if (error === "User already exists") {
+      console.log('user already exists');
+      setAlert(true);
+      setMessage(error);
+      setLoading(false);
+      // clearError();
+    }
+  }, [error, isAuthenticated]);
+
+  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+
+  const onSubmit = e => {
+    setLoading(true);
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      setAlert(true);
+      setLoading(false);
+      setMessage('Password does not match');
+    } else {
+      console.log("this is register");
+      registerUser(user);
+    }
+  };
+
+  return (
+    <AccountWrap>
+      {console.log(message)}
+      <div className="main">
+        <div className="upperPart">
+          <h1 className="heading">Sign Up</h1>
+          <img
+            src={require("../../img/authenticate.jpg")}
+            alt="authenticateImg"
+          />
+        </div>
+        <div className="lowerPart">
+          <form onSubmit={onSubmit} className="form">
+            <div className="formInput">
+              <span>Name</span>
+              <div className="inputForm">
+                <input
+                  type="text"
+                  placeholder="Enter Name"
+                  name="name"
+                  onChange={onChange}
+                  value={name}
+                  required
+                />
+                <span className="line"></span>
+              </div>
+            </div>
+            <div className="formInput">
+              <span>Email</span>
+              <div className="inputForm">
+                <input
+                  type="email"
+                  placeholder="Enter Email Address"
+                  name="email"
+                  onChange={onChange}
+                  value={email}
+                  required
+                />
+                <span className="line"></span>
+              </div>
+            </div>
+            <div className="formInput">
+              <span>Password</span>
+              <div className="inputForm">
+                <input
+                  type="password"
+                  placeholder="Enter Password"
+                  name="password"
+                  onChange={onChange}
+                  value={password}
+                  minLength="8"
+                />
+                <span className="line"></span>
+              </div>
+            </div>
+            <div className="formInput">
+              <span>Confirm Password</span>
+              <div className="inputForm">
+                <input
+                  type="password"
+                  placeholder="Enter Confirm Password"
+                  name="confirmPassword"
+                  onChange={onChange}
+                  value={confirmPassword}
+                />
+                <span className="line"></span>
+              </div>
+            </div>
+            <div className="btns">
+              <button type="submit">{loading ? 'Loading...' : 'Register'}</button>
+            </div>
+          </form>
+          <p className="my-1 link">
+            Already have an account? <Link to="/login">Sign In</Link>
+          </p>
+        </div>
+        {alert && <div className='accountAlert'> 
+        <i className="fas fa-info-circle"></i>
+        <p className='errorMessage'>{message}</p>
+        </div>}
+      </div>
+    </AccountWrap>
+  );
+};
 
 const mapStateToProps = state => ({
- error: state.auth.error,
- isAuthenticated: state.auth.isAuthenticated
-})
-export default connect(mapStateToProps, {setAlert, registerUser, clearError, clearProfile})(Register);
+  error: state.auth.error,
+  isAuthenticated: state.auth.isAuthenticated
+});
+export default connect(
+  mapStateToProps,
+  { registerUser, clearError, clearProfile }
+)(Register);

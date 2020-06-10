@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logout} from '../../actions/auth';
-
+import styled from 'styled-components';
 
 const Navbar = ({isAuthenticated, logout}) => {
 
@@ -27,12 +27,14 @@ const Navbar = ({isAuthenticated, logout}) => {
     </ul>)
 
     return (
+        <NavbarWrap>
         <nav className="navbar bg-dark">
             
             <Link to="/" className='logo'><i class="fa fa-link fa-2x" aria-hidden="true"></i> <h1 style = {{marginLeft: '0.5rem'}}>DevJunction</h1>
             </Link>
             {isAuthenticated ? privateNav : publicNav}
         </nav>
+        </NavbarWrap>
     )
 }
 
@@ -41,3 +43,35 @@ const mapStatetoProps = state => ({
 })
 
 export default connect(mapStatetoProps, {logout})(Navbar)
+
+const NavbarWrap = styled.div`
+.navbar {
+    display: flex;
+    height: 10vh;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 2rem;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    top: 0;
+    border-bottom: solid 1px var(--primary-color);
+    opacity: 0.9;
+    color: var(--text-color);
+  }
+  @media(max-width: 700px) {
+      .navbar{
+         flex-direction: column; 
+         height: auto;
+         padding-bottom: 0;
+         ul{
+             width: 95%;
+             margin: auto;
+             margin-top: 1rem;
+             justify-content: space-between;
+             margin-bottom: 0;
+             padding: 0;
+         }
+      }
+  }
+`
