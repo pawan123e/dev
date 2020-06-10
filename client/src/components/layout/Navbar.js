@@ -63,13 +63,17 @@ const NavbarWrap = styled.div`
       .navbar{
          flex-direction: column; 
          height: 18vh;
-         padding-bottom: 0;
+         padding: 0;
+         padding-top: 0.5rem;
          ul{
              width: 95%;
              margin: auto;
              justify-content: space-between;
              margin-bottom: 0;
              padding: 0;
+             i{
+                 display: none;
+             }
          }
       }
   }

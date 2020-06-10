@@ -97,18 +97,23 @@ align-items: center;
    }
    .accountAlert{
        position: absolute;
-       bottom: -10px;
+       top: -20px;
        left: 50%;
        background: red;
        display: flex;
        padding: 0.5rem 2rem;
        justify-content: space-between;
        transform: translate(-50%, 0);
-       border-radius: 8px;
+       border-radius: 3px;
        color: white;
        align-items: center;
+       width: 50%;
+       margin: auto;
+       z-index: 3;
        .errorMessage{
-           margin-left: 2rem;
+           text-align: center;
+           width: 100%;
+           margin: auto;
        }
    }
  }
@@ -131,10 +136,14 @@ align-items: center;
     }
 }
 @media(max-width: 700px) {
-    padding-top: 20vh;
+    padding-top: 22vh;
     .main {
         width: 90%;
+        .accountAlert{ 
+        width: 80%;
     }
+    }
+    
 }
 @media(max-width: 600px) {
     .main {

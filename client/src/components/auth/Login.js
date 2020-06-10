@@ -106,7 +106,7 @@ const Login = ({loginUser, error, isAuthenticated, history, clearProfile, clearE
             </p>
             </div>
             {alert && <div className='accountAlert'> 
-        <i className="fas fa-info-circle"></i>
+        {/* <i className="fas fa-info-circle"></i> */}
         <p className='errorMessage'>{message}</p>
         </div>}
             </div>

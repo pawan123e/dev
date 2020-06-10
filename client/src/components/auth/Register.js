@@ -42,6 +42,7 @@ const Register = ({
     clearProfile();
     if (error === "User already exists") {
       console.log('user already exists');
+      window.scrollTo(0,0);
       setAlert(true);
       setMessage(error);
       setLoading(false);
@@ -58,6 +59,7 @@ const Register = ({
       setAlert(true);
       setLoading(false);
       setMessage('Password does not match');
+      window.scrollTo(0,0);
     } else {
       console.log("this is register");
       registerUser(user);
@@ -68,6 +70,9 @@ const Register = ({
     <AccountWrap>
       {console.log(message)}
       <div className="main">
+      {alert && <div className='accountAlert'> 
+        <p className='errorMessage'>{message}</p>
+        </div>}
         <div className="upperPart">
           <h1 className="heading">Sign Up</h1>
           <img
@@ -140,10 +145,6 @@ const Register = ({
             Already have an account? <Link to="/login">Sign In</Link>
           </p>
         </div>
-        {alert && <div className='accountAlert'> 
-        <i className="fas fa-info-circle"></i>
-        <p className='errorMessage'>{message}</p>
-        </div>}
       </div>
     </AccountWrap>
   );
