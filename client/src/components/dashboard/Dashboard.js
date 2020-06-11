@@ -96,7 +96,7 @@ const DashboardWrap = styled.div`
   min-height: 100vh;
   .card {
     width: 750px;
-    height: 55vh;
+    height: 350px;
     background: white;
     border-radius: 5px;
     .topPart {
@@ -128,7 +128,7 @@ const DashboardWrap = styled.div`
         margin-top: 70px;
         font-size: 1.5rem;
         font-weight: 500;
-        margin-left: 4rem;
+        margin-left: 2rem;
       }
       .noProfile{
           margin-top: 2rem;
@@ -150,13 +150,19 @@ const DashboardWrap = styled.div`
       }
       .educationPart{
         padding: 1.5rem ;
-        border-bottom: 1px solid rgba(0,0,0,.15);
     }
   }
 
   @media(max-width: 950px) {
       .card{
           width: 100%;
+          .bottomPart{
+              .noProfile{
+                  p{
+                      display: none;
+                  }
+              }
+          }
       }
       .aboutPart{
           width: 100%;
@@ -168,12 +174,12 @@ const DashboardWrap = styled.div`
   }
   @media(max-width: 500px) {
     padding: 0 5%;
-    padding-top: 24vh;
+    padding-top: 22vh;
     padding-bottom: 10vh;
     .card{
-        height: 45vh;
+        height: 300px;
         .topPart{
-            height: 50%;
+            height: 55%;
             .profileImg{
                 width: 100px;
                 height: 100px;
@@ -183,11 +189,13 @@ const DashboardWrap = styled.div`
         }
         .bottomPart{
             .name{
-                margin-left: 1.5rem;
+                margin-left: 1rem;
                 margin-top: 60px;
+                min-width: 100px;
+                text-align: center;
             }
             .noProfile{
-                margin-right: 1.5rem;
+                margin-right: .5rem;
                 margin-top: 0rem;
             }
             .editProfile{

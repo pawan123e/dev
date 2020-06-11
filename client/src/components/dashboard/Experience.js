@@ -81,8 +81,8 @@ margin: auto;
   .expPart {
     display: flex;
     justify-content: space-between;
-    margin: 1rem 0;
-    padding-bottom: 1rem;
+    margin-top: 1rem;
+    padding-bottom: 0.5rem;
     align-items: center;
     .expDetail{
       .expCompany{
@@ -99,5 +99,9 @@ margin: auto;
         color: #808080;
       }
     }
+  }
+
+  @media(max-width: 450px) {
+    width: 100%;
   }
 `;

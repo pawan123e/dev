@@ -79,6 +79,7 @@ margin: auto;
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
+    padding-bottom: 0.5rem;
     align-items: center;
     .eduDetail{
       .eduSchool{
@@ -92,5 +93,9 @@ margin: auto;
         color: #808080;
       }
     }
+  }
+
+  @media(max-width: 450px) {
+    width: 100%;
   }
 `;

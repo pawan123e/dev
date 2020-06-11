@@ -20,10 +20,10 @@ const Developers = ({getAllProfiles, profiles, clearProfile}) => {
            <p className="lead">
            <i className="fab fa-connectdevelop"></i> Browse and connect with developers
            </p>
-           {profiles.length === 0 ? <Spinner/> : 
+           {!profiles ? <Spinner/> : 
            <div className="profiles">
           {  
-              profiles.map(profile => <Profiles profile = {profile} key={profile._id}/> ) 
+              profiles.length > 0 ? profiles.map(profile => <Profiles profile = {profile} key={profile._id}/> ) : <h2>No Profiles exist.</h2> 
           }
            </div>
            }
@@ -45,7 +45,7 @@ background: whitesmoke;
 min-height: 100vh;
 .profiles{
     display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+    grid-template-columns: repeat( auto-fill, minmax(300px, 1fr) );
     align-items: center;
     justify-content: center;
     grid-gap: 4rem;

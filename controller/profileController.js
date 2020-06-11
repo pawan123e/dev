@@ -4,10 +4,11 @@ const AppError = require('../utils/AppError');
 const User = require('../models/User');
 
 exports.getProfile = asyncError (async (req, res, next) => {
-    const profile = await Profile.findOne({user: req.user._id}).populate("user", ["name", "avatar"]);
+    const profile = await Profile.findOne({user: req.user._id}).populate("user", ["name", "avatar", "email"]);
     if(!profile) {
         return next(new AppError('There is no profile for this user', 400))
     }
+    console.log('profile detail', profile)
     res.json(profile)
 })
 
@@ -69,7 +70,7 @@ exports.getAllProfiles = asyncError (async (req, res, next) => {
 })
 
 exports.getProfileById = asyncError (async (req, res, next) => {
-    const profile = await Profile.findOne({user: req.params.user_id}).populate('user', ['name', 'avatar']);
+    const profile = await Profile.findOne({user: req.params.user_id}).populate('user', ['name', 'avatar', 'email']);
     if(!profile) {
         return next(new AppError('Profile not found', 400));
     }

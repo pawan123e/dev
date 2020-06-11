@@ -2,7 +2,7 @@ import {GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE, CREATE_PROFILE, UPDATE_PROFIL
 
 const initialState = {
     profile: null,
-    profiles: [],
+    profiles: '',
     loading: true,
     error: null
 }

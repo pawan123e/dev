@@ -11,10 +11,10 @@ const Profiles = ({ profile }) => {
             className="round-img"
             src="fdfdsf"
             alt=""
-            src={profile.user.avatar}
+            src={profile.user && profile.user.avatar}
           />
           <div className="userDetail">
-            <h2 className="userName">{profile.user.name}</h2>
+            <h2 className="userName">{profile.user && profile.user.name}</h2>
             <p className="userCompany">{profile.company}</p>
             <p className="userLocation">{profile.location}</p>
           </div>
@@ -22,7 +22,7 @@ const Profiles = ({ profile }) => {
         <div className="footerPart">
           <div className="connect">
             <Link
-              to={`/profiles/${profile.user._id}`}
+              to={`/profiles/${profile.user && profile.user._id}`}
               className="btn btn-primary"
             >
               View Profile
