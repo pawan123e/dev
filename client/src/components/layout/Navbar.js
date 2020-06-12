@@ -4,17 +4,19 @@ import {connect} from 'react-redux';
 import {logout} from '../../actions/auth';
 import styled from 'styled-components';
 
-const Navbar = ({isAuthenticated, logout}) => {
+const Navbar = ({isAuthenticated, logout, user}) => {
 
     const privateNav = (
         <ul>
         <li><Link to='/profiles'> Developers </Link></li>   
         <li><Link to='/posts'> Posts </Link></li>   
-        <li><Link to='/dashboard'>
-            <i className="fas fa-user" /> {' '}
+        <li><Link to='/dashboard' className='profileSnapshot'>
+           {/* <div className='profileImg' style = {{height: '10px', width: '10px'}}> */}
+               {user && <img src = {require(`../../../../public/img/users/${user.avatar}`)}/>}
+           {' '}
             Dashboard</Link></li>
         <li><a onClick={logout} href="">
-            <i className="fas fa-sign-out-alt"/>{' '}
+            
             Logout</a></li>
     </ul>
     )
@@ -40,6 +42,7 @@ const Navbar = ({isAuthenticated, logout}) => {
 
 const mapStatetoProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user
 })
 
 export default connect(mapStatetoProps, {logout})(Navbar)
@@ -58,6 +61,20 @@ const NavbarWrap = styled.div`
     border-bottom: solid 1px var(--primary-color);
     opacity: 0.9;
     color: var(--text-color);
+    ul{
+        display: flex;
+        align-items: center;
+        .profileSnapshot{
+            display: flex;
+            align-items: center;
+            img{
+                height: 30px;
+                width: 30px;
+                border-radius: 50%;
+                margin-right: 0.5rem;
+            }
+        }
+    }
   }
   @media(max-width: 700px) {
       .navbar{

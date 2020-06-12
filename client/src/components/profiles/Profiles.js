@@ -7,11 +7,12 @@ const Profiles = ({ profile }) => {
     <ProfileWrap>
       <div className="profile">
         <div className="headerPart">
+         
           <img
             className="round-img"
             src="fdfdsf"
             alt=""
-            src={profile.user && profile.user.avatar}
+            src={profile.user && require(`../../../../public/img/users/${profile.user.avatar}`)}
           />
           <div className="userDetail">
             <h2 className="userName">{profile.user && profile.user.name}</h2>

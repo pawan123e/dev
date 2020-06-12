@@ -35,7 +35,8 @@ const userSchema = new mongoose.Schema({
     passwordResetToken: String,
     passwordResetExpires: Date,
     avatar: {
-        type: String
+        type: String,
+        default: 'default.png'
     },
     date: {
         type: Date,
@@ -47,11 +48,11 @@ userSchema.pre('save', async function(next) {
     if(!this.isModified('password')) return next();
     this.password = await bcrypt.hash(this.password, 12);
     this.confirmPassword = undefined;
-    this.avatar = gravatar.url(this.email, {
-        s: '200',
-        r: 'pg',
-        d: 'mm'
-    })
+    // this.avatar = gravatar.url(this.email, {
+    //     s: '200',
+    //     r: 'pg',
+    //     d: 'mm'
+    // })
     next();
 })
 

@@ -10,7 +10,8 @@ import {
         CLEAR_PROFILE,
         FORGOT_PASSWORD,
         FORGOT_PASSWORD_ERROR,
-        CLEAR_FORGOT_PASSWORD
+        CLEAR_FORGOT_PASSWORD,
+        UPDATED_USER
        } from '../actions/types';
 
 import axios from 'axios';
@@ -145,6 +146,27 @@ export const resetPassword = (token, history, user) => async dispatch => {
         console.log('hello this is the error of reset Password', err.response.data.message)
         dispatch({
             type: LOGIN_FAIL,
+            payload: err.response.data.message
+        })
+    }
+}
+
+export const updateUser = (userData, history) => async dispatch => {
+    const config = {
+        headers: {'Content-Type': 'multipart/form-data'}
+    }
+    console.log('data', userData);
+    try {
+        const res = await axios.patch(`/api/users/updateMe`, userData, config);
+        dispatch({
+            type: UPDATED_USER,
+            payload: res.data
+        })
+        history.push('/dashboard')
+    } catch (err) {
+        console.log('hello this is the error of reset Password', err.response.data.message)
+        dispatch({
+            type: CLEAR_ERRORS,
             payload: err.response.data.message
         })
     }

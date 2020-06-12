@@ -24,7 +24,7 @@ const CurrentProfile = ({ getProfileById, loading, match, profile, error }) => {
           <div className="wrap">
             <div className="profileHeader">
               <div className="leftHeader">
-                <img src={profile.user.avatar} alt="profilePic" />
+                <img src={profile.user && require(`../../../../public/img/users/${profile.user.avatar}`)}alt="profilePic" />
               </div>
               <div className="rightHeader">
                 <div className="profileAbout">
@@ -309,8 +309,8 @@ const ProfileWrap = styled.div`
       display: flex;
       align-items: center;
       .leftHeader {
-        min-width: 250px;
-        min-height: 250px;
+        width: 250px;
+        height: 250px;
         margin-right: 3rem;
         img {
           height: 100%;

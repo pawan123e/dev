@@ -8,7 +8,6 @@ exports.getProfile = asyncError (async (req, res, next) => {
     if(!profile) {
         return next(new AppError('There is no profile for this user', 400))
     }
-    console.log('profile detail', profile)
     res.json(profile)
 })
 

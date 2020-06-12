@@ -20,6 +20,8 @@ import AddEducation from '../profiles/AddEducation';
 import CurrentProfile from '../profiles/CurrentProfile'
 import Posts from '../posts/Post'
 import PostComment from  '../posts/PostComment'
+import DashboardSettings from '../dashboard/DashboardSettings'
+
 const Routes = () => {
     return (
         <section>
@@ -33,6 +35,7 @@ const Routes = () => {
              <Route exact path='/recoverPassword' component={RecoverPassword}/>
              <Route exact path='/resetPassword' component={ResetPassword}/>
              <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+             <PrivateRoute exact path='/dashboard/settings' component={DashboardSettings}/>
              <PrivateRoute exact path='/create-profile' component={CreateProfile}/>
              <PrivateRoute exact path='/edit-profile' component={EditProfile}/>
              <PrivateRoute exact path='/add-experience' component={AddExperience}/>

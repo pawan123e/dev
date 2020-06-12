@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCurrentProfile, deleteProfile } from "../../actions/profile";
@@ -21,17 +21,48 @@ const Dashboard = ({
     getCurrentProfile();
   }, []);
 
+  const settings = () => {
+    history.push('/dashboard/settings')
+  }
+
   if (loading && !auth.user) {
     return <Spinner />;
   } else {
     return (
       <DashboardWrap>
-        {console.log(auth)}
+
+          {/* <div className="modal">
+            <div className="accountModal">
+              <h2 className="accountHeading">Account Settings</h2>
+              <div className="topPart">
+            <img src={require("../../img/web.jpg")} alt="web" />
+            <div className="profileImg">
+              <img
+                src={
+                  auth.user &&
+                  require(`../../../../public/img/users/${auth.user.avatar}`)
+                }
+                alt="profilePic"
+              />
+            </div>
+          </div>
+            </div>
+          </div> */}
+        <div className='dashboard'>
         <div className="card">
           <div className="topPart">
             <img src={require("../../img/web.jpg")} alt="web" />
             <div className="profileImg">
-              <img src={auth.user.avatar} alt="profilePic" />
+              <img
+                src={
+                  auth.user &&
+                  require(`../../../../public/img/users/${auth.user.avatar}`)
+                }
+                alt="profilePic"
+              />
+            </div>
+            <div className="settings" onClick = {settings}>
+              <i className="fas fa-user-cog"></i>
             </div>
           </div>
           <div className="bottomPart">
@@ -44,22 +75,21 @@ const Dashboard = ({
                 </Link>
               </div>
             ) : (
-                <Link to="/edit-profile" className='editProfile'> 
+              <Link to="/edit-profile" className="editProfile">
                 <i className="fas fa-edit"></i> Edit Profile
-             
-                </Link>
+              </Link>
             )}
           </div>
         </div>
         {profile !== null && (
           <>
-            <div className='aboutPart'>
-            <div className='experiencePart'>
-            <Experience experience={profile.experience} />
-            </div>
-            <div className='educationPart'>
-            <Education education={profile.education} />
-            </div>
+            <div className="aboutPart">
+              <div className="experiencePart">
+                <Experience experience={profile.experience} />
+              </div>
+              <div className="educationPart">
+                <Education education={profile.education} />
+              </div>
             </div>
             <div className="my-2">
               <button
@@ -72,6 +102,7 @@ const Dashboard = ({
             </div>
           </>
         )}
+        </div>
       </DashboardWrap>
     );
   }
@@ -89,11 +120,15 @@ export default connect(
 )(Dashboard);
 
 const DashboardWrap = styled.div`
-  background: whitesmoke;
-  padding: 0 10%;
-  padding-top: 15vh;
-  padding-bottom: 10vh;
-  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  .dashboard{
+    background: whitesmoke;
+    padding: 0 10%;
+    padding-top: 15vh;
+    padding-bottom: 10vh;
+    min-height: 100vh;
   .card {
     width: 750px;
     height: 350px;
@@ -119,9 +154,17 @@ const DashboardWrap = styled.div`
           border-radius: 50%;
         }
       }
+      .settings {
+        position: absolute;
+        right: 40px;
+        bottom: -50px;
+        cursor: pointer;
+        i {
+          font-size: 2rem;
+        }
+      }
     }
     .bottomPart {
-        
       display: flex;
       justify-content: space-between;
       .name {
@@ -129,80 +172,90 @@ const DashboardWrap = styled.div`
         font-size: 1.5rem;
         font-weight: 500;
         margin-left: 2rem;
+        width: 140px;
+        text-align: center;
       }
-      .noProfile{
-          margin-top: 2rem;
-          margin-right: 1rem;
+      .noProfile {
+        margin-top: 2rem;
+        margin-right: 1rem;
       }
-      .editProfile{
-          margin-top: 70px;
-          margin-right: 3rem;
+      .editProfile {
+        margin-top: 70px;
+        margin-right: 3rem;
       }
     }
   }
-  .aboutPart{
-      width: 750px;
-      background: white;
-      margin-top: 4rem;
-      .experiencePart{
-          padding: 1.5rem;
-          border-bottom: 1px solid rgba(0,0,0,.15);
-      }
-      .educationPart{
-        padding: 1.5rem ;
+  .aboutPart {
+    width: 750px;
+    background: white;
+    margin-top: 4rem;
+    .experiencePart {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    .educationPart {
+      padding: 1.5rem;
     }
   }
+}
 
-  @media(max-width: 950px) {
-      .card{
-          width: 100%;
-          .bottomPart{
-              .noProfile{
-                  p{
-                      display: none;
-                  }
-              }
+  @media (max-width: 950px) {
+    .card {
+      width: 100%;
+      .bottomPart {
+        .noProfile {
+          p {
+            display: none;
           }
+        }
       }
-      .aboutPart{
-          width: 100%;
-      }
+    }
+    .aboutPart {
+      width: 100%;
+    }
   }
 
-  @media(max-width: 700px) {
-      padding-top: 24vh;
+  @media (max-width: 700px) {
+    padding-top: 24vh;
   }
-  @media(max-width: 500px) {
+  @media (max-width: 500px) {
     padding: 0 5%;
     padding-top: 22vh;
     padding-bottom: 10vh;
-    .card{
-        height: 300px;
-        .topPart{
-            height: 55%;
-            .profileImg{
-                width: 100px;
-                height: 100px;
-                bottom: -40px;
-                left: 15px;
-            }
+    .card {
+      height: 300px;
+      .topPart {
+        height: 55%;
+        .profileImg {
+          width: 100px;
+          height: 100px;
+          bottom: -40px;
+          left: 15px;
         }
-        .bottomPart{
-            .name{
-                margin-left: 1rem;
-                margin-top: 60px;
-                min-width: 100px;
-                text-align: center;
-            }
-            .noProfile{
-                margin-right: .5rem;
-                margin-top: 0rem;
-            }
-            .editProfile{
-                margin-top: 0.5rem;
-                margin-right: 1rem;
-            }
+        .settings {
+          right: 20px;
+          bottom: -40px;
+          i {
+            font-size: 1.5rem;
+          }
         }
+      }
+      .bottomPart {
+        .name {
+          margin-left: 1rem;
+          margin-top: 60px;
+          width: 100px;
+          text-align: center;
+        }
+        .noProfile {
+          margin-right: 0.5rem;
+          margin-top: 60px;
+        }
+        .editProfile {
+          margin-top: 60px;
+          margin-right: 1rem;
+        }
+      }
     }
-}
+  }
 `;
