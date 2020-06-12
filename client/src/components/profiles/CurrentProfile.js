@@ -519,7 +519,7 @@ const ProfileWrap = styled.div`
             margin-top: auto;
             width: 90%;
             margin: auto;
-            margin-top: 1rem;
+            margin-top: 2rem;
           }
         }
       }
