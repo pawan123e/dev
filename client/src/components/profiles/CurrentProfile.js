@@ -491,13 +491,13 @@ const ProfileWrap = styled.div`
         }
         .rightHeader {
           width: 100%;
-          height: 45vh;
+          min-height: 45vh;
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
           .profileAbout{
-            height: 50%;
+            // height: 50%;
             .company {
             color: #808080;
             text-align: center;
@@ -515,11 +515,11 @@ const ProfileWrap = styled.div`
           }
           
           .socialIcons {
-            height: 10%;
+            // height: 10%;
             margin-top: auto;
             width: 90%;
             margin: auto;
-            // margin-top: 3rem;
+            margin-top: 1rem;
           }
         }
       }
