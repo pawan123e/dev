@@ -497,7 +497,7 @@ const ProfileWrap = styled.div`
           justify-content: center;
           align-items: center;
           .profileAbout{
-            height: 70%;
+            height: 50%;
             .company {
             color: #808080;
             text-align: center;
@@ -519,7 +519,7 @@ const ProfileWrap = styled.div`
             margin-top: auto;
             width: 90%;
             margin: auto;
-            margin-top: 3rem;
+            // margin-top: 3rem;
           }
         }
       }
