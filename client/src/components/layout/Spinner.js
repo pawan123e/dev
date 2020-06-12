@@ -3,8 +3,8 @@ import spinner from './spinner.gif'
 import loader from './loader.svg'
 const Spinner = () => {
     return (
-        <div style={{display: 'flex', alignItems: 'center', justifyContent:'center'}}>
-       <img src={loader} alt='' className="img-fluid" style={{width: '200px'}}/>
+        <div style={{display: 'flex', alignItems: 'center', justifyContent:'center', marginTop: '4rem'}}>
+       <img src={loader} alt='' style={{width: '200px'}}/>
        </div>
     )
 }
