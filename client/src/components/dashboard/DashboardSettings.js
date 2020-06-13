@@ -1,4 +1,5 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
+import {Link} from 'react-router-dom'
 import DashBoard from './Dashboard'
 import { connect } from "react-redux";
 import styled from "styled-components";
@@ -9,15 +10,17 @@ const DashboardSettings = ({auth, history, updateUser}) => {
     const [user, setUser] = useState({
         name: auth.user.name,
         email: auth.user.email,
-        file: null
+        userPhoto: null,
+        userCover: null
     })
 
-    const fileRef = useRef();
+    const userPhotoRef = useRef();
+    const userCoverRef = useRef();
 
-    const {name, email, file} = user;
+    const {name, email, userPhoto, userCover} = user;
 
-    document.body.style.overflow = 'hidden'
-
+      document.body.style.overflow = 'hidden'
+    
     const onchange = (e) => {
         setUser({...user, [e.target.name]: e.target.value})
     }
@@ -25,28 +28,38 @@ const DashboardSettings = ({auth, history, updateUser}) => {
     const onsubmit = (e) => {
         e.preventDefault();
         const formData = new FormData();
-        console.log('formData', name, email, file);
+        console.log('formData', name, email, userPhoto);
         formData.append('name', name);
         formData.append('email', email);
-        formData.append('avatar', file);
+        formData.append('avatar', userPhoto);
+        formData.append('coverPhoto', userCover);
         updateUser(formData, history)
     }
 
-    const fileUpload = e => {
-            setUser({...user, file: e.target.files[0]})
+    const userPhotoUpload = e => {
+            setUser({...user, userPhoto: e.target.files[0]})
+    }
+
+    const userCoverUpload = e => {
+            setUser({...user, userCover: e.target.files[0]})
     }
 
     return (
            <DashboardWrap>
            <div className="modal">
             <div className="accountModal">
+              <div className='header'>
+              <Link to = '/dashboard' style = {{textDecoration: 'none'}}><i className="fas fa-arrow-left backButton"></i></Link>
               <h2 className="accountHeading">Account Settings</h2>
-              <form onSubmit = {onsubmit}>
-              <div className="topPart">
+              </div>
+              
+            <form onSubmit = {onsubmit}>
+            <div className="topPart">
             <img src={require("../../img/web.jpg")} alt="web" />
             <div className='profileBgEdit'>
-            <i className="far fa-edit"></i>
+            {userCover ? <i className="fas fa-check-circle" style={{color: 'green'}}></i> : <i className="far fa-edit" onClick = {!userCover ? () => userCoverRef.current.click() : undefined}></i>} 
             </div>
+            <input type="file" ref = {userCoverRef} style={{display: 'none'}} accept = 'image/*' onChange = {userCoverUpload}/>
             <div className="profileImg">
               <img
                 src={
@@ -56,10 +69,10 @@ const DashboardSettings = ({auth, history, updateUser}) => {
                 alt="profilePic"
               />
               <div className='profilePicEdit'>
-                 {file ? <i className="fas fa-check-circle" style={{color: 'green'}}></i> : <i className="far fa-edit" onClick = {!file ? () => fileRef.current.click() : undefined}></i>} 
+                 {userPhoto ? <i className="fas fa-check-circle" style={{color: 'green'}}></i> : <i className="far fa-edit" onClick = {!userPhoto ? () => userPhotoRef.current.click() : undefined}></i>} 
                   
               </div>
-              <input type="file" ref = {fileRef} style={{display: 'none'}} accept = 'image/*' onChange = {fileUpload}/>
+              <input type="file" ref = {userPhotoRef} style={{display: 'none'}} accept = 'image/*' onChange = {userPhotoUpload}/>
          
             </div>
           </div>
@@ -100,6 +113,7 @@ export default connect(
 const DashboardWrap = styled.div` 
  height: 100vh;
  width: 100vw;
+
  position: relative;
  .dash{
     filter: blur(2px);
@@ -115,19 +129,29 @@ const DashboardWrap = styled.div`
     align-items: center;
     z-index: 10;
     height: 100%;
-    
     .accountModal{
       width: 40%;
       margin: auto;
       height: 90%;
       background: white;
       padding: 1rem;
-      .accountHeading{
-        text-align: center;
+      overflow: auto;
+      .header{
+        display: flex;
+        align-items: center;
+        padding-left: 5%;
+        .backButton{
+          color: #0e9aa7;
+          margin-right: 2rem;
+          display: none;
+        }
+        .accountHeading{
         font-size: 2.2rem;
         font-weight: 500;
         color: #0e9aa7;
       }
+      }
+      
       .topPart {
         height: 140px;
         width: 90%;
@@ -248,7 +272,33 @@ const DashboardWrap = styled.div`
          .accountModal{
           width: 60%;
       } 
+      }  
+  }
+
+  @media(max-width: 700px) {
+    .modal{
+      .accountModal{
+        width: 80%;
       }
-      
+    }
+  }
+
+  @media(max-width: 500px) {
+    // height: auto;
+    .modal{
+      .accountModal{
+        width: 100%;
+        height: 100%;
+        .header{
+          .backButton{
+            display: block;
+            font-size: 1srem;
+          }
+          .accountHeading{
+            font-size: 1.5rem;
+          }
+        }
+      }
+    }
   }
 `

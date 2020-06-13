@@ -39,16 +39,22 @@ const upload = multer({
     fileFilter: multerFilter
 })
 
-exports.uploadUserPhoto = upload.single('avatar');
+exports.uploadUserPhoto = upload.fields([
+    {name: 'avatar', maxCount: 1},
+    {name: 'coverPhoto', maxCount: 1}
+]);
 
 exports.resizeUserPhoto = (req, res, next) => {
+    console.log('request files',req.files)
+    // if(!req.files.length) return next();
+    // req.files.forEach(file => {
+    // })
     if(!req.file) return next();
     req.file.filename = `user-${req.user._id}-${Date.now()}.jpeg`
     sharp(req.file.buffer).resize(500, 500).toFormat('jpeg').jpeg({quality: 90})
     .toFile(`public/img/users/${req.file.filename}`) 
     next();
 }
-
 
 exports.getUser = asyncError (async (req, res, next) => {
     const user = await User.findById(req.user._id).select('-password');

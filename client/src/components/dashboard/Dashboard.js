@@ -25,33 +25,18 @@ const Dashboard = ({
     history.push('/dashboard/settings')
   }
 
+  useEffect(() => {
+    document.body.style.overflow = 'auto'
+  }, [])
+
   if (loading && !auth.user) {
     return <Spinner />;
   } else {
     return (
       <DashboardWrap>
-
-          {/* <div className="modal">
-            <div className="accountModal">
-              <h2 className="accountHeading">Account Settings</h2>
-              <div className="topPart">
-            <img src={require("../../img/web.jpg")} alt="web" />
-            <div className="profileImg">
-              <img
-                src={
-                  auth.user &&
-                  require(`../../../../public/img/users/${auth.user.avatar}`)
-                }
-                alt="profilePic"
-              />
-            </div>
-          </div>
-            </div>
-          </div> */}
-        <div className='dashboard'>
         <div className="card">
           <div className="topPart">
-            <img src={require("../../img/web.jpg")} alt="web" />
+            <img src={require(`../../../../public/img/cover/${auth.user.coverPhoto}`)} />
             <div className="profileImg">
               <img
                 src={
@@ -62,14 +47,14 @@ const Dashboard = ({
               />
             </div>
             <div className="settings" onClick = {settings}>
-              <i className="fas fa-user-cog"></i>
+            
+              <i className="fas fa-user-cog settingsIcon"></i>
             </div>
           </div>
           <div className="bottomPart">
             <p className="name">{auth.user.name}</p>
             {profile === null ? (
               <div className="noProfile">
-                <p>You have not yet setup a profile, please add some info</p>
                 <Link to="/create-profile" className="btn btn-primary my-1">
                   Create Profile
                 </Link>
@@ -102,7 +87,6 @@ const Dashboard = ({
             </div>
           </>
         )}
-        </div>
       </DashboardWrap>
     );
   }
@@ -120,10 +104,10 @@ export default connect(
 )(Dashboard);
 
 const DashboardWrap = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  .dashboard{
+  // width: 100%;
+  // height: 100%;
+  // position: relative;
+  // .dashboard{
     background: whitesmoke;
     padding: 0 10%;
     padding-top: 15vh;
@@ -131,7 +115,7 @@ const DashboardWrap = styled.div`
     min-height: 100vh;
   .card {
     width: 750px;
-    height: 350px;
+    // height: 350px;
     background: white;
     border-radius: 5px;
     .topPart {
@@ -159,6 +143,8 @@ const DashboardWrap = styled.div`
         right: 40px;
         bottom: -50px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
         i {
           font-size: 2rem;
         }
@@ -166,25 +152,19 @@ const DashboardWrap = styled.div`
     }
     .bottomPart {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      margin-top: 70px;
+      margin-left: 2rem;
       .name {
-        margin-top: 70px;
         font-size: 1.5rem;
         font-weight: 500;
-        margin-left: 2rem;
-        width: 140px;
-        text-align: center;
       }
-      .noProfile {
-        margin-top: 2rem;
-        margin-right: 1rem;
-      }
-      .editProfile {
-        margin-top: 70px;
-        margin-right: 3rem;
+      .editProfile{
+        margin: 1rem 0rem;
+        margin-top: 0.5rem;
       }
     }
-  }
+    }
   .aboutPart {
     width: 750px;
     background: white;
@@ -197,7 +177,7 @@ const DashboardWrap = styled.div`
       padding: 1.5rem;
     }
   }
-}
+//}
 
   @media (max-width: 950px) {
     .card {
@@ -223,9 +203,9 @@ const DashboardWrap = styled.div`
     padding-top: 22vh;
     padding-bottom: 10vh;
     .card {
-      height: 300px;
+      // height: 300px;
       .topPart {
-        height: 55%;
+        height: 150px;
         .profileImg {
           width: 100px;
           height: 100px;
@@ -240,22 +220,22 @@ const DashboardWrap = styled.div`
           }
         }
       }
-      .bottomPart {
-        .name {
-          margin-left: 1rem;
-          margin-top: 60px;
-          width: 100px;
-          text-align: center;
-        }
-        .noProfile {
-          margin-right: 0.5rem;
-          margin-top: 60px;
-        }
-        .editProfile {
-          margin-top: 60px;
-          margin-right: 1rem;
-        }
-      }
+      // .bottomPart {
+      //   .name {
+      //     margin-left: 1rem;
+      //     margin-top: 60px;
+      //     width: 100px;
+      //     text-align: center;
+      //   }
+      //   .noProfile {
+      //     margin-right: 0.5rem;
+      //     margin-top: 60px;
+      //   }
+      //   .editProfile {
+      //     margin-top: 60px;
+      //     margin-right: 1rem;
+      //   }
+      // }
     }
   }
 `;

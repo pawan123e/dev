@@ -1,6 +1,8 @@
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const app = require('./app')
+const compression = require('compression');
+app.use(compression());
 dotenv.config({
     path: './config.env'
 });

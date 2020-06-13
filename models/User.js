@@ -38,6 +38,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: 'default.png'
     },
+    coverPhoto: {
+        type: String,
+        default: 'default.jpg'
+    },
     date: {
         type: Date,
         default: Date.now
@@ -48,11 +52,6 @@ userSchema.pre('save', async function(next) {
     if(!this.isModified('password')) return next();
     this.password = await bcrypt.hash(this.password, 12);
     this.confirmPassword = undefined;
-    // this.avatar = gravatar.url(this.email, {
-    //     s: '200',
-    //     r: 'pg',
-    //     d: 'mm'
-    // })
     next();
 })
 
