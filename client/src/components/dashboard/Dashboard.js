@@ -103,10 +103,6 @@ export default connect(
 )(Dashboard);
 
 const DashboardWrap = styled.div`
-  // width: 100%;
-  // height: 100%;
-  // position: relative;
-  // .dashboard{
     background: whitesmoke;
     padding: 0 10%;
     padding-top: 15vh;
@@ -114,7 +110,6 @@ const DashboardWrap = styled.div`
     min-height: 100vh;
   .card {
     width: 750px;
-    // height: 350px;
     box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.45);
     background: white;
     border-radius: 5px;
@@ -178,7 +173,6 @@ const DashboardWrap = styled.div`
       padding: 1.5rem;
     }
   }
-//}
 
   @media (max-width: 950px) {
     .card {

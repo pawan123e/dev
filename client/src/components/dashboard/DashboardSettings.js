@@ -21,15 +21,13 @@ const DashboardSettings = ({ auth, history, updateUser }) => {
 
   const { name, email, userPhoto, userCover } = user;
 
-  
   useEffect(() => {
     document.body.style.overflow = "hidden";
   },[])
 
   useEffect(() => {
     const closeModal = e => {
-      console.log('target value',e.target)
-        const element = document.getElementById('modal')
+      const element = document.getElementById('modal')
       const positionInfo = element.getBoundingClientRect();
       const top = positionInfo.top;
       const bottom = positionInfo.bottom;
@@ -51,11 +49,10 @@ const DashboardSettings = ({ auth, history, updateUser }) => {
   const onsubmit = e => {
     e.preventDefault();
     const formData = new FormData();
-    console.log("formData", name, email, userPhoto, userCover);
     formData.append("name", name);
     formData.append("email", email);
-    formData.append("avatar", userPhoto);
-    formData.append("coverPhoto", userCover);
+    profilePhoto && formData.append("avatar", userPhoto);
+    coverPhoto && formData.append("coverPhoto", userCover);
     updateUser(formData, history);
   };
 
