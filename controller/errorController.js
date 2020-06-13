@@ -35,6 +35,7 @@ const prodError = (err, res) =>{
         message: err.message
   }) 
     }  else {
+      console.log('this is the error from errorController line 38', err.message)
        res.status(err.statusCode).json({
             status: err.status,
             message: "Something went wrong",

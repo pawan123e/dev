@@ -53,7 +53,8 @@ const NavbarWrap = styled.div`
     height: 10vh;
     justify-content: space-between;
     align-items: center;
-    padding: 0.7rem 2rem;
+    // padding: 0.7rem 2rem;
+    padding: 0 2rem;
     position: fixed;
     z-index: 2;
     width: 100%;
@@ -79,16 +80,25 @@ const NavbarWrap = styled.div`
   @media(max-width: 700px) {
       .navbar{
          flex-direction: column; 
-         height: 18vh;
-         height: 105px;
-         padding: 0;
-         padding-top: 0.5rem;
+         border: none;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         .logo{
+             h1{
+                 display: none;
+             }
+             i{
+                 font-size: 1.5rem;
+             }
+         }
          ul{
              width: 95%;
              margin: auto;
              justify-content: space-between;
              margin-bottom: 0;
              padding: 0;
+             display: none;
              i{
                  display: none;
              }

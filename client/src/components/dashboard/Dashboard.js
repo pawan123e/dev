@@ -76,12 +76,11 @@ const Dashboard = ({
                 <Education education={profile.education} />
               </div>
             </div>
-            <div className="my-2">
+            <div className="my-2 deleteBtn">
               <button
                 className="btn btn-danger"
                 onClick={() => deleteProfile(history)}
               >
-                <i className="fas fa-user-minus"></i>
                 Delete My Account
               </button>
             </div>
@@ -116,6 +115,7 @@ const DashboardWrap = styled.div`
   .card {
     width: 750px;
     // height: 350px;
+    box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.45);
     background: white;
     border-radius: 5px;
     .topPart {
@@ -169,6 +169,7 @@ const DashboardWrap = styled.div`
     width: 750px;
     background: white;
     margin-top: 4rem;
+    box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.45);
     .experiencePart {
       padding: 1.5rem;
       border-bottom: 1px solid rgba(0, 0, 0, 0.15);
@@ -199,13 +200,21 @@ const DashboardWrap = styled.div`
     padding-top: 24vh;
   }
   @media (max-width: 500px) {
-    padding: 0 5%;
-    padding-top: 22vh;
-    padding-bottom: 10vh;
+    padding: 0 0%;
+    padding-top: 10vh;
+    padding-bottom: 5vh;
+    .deleteBtn{
+      // margin-left: 1rem;
+      // display: none;
+    }
     .card {
-      // height: 300px;
+      border-radius: 0;
+      box-shadow: none;
       .topPart {
         height: 150px;
+        img{
+          border-radius: 0;
+        }
         .profileImg {
           width: 100px;
           height: 100px;
@@ -220,22 +229,13 @@ const DashboardWrap = styled.div`
           }
         }
       }
-      // .bottomPart {
-      //   .name {
-      //     margin-left: 1rem;
-      //     margin-top: 60px;
-      //     width: 100px;
-      //     text-align: center;
-      //   }
-      //   .noProfile {
-      //     margin-right: 0.5rem;
-      //     margin-top: 60px;
-      //   }
-      //   .editProfile {
-      //     margin-top: 60px;
-      //     margin-right: 1rem;
-      //   }
-      // }
+      .bottomPart{
+        margin-top: 50px;
+        margin-left: 1rem;
+      }
+    }
+    .aboutPart{
+      margin-top: 0rem;
     }
   }
 `;

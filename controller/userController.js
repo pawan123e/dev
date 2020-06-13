@@ -44,17 +44,22 @@ exports.uploadUserPhoto = upload.fields([
     {name: 'coverPhoto', maxCount: 1}
 ]);
 
-exports.resizeUserPhoto = (req, res, next) => {
-    console.log('request files',req.files)
-    // if(!req.files.length) return next();
-    // req.files.forEach(file => {
-    // })
-    if(!req.file) return next();
-    req.file.filename = `user-${req.user._id}-${Date.now()}.jpeg`
-    sharp(req.file.buffer).resize(500, 500).toFormat('jpeg').jpeg({quality: 90})
-    .toFile(`public/img/users/${req.file.filename}`) 
+exports.resizeUserPhoto = asyncError(async(req, res, next) => {
+    if(!req.files.avatar && !req.files.coverPhoto) return next();
+    req.body.coverPhoto = `user-${req.user._id}-${Date.now()}-cover.jpeg`
+    await sharp(req.files.coverPhoto[0].buffer)
+    .resize(2000, 1333)
+    .toFormat('jpeg')
+    .jpeg({quality: 90})
+    .toFile(`public/img/cover/${req.body.coverPhoto}`)
+
+    req.body.avatar = `user-${req.user._id}-${Date.now()}-profile.jpeg`
+
+    await sharp(req.files.avatar[0].buffer).resize(500, 500).toFormat('jpeg').jpeg({quality: 90})
+    .toFile(`public/img/users/${req.body.avatar}`) 
+    
     next();
-}
+})
 
 exports.getUser = asyncError (async (req, res, next) => {
     const user = await User.findById(req.user._id).select('-password');
@@ -64,15 +69,21 @@ exports.getUser = asyncError (async (req, res, next) => {
 })
 
 exports.updateMe = asyncError (async (req, res, next) => {
-    console.log('request file', req.file);
     const filteredbody = filterObj(req.body, 'name', 'email');
-    
-    if(req.file) filteredbody.avatar = req.file.filename;
+    console.log('body of an User model is', req.body);
+    if(req.files.avatar) {
+        filteredbody.avatar = req.body.avatar;
+    }
+    if(req.files.coverPhoto) {
+        filteredbody.coverPhoto = req.body.coverPhoto;
+    }
+    if(req.body.name) {
+        filteredbody.name = req.body.name
+    }
     const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredbody, {
         new: true, 
         runValidators: true
     })
-   
     res.status(200).json({
        status: 'success' ,
        data: {
