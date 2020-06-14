@@ -131,6 +131,7 @@ const DashboardWrap = styled.div`
         height: 140px;
         img {
           border-radius: 50%;
+          //border: 5px solid whitesmoke;
         }
       }
       .settings {
