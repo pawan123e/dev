@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logout} from '../../actions/auth';
@@ -6,33 +6,54 @@ import styled from 'styled-components';
 
 const Navbar = ({isAuthenticated, logout, user}) => {
 
+    const [ham, setHam] = useState(false);
+
+    useEffect(() => {
+        if(ham) {
+            console.log('ham is true')
+           const links = document.querySelector('.links');
+           console.log(links.classList)
+           links.classList.add('showUl');
+        } else {
+            console.log('ham is false');
+            const links = document.querySelector('.links');
+            console.log(links.classList)
+            links.classList.remove('showUl');
+        }
+    }, [ham])
+
     const privateNav = (
-        <ul>
-        <li><Link to='/profiles'> Developers </Link></li>   
-        <li><Link to='/posts'> Posts </Link></li>   
-        <li><Link to='/dashboard' className='profileSnapshot'>
-           {/* <div className='profileImg' style = {{height: '10px', width: '10px'}}> */}
+        <ul className='links'>
+        <li onClick = {() => setHam(false)}><Link to='/profiles'> Developers </Link></li>   
+        <li onClick = {() => setHam(false)}><Link to='/posts'> Posts </Link></li>   
+        <li onClick = {() => setHam(false)}><Link to='/dashboard' className='profileSnapshot'>
                {user && <img src = {require(`../../../../public/img/users/${user.avatar}`)}/>}
            {' '}
             Dashboard</Link></li>
-        <li><a onClick={logout} href="">
-            
-            Logout</a></li>
+        <li onClick = {() => setHam(false)}>
+            <a onClick={logout} href="">
+            Logout
+            </a>
+        </li>
     </ul>
     )
     
    const publicNav = (
-    <ul>
-    <li><Link to="/profiles">Developers</Link></li>
-    <li><Link to="/register">Register</Link></li>
-    <li><Link to="/login">Login</Link></li>
+    <ul className='links'>
+    <li onClick = {() => setHam(false)}><Link to="/profiles">Developers</Link></li>
+    <li onClick = {() => setHam(false)}><Link to="/register">Register</Link></li>
+    <li onClick = {() => setHam(false)}><Link to="/login">Login</Link></li>
     </ul>)
 
     return (
         <NavbarWrap>
         <nav className="navbar bg-dark">
-            
-            <Link to="/" className='logo'><i class="fa fa-link fa-2x" aria-hidden="true"></i> <h1 style = {{marginLeft: '0.5rem'}}>DevJunction</h1>
+            <div className='hamburger' onClick = {() => setHam(!ham)}>
+              <div className='line'></div>
+              <div className='line'></div>
+              <div className='line'></div>
+            </div>
+            <Link to="/" className='logo' onClick = {() => setHam(false)}><h1 style = {{marginLeft: '0.5rem'}}>DevJunction</h1>
             </Link>
             {isAuthenticated ? privateNav : publicNav}
         </nav>
@@ -53,15 +74,20 @@ const NavbarWrap = styled.div`
     height: 10vh;
     justify-content: space-between;
     align-items: center;
-    // padding: 0.7rem 2rem;
     padding: 0 2rem;
     position: fixed;
     z-index: 2;
     width: 100%;
-    top: 0;
+    // top: 0;
     border-bottom: solid 1px var(--primary-color);
     opacity: 0.9;
     color: var(--text-color);
+    .hamburger{
+        display: none;
+    }
+    .snapshot{
+        display: none;
+    }
     ul{
         display: flex;
         align-items: center;
@@ -82,26 +108,65 @@ const NavbarWrap = styled.div`
          flex-direction: column; 
          border: none;
          display: flex;
-         justify-content: center;
-         align-items: center;
-         .logo{
-             h1{
-                 display: none;
-             }
-             i{
-                 font-size: 1.5rem;
+         padding: 0;
+         opacity: 1;
+         .snapshot{
+            //  display: block;
+             position: absolute;
+             top: 50%;
+             left: 30px;
+             transform: translate(-50%, -50%);
+             height: 50px;
+             width: 50px;
+             img{
+                 height: 100%;
+                 width: 100%;
+                 border-radius: 50%;
              }
          }
-         ul{
-             width: 95%;
-             margin: auto;
-             justify-content: space-between;
-             margin-bottom: 0;
-             padding: 0;
-             display: none;
-             i{
-                 display: none;
+         .hamburger{
+             display: block;
+             position: absolute;
+             top: 50%;
+             right: 20px;
+             transform: translate(0, -50%);
+             z-index: 2;
+             .line{
+                 height: 3px;
+                 width: 26px;
+                 margin: 3px;
+                 background: white;
              }
+         }
+         .logo{
+             position: absolute;
+             top: 50%;
+             left: 0px;
+             transform: translate(0, -50%);
+             z-index: 2;
+         }
+         .links{
+             flex-direction: column;
+             position: fixed;
+             width: 100%;
+             min-height: 100vh;
+             background: #343a40;
+             justify-content: space-between;
+             align-items: space-around;
+             margin-bottom: 0;
+             padding: 8rem 0;
+             opacity: 1;
+             clip-path: circle(100px at 90% -10%);
+             -webkit-clip-path: circle(100px at 90% -10%);
+             transition: all 1s ease-out;
+             li{
+                 font-size: 1.5rem;
+             }
+            
+         }
+         .showUl{
+            clip-path: circle(1000px at 90% -10%)!imporant;
+            -webkit-clip-path: circle(1000px at 90% -10%)!important;
          }
       }
   }

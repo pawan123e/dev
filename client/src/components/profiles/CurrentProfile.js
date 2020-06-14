@@ -384,15 +384,15 @@ const ProfileWrap = styled.div`
   }
 
   @media (max-width: 700px) {
-    padding: 20vh 0% 10vh 0%;
+    padding: 0;
+    padding-top: 10vh;
     background: white;
     .wrap {
       padding: 0;
+      box-shadow: none;
       .profileHeader {
         padding: 1rem;
         flex-direction: column;
-        // justify-content: center;
-        // background: #0e9aa7;
         width: 100%;
         position: relative;
         .leftHeader {
@@ -403,7 +403,6 @@ const ProfileWrap = styled.div`
         }
         .rightHeader {
           width: 100%;
-          min-height: 45vh;
           display: flex;
           flex-direction: column;
           justify-content: center;

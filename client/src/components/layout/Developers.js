@@ -50,7 +50,4 @@ min-height: 100vh;
     justify-content: center;
     grid-gap: 4rem;
 }
-@media(max-width: 700px) {
-    padding-top: 20vh;
-}
 ` 

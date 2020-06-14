@@ -103,10 +103,10 @@ export default connect(
 )(Dashboard);
 
 const DashboardWrap = styled.div`
-    background: whitesmoke;
+    // background: whitesmoke;
     padding: 0 10%;
     padding-top: 15vh;
-    padding-bottom: 10vh;
+    // padding-bottom: 10vh;
     min-height: 100vh;
   .card {
     width: 750px;
@@ -197,10 +197,10 @@ const DashboardWrap = styled.div`
   @media (max-width: 500px) {
     padding: 0 0%;
     padding-top: 10vh;
-    padding-bottom: 5vh;
+    // padding-bottom: 5vh;
+    background: white;
     .deleteBtn{
-      // margin-left: 1rem;
-      // display: none;
+      margin-bottom: 0.5rem;
     }
     .card {
       border-radius: 0;
