@@ -22,6 +22,7 @@ const Dashboard = ({
   }, []);
 
   const settings = () => {
+    window.scrollTo(0, 0);
     history.push('/dashboard/settings')
   }
 

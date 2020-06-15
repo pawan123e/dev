@@ -4,6 +4,7 @@ import {getAllPosts, createPost,  clearPost} from '../../actions/posts'
 import Spinner from '../layout/Spinner'
 import PostItem from './PostItem'
 import PostForm from './PostForm'
+import styled from 'styled-components';
 const Post = ({getAllPosts, createPost, clearPost, loading, posts, user}) => {
 
     useEffect(() => { 
@@ -16,12 +17,15 @@ const Post = ({getAllPosts, createPost, clearPost, loading, posts, user}) => {
       return <Spinner/>
     } else {
       return (
-      <div>
+      <PostWrap>
       <h1 className="large text-primary"> Posts </h1>
       <p className="lead"><i className="fas fa-user"></i> Welcome to the community!</p>
       <PostForm createPost={createPost}/>
-      {posts.length > 0  ? (posts.map(post => <PostItem key={post._id} post={post} user={user}/>)) : (<Spinner/>)}
+      {console.log('posts length', posts.length)}
+      <div className='posts'>
+      {posts.length > 0  &&  (posts.map(post => <PostItem key={post._id} post={post} user={user}/>)) }
       </div>
+      </PostWrap>
     )}}
 
 const mapStateToProps = state => ({
@@ -31,3 +35,15 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, {getAllPosts, clearPost, createPost})(Post)
+
+const PostWrap = styled.div`
+padding-top: 11vh;
+width: 80%;
+margin: auto;
+.posts{
+  // padding: 1rem;
+  border: 1px solid rgb(230, 236, 240);
+  border-bottom: none;
+  margin-bottom: 1rem;
+}
+`
