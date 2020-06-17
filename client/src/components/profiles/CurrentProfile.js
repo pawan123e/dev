@@ -14,7 +14,7 @@ const CurrentProfile = ({ getProfileById, loading, match, profile, error }) => {
     (profile === null && error !== "Profile not found") ||
     (loading && error !== "Profile not found")
   ) {
-    return <Spinner />;
+    return <ProfileWrap><Spinner /></ProfileWrap>
   } else {
     if (error === "Profile not found") {
       return <h4>Profile not found.</h4>;
