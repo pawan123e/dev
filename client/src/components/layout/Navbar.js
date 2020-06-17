@@ -110,20 +110,7 @@ const NavbarWrap = styled.div`
          display: flex;
          padding: 0;
          opacity: 1;
-         .snapshot{
-            //  display: block;
-             position: absolute;
-             top: 50%;
-             left: 30px;
-             transform: translate(-50%, -50%);
-             height: 50px;
-             width: 50px;
-             img{
-                 height: 100%;
-                 width: 100%;
-                 border-radius: 50%;
-             }
-         }
+         height: 8vh;
          .hamburger{
              display: block;
              position: absolute;

@@ -192,12 +192,9 @@ const DashboardWrap = styled.div`
     }
   }
 
-  @media (max-width: 700px) {
-    padding-top: 24vh;
-  }
   @media (max-width: 500px) {
     padding: 0 0%;
-    padding-top: 10vh;
+    padding-top: 8vh;
     // padding-bottom: 5vh;
     background: white;
     .deleteBtn{

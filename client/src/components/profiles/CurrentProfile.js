@@ -385,7 +385,7 @@ const ProfileWrap = styled.div`
 
   @media (max-width: 700px) {
     padding: 0;
-    padding-top: 10vh;
+    padding-top: 8vh;
     background: white;
     .wrap {
       padding: 0;
@@ -437,7 +437,7 @@ const ProfileWrap = styled.div`
       .profileMain {
         margin-top: 1rem;
         flex-direction: column;
-        padding: 1rem 2rem;
+        padding: 1rem 0.5rem;
         .mainLeft {
           border: 1px solid rgba(0, 0, 0, 0.2);
           padding: 1rem;
