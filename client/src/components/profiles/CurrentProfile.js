@@ -86,10 +86,10 @@ const CurrentProfile = ({ getProfileById, loading, match, profile, error }) => {
             <div className="profileMain">
               <div className="mainLeft">
                 <h1 className="personalHeading">Personal Details</h1>
-                <div className="address">
-                  <h2 className="addressHeading">Address</h2>
+                {profile.location && <div className="address">
+                   <h2 className="addressHeading">Address</h2>
                   <h3 className="addressText">{profile.location}</h3>
-                </div>
+                  </div> }
                 <div className="email">
                   <h2 className="emailHeading">Email</h2>
                   <h3 className="emailText">{profile.user.email}</h3>
@@ -395,6 +395,8 @@ const ProfileWrap = styled.div`
         flex-direction: column;
         width: 100%;
         position: relative;
+        // background: pink;
+        background: #0e9aa7;
         .leftHeader {
           margin-right: 0;
           min-width: 100px;
@@ -408,15 +410,16 @@ const ProfileWrap = styled.div`
           justify-content: center;
           align-items: center;
           .profileAbout{
-            // height: 50%;
             .company {
             color: #808080;
+            color: black;
             text-align: center;
           }
           .name {
             text-align: center;
             color: black;
             color: #ff5200;
+            color: white;
             font-weight: 500;
             font-size: 2rem;
           }
@@ -426,7 +429,6 @@ const ProfileWrap = styled.div`
           }
           
           .socialIcons {
-            // height: 10%;
             margin-top: auto;
             width: 90%;
             margin: auto;
@@ -435,21 +437,20 @@ const ProfileWrap = styled.div`
         }
       }
       .profileMain {
-        margin-top: 1rem;
+        margin-top: 0;
         flex-direction: column;
-        padding: 1rem 0.5rem;
         .mainLeft {
-          border: 1px solid rgba(0, 0, 0, 0.2);
+          border-top: 1px solid rgba(0, 0, 0, 0.2);
           padding: 1rem;
-          margin-bottom: 1rem;
+          margin-bottom: 0;
         }
         .mainRight {
           .experience,
           .education,
           .skills {
             padding: 1rem;
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            margin-bottom: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.2);
+            margin-bottom: 0;
           }
         }
       }

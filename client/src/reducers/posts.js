@@ -1,10 +1,12 @@
-import {CREATE_POST, GET_POSTS, POST_ERROR, DELETE_POST, UPDATE_LIKES, GET_POST, CREATE_COMMENT, DELETE_COMMENT, DELETE_PROFILE, LIKE_POST, UNLIKE_POST, CLEAR_POST} from '../actions/types';
+import {CREATE_POST, GET_POSTS, POST_ERROR, DELETE_POST, UPDATE_LIKES, GET_POST, CREATE_COMMENT, DELETE_COMMENT, DELETE_PROFILE, LIKE_POST, UNLIKE_POST, CLEAR_POST, SET_POST_MODEL} from '../actions/types';
 
 const initialState = {
     posts: '',
     loading: true,
     post: null,
-    error: null
+    error: null,
+    postModel: false,
+    postModelId: null
 }
 
 export default (state= initialState, action) => {
@@ -25,6 +27,12 @@ export default (state= initialState, action) => {
                 ...state,
                 loading: false,
                 error: action.payload
+            }
+        case SET_POST_MODEL: 
+            return {
+                ...state,
+                postModel: action.payload.value,
+                postModelId: action.payload.id
             }
         case DELETE_POST:
              return {
@@ -59,16 +67,19 @@ export default (state= initialState, action) => {
               }
         }
         case LIKE_POST: 
+               console.log(state.post && {...state.post, like: [...state.post.like, action.payload.liking]})
                return {
                    ...state,
                    loading: false,
-                   posts: state.posts.map(post => post._id === action.payload.id ? {...post, like: [...post.like, action.payload.liking]}: post)
+                   posts: state.posts.map(post => post._id === action.payload.id ? {...post, like: [...post.like, action.payload.liking]}: post),
+                   post: state.post && {...state.post, like: [...state.post.like, action.payload.liking]}
                }    
         case UNLIKE_POST: 
                return {
                    ...state,
                    loading: false,
-                   posts: state.posts.map(post => post._id === action.payload.id ? {...post, like: post.like.filter(item => item.user !== action.payload.user)}: post)
+                   posts: state.posts.map(post => post._id === action.payload.id ? {...post, like: post.like.filter(item => item.user !== action.payload.user)}: post),
+                   post: state.post && {...state.post, like: state.post.like.filter(item => item.user !== action.payload.user)}
                }             
         default: 
             return state;

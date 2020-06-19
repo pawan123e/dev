@@ -16,8 +16,8 @@ return (
     {education.map((edu,idx) => (
       <div className={(idx === (education.length - 1)) ? 'eduPart': 'eduPart yesBorder'} id={edu._id} >
         <div className="eduDetail">
-          <p className="eduSchool">{edu.school}</p>
-          <p className="eduDegree">{edu.degree} {', '} {edu.fieldofstudy}</p>
+          {edu.school && <p className="eduSchool">{edu.school}</p>}
+          {edu.fieldofstudy && <p className="eduDegree">{edu.degree} {', '} {edu.fieldofstudy}</p>}
           <p className="eduDate">
             {edu.from
               .split("")

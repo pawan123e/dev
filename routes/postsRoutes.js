@@ -5,6 +5,7 @@ const {
     getPosts, 
     getPostById, 
     deletePostById,
+    editPost,
     likePost,
     unlikePost,
     createComment,
@@ -19,7 +20,7 @@ router.route('/')
 
 router.route('/:id')
 .get(protect, getPostById)
-.delete(protect, deletePostById);
+.delete(protect, deletePostById)
 
 router.route('/like/:id')
 .put(protect, likePost);

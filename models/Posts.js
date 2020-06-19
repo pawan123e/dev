@@ -9,12 +9,6 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Text is required']
     },
-    name: {
-        type: String,
-    },
-    avatar: {
-        type: String
-    },
     like: [
         {
             user: {
@@ -50,5 +44,16 @@ const postSchema = new mongoose.Schema({
         default: Date.now
     }
 });
+
+
+
+postSchema.pre(/^find/, function(next) {
+    this.populate({
+        path: 'user',
+        select: 'name email avatar'
+    })
+    console.log('hello uncle namaste')
+    next();
+})
 
 module.exports = Post = mongoose.model('Post', postSchema);

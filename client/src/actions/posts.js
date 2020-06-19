@@ -9,7 +9,9 @@ import {
     CREATE_COMMENT,
     DELETE_COMMENT, 
     LIKE_POST, 
-    UNLIKE_POST } from './types';
+    UNLIKE_POST,
+    SET_POST_MODEL
+ } from './types';
 import {setAlert} from './alert'
 import axios from 'axios'
 
@@ -50,6 +52,14 @@ export const getAllPosts = () => async dispatch => {
        }
 }
 
+export const setPostModel = (value, id) => dispatch => {
+    console.log('model value in post.js action in 56', id)
+    dispatch({
+        type: SET_POST_MODEL,
+        payload: {value, id}
+    })
+}
+
 export const deletePost = id => async dispatch => {
        try {
            await axios.delete(`/api/posts/${id}`);
@@ -67,17 +77,13 @@ export const deletePost = id => async dispatch => {
        }
 }
 
-export const likePost = (id, likes, user) => async dispatch => {
-    const finds = likes.find(like => like.user === user);
-    if(!finds)
-    {   setTimeout(() => {
+export const likePost = (id, user) => async dispatch => {
+        setTimeout(() => {
         dispatch({
         type: LIKE_POST,
         payload: {id:id, liking: {id: id, user: user}}
     })
     }, 100)
-        
-    }
     
     try {
         const res = await axios.put(`/api/posts/like/${id}`);
@@ -94,17 +100,15 @@ export const likePost = (id, likes, user) => async dispatch => {
     }
 }
 
-export const unLikePost = (id, likes, user) => async dispatch => {
-    const finds = likes.find(like => like.user === user);
-    if(finds)
-    {   setTimeout(() => { 
+export const unLikePost = (id, user) => async dispatch => {
+   
+        setTimeout(() => { 
         dispatch({
         type: UNLIKE_POST,
         payload: {id: id, user: user}
     })
     },100)
-        
-    }
+
     try {
         const res = await axios.put(`/api/posts/unlike/${id}`);
         dispatch({
@@ -122,6 +126,7 @@ export const unLikePost = (id, likes, user) => async dispatch => {
 export const getPostById = id => async dispatch => {
     try {
         const res = await axios.get(`/api/posts/${id}`);
+        console.log('this is post', res.data)
         dispatch({
             type: GET_POST,
             payload: res.data

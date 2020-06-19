@@ -5,17 +5,16 @@ const User = require('../models/User');
 const Profile = require('../models/Profile')
 
 exports.createPosts = asyncError (async (req, res, next) => {
-    const user  = await User.findById(req.user._id);
 
     const newPost = {
         text: req.body.text,
-        name: user.name,
-        avatar: user.avatar,
         user: req.user._id
     }
 
-    const post = await Post.create(newPost);
-    res.json(post);
+    const post = await Post.create(newPost)
+    const finalPost = await Post.findById(post._id);
+    console.log('this is post values that is created in postController in line 15', finalPost)
+    res.json(finalPost);
 })
 
 exports.getPosts = asyncError (async (req, res, next) => {
@@ -24,13 +23,12 @@ exports.getPosts = asyncError (async (req, res, next) => {
     if(!posts) {
         return next (new AppError('No post found', 404))
     }
-    
     res.json(posts)
 })
 
 exports.getPostById = asyncError (async (req, res, next) => {
     const post = await Post.findById(req.params.id);
-
+    console.log('post value in postController in 33 line', post)
     if(!post) {
         return next(new AppError('No post found with this id', 400))
     }
@@ -49,6 +47,7 @@ exports.deletePostById = asyncError (async (req, res, next) => {
     await post.remove();
     res.json({msg: 'Post removed'})
 })
+
 
 exports.likePost = asyncError (async (req, res, next) => {
     const post = await Post.findById(req.params.id);

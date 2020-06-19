@@ -2,9 +2,11 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {deleteComment} from '../../actions/posts'
+import styled from 'styled-components';
+
 const Comments = ({comment: {avatar, user, _id, text, date, name}, deleteComment, postId, mainUser}) => {
     return (
-        <div className="post bg-white p-1 my-1" >
+        <CommentWrap >
         <div>
           <Link  to={`/profiles/${user}`}>
             <img
@@ -34,8 +36,12 @@ const Comments = ({comment: {avatar, user, _id, text, date, name}, deleteComment
           }
       </div>
           
-      </div>
+      </CommentWrap>
     )
 }
 
 export default connect(null, {deleteComment})(Comments)
+
+const CommentWrap = styled.div`
+
+`
