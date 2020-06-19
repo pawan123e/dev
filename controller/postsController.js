@@ -109,7 +109,7 @@ exports.createComment = asyncError(async (req, res, next) => {
 
 exports.removeComment = asyncError(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
-
+  console.log('post comments in postsController in 133 line', req.params.comment_id, post.comments);
   if (!post) {
     return next(new AppError("Invalid post id", 404));
   }
@@ -122,7 +122,7 @@ exports.removeComment = asyncError(async (req, res, next) => {
     return next(new AppError("Comment does not exist", 404));
   }
 
-  if (comment.user.toString() !== req.user._id.toString()) {
+  if (comment.user._id.toString() !== req.user._id.toString()) {
     return next(new AppError("User not authorized", 401));
   }
 

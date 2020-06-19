@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {getPostById, createComment, likePost, unLikePost, clearPost} from '../../actions/posts'
+import {getPostById, createComment, likePost, unLikePost, clearPost, setPostModel} from '../../actions/posts'
 import Spinner from '../layout/Spinner'
 import Comments from './Comments'
 import PostCommentForm from './PostCommentForm'
 import moment from 'moment'
 import styled, {css} from 'styled-components';
 
-const PostComment = ({post, getPostById, match, createComment, user, likePost, unLikePost, clearPost}) => {
+const PostComment = ({post, getPostById, match, createComment, user, likePost, unLikePost, clearPost, setPostModel, postModel}) => {
 
   const [like, setLike] = useState(false);
+  const [wrap, setWrap] = useState(false);
 
     useEffect(() => {
      clearPost();
@@ -38,11 +39,31 @@ const PostComment = ({post, getPostById, match, createComment, user, likePost, u
       }
     }
 
+    useEffect(() => {
+      if(wrap) {
+      const closeModal = e => {
+           setPostModel(false);
+        }
+      const modal = document.querySelector('.modelWrap');
+      modal.addEventListener("click", closeModal);
+      return () => modal.addEventListener("click", closeModal);
+      }
+    }, [wrap])
+
+    useEffect(() => {
+      if(postModel) {
+        setWrap(true);
+      } else {
+        setWrap(false);
+      }
+    }, [postModel])
+
     if(post === null) {
         return <PostCommentWrap><Spinner/></PostCommentWrap>
     } else {
     return (
         <PostCommentWrap>
+          {wrap && <div className='modelWrap'></div>}
             <div className='mainWrap'>
             <Link to='/posts'className="btn">Back To Posts</Link>
 
@@ -101,16 +122,22 @@ const PostComment = ({post, getPostById, match, createComment, user, likePost, u
 const mapStateToProps  = state => ({
     post: state.post.post,
     user: state.auth.user,
-  
+    postModel: state.post.postModel
 })
 
-export default connect(mapStateToProps, {getPostById, createComment, likePost, unLikePost, clearPost})(PostComment)
+export default connect(mapStateToProps, {getPostById, createComment, likePost, unLikePost, clearPost, setPostModel})(PostComment)
 
 const PostCommentWrap = styled.div`
 width: 80%;
 margin: auto;
 padding-top: 12vh;
 margin-bottom: 2rem;
+.modelWrap{
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 2;
+}
 .mainWrap{
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   padding-bottom: 1rem;
