@@ -71,7 +71,7 @@ width: 100%;
   z-index: 2;
 }
 .topSection{
-  width: 60%;
+  width: 80%;
   margin: auto;
 }
 .posts{
@@ -79,7 +79,7 @@ width: 100%;
   border: 1px solid rgb(230, 236, 240);
   border-top: none;
   margin-bottom: 1rem;
-  width: 60%;
+  width: 80%;
   margin: auto;
   margin-bottom: 1rem;
 }

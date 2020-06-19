@@ -84,7 +84,7 @@ const PostComment = ({post, getPostById, match, createComment, user, likePost, u
           </div>
         </div>
         </div>
-        </div>
+        
       
       {/* <PostCommentForm createComment={createComment} match={match}/>
         */
@@ -93,6 +93,7 @@ const PostComment = ({post, getPostById, match, createComment, user, likePost, u
       <div className="comments">
         {post.comments.map(comment => (<Comments key={comment._id} comment={comment} postId = {post._id} mainUser = {user}/>))}
       </div> 
+      </div>
       
       </PostCommentWrap> 
     )}}
@@ -106,9 +107,10 @@ const mapStateToProps  = state => ({
 export default connect(mapStateToProps, {getPostById, createComment, likePost, unLikePost, clearPost})(PostComment)
 
 const PostCommentWrap = styled.div`
-width: 60%;
+width: 80%;
 margin: auto;
-padding-top: 9vh;
+padding-top: 12vh;
+margin-bottom: 2rem;
 .mainWrap{
   border: 0.5px solid rgba(0, 0, 0, 0.3);
   padding-bottom: 1rem;
@@ -120,14 +122,11 @@ padding-top: 9vh;
   }  
 .main {
   border-top: 1px solid rgb(230, 236, 240);
-  border-bottom: 1px solid rgb(230, 236, 240);
   .postSection{
   padding: 0.8rem 1.5rem;
   padding-bottom: 0;
   display: flex;
   flex-direction: column;
-  // border-top: 1px solid rgb(230, 236, 240);
-  // border-bottom: 1px solid rgb(230, 236, 240);
   transition: 0.3s ease;
   text-decoration: none;
   color: black;

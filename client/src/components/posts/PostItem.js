@@ -108,12 +108,14 @@ const PostItem = ({
                 style={like ? { color: "#0e9aa7" } : { color: "gray" }}
               ></i>
               <span>
-                {post.like.length > 0 && <span>{post.like.length}</span>}
+                {post.like.length ? post.like.length : ''}
               </span>
             </button>
             <button type="button" className="btn">
               <i className="far fa-comment"></i>
-              {post.comments.length}
+              <span>
+                {post.comments.length  ? post.comments.length : ''}
+              </span>
             </button>
             {user._id === post.user._id && (
               <div className="options" onClick={(e) => showPostModel(e, post._id)}>
@@ -200,11 +202,18 @@ const PostWrap = styled.div`
         .btn {
           background: none;
           padding: 0;
-          margin-right: 2rem;
+          margin-right: 5rem;
           color: gray;
           margin-top: 0.5rem;
+          // width: 50px;
+          position: relative;
           i {
             margin-right: 0.5rem;
+          }
+          span{
+            position: absolute;
+            top: 0; 
+            left: 25px;
           }
         }
         .options {

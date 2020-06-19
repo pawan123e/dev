@@ -24,7 +24,7 @@ const Comments = ({comment: {user, _id, text, date}, deleteComment, postId, main
 
     return (
         <CommentWrap modelPosition = {modelPosition}>
-          <div className="main">
+          <div className="mainComment">
         <Link to={`/profiles/${user._id}`} className="leftPortion">
           <img src={require(`../../../../public/img/users/${user.avatar}`)} />
         </Link>
@@ -89,20 +89,15 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {deleteComment, setPostModel})(Comments)
 
 const CommentWrap = styled.div`
-.main {
-  padding: 0.8rem 1rem;
+.mainComment {
+  padding: 0.8rem 1.5rem;
   display: flex;
-  border-bottom: 1px solid rgb(230, 236, 240);
+  border-top: 1px solid rgb(230, 236, 240);
   transition: 0.3s ease;
-  cursor: pointer;
   text-decoration: none;
   color: black;
   width: 100%;
   height: 100%;
-  -webkit-tap-highlight-color: transparent;
-  &:hover {
-    background: whitesmoke;
-  }
   .leftPortion {
     text-decoration: none;
     min-height: 50px;
@@ -145,6 +140,7 @@ const CommentWrap = styled.div`
         margin-top: 0.54rem;
         padding: 0 0.5rem;
         position: relative;
+        cursor: pointer;
         .model {
           position: absolute;
           border: 0.3px solid rgba(230,230,230, 0.8);
