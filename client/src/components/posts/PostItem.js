@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { deletePost, likePost, unLikePost, setPostModel,  } from "../../actions/posts";
 import styled, {css} from "styled-components";
-import moment from "moment";
+import getDate from '../../utils/getDate'
+
 const PostItem = ({
   post,
   user,
@@ -36,30 +37,30 @@ const PostItem = ({
     }
   }, [post]);
 
-  const getDate = date => {
-    let newDate = parseInt(Date.parse(date)) / 1000;
-    let currentDate = parseInt(Date.now()) / 1000;
-    let result = currentDate - newDate;
-    let seconds = 60;
-    let minutes = 3570;
-    let hours = 83895;
-    if (result < seconds) {
-      if (result < 1) {
-        result = 1;
-      }
-      return Math.round(result) + "s";
-    } else if (result < minutes) {
-      return Math.round(result / seconds) + "m";
-    } else if (result < hours) {
-      return Math.round(result / minutes) + "h";
-    } else {
-      let finalDate = moment(date).format("ll");
-      if (finalDate.split(", ")[1] === "2020") {
-        return finalDate.split(", ")[0];
-      }
-      return finalDate;
-    }
-  };
+  // const getDate = date => {
+  //   let newDate = parseInt(Date.parse(date)) / 1000;
+  //   let currentDate = parseInt(Date.now()) / 1000;
+  //   let result = currentDate - newDate;
+  //   let seconds = 60;
+  //   let minutes = 3570;
+  //   let hours = 83895;
+  //   if (result < seconds) {
+  //     if (result < 1) {
+  //       result = 1;
+  //     }
+  //     return Math.round(result) + "s";
+  //   } else if (result < minutes) {
+  //     return Math.round(result / seconds) + "m";
+  //   } else if (result < hours) {
+  //     return Math.round(result / minutes) + "h";
+  //   } else {
+  //     let finalDate = moment(date).format("ll");
+  //     if (finalDate.split(", ")[1] === "2020") {
+  //       return finalDate.split(", ")[0];
+  //     }
+  //     return finalDate;
+  //   }
+  // };
 
   const checkLike = (postId, userId) => {
     console.log('postId, userId of postItem', postId, userId);
@@ -85,12 +86,12 @@ const PostItem = ({
   return (
     <PostWrap modelPosition = {modelPosition}>
       <div onClick={e => goToPost(e, post._id)} className="main">
-        <Link to={`/profiles/${post.user}`} className="leftPortion">
+        <Link to={`/profiles/${post.user._id}`} className="leftPortion">
           <img src={require(`../../../../public/img/users/${post.user.avatar}`)} />
         </Link>
         <div className="rightPortion">
           <div className="upper">
-            <Link to={`/profiles/${post.user}`} className="userName">
+            <Link to={`/profiles/${post.user._id}`} className="userName">
               {post.user.name}
             </Link>
             <p className="date">{getDate(post.date)}</p>
@@ -114,7 +115,7 @@ const PostItem = ({
               <i className="far fa-comment"></i>
               {post.comments.length}
             </button>
-            {user._id === post.user && (
+            {user._id === post.user._id && (
               <div className="options" onClick={(e) => showPostModel(e, post._id)}>
                 <div className="dot"></div>
                 <div className="dot"></div>

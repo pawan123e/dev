@@ -27,12 +27,6 @@ const postSchema = new mongoose.Schema({
                 type: String,
                 required: [true, 'Text is required']
             },
-            name: {
-                type: String
-            },
-            avatar: {
-                type: String
-            },
             date: {
                 type: Date,
                 default: Date.now
@@ -51,7 +45,11 @@ postSchema.pre(/^find/, function(next) {
     this.populate({
         path: 'user',
         select: 'name email avatar'
-    })
+    }).populate({
+        path: "comments.user",
+        model: "User",
+        select: ["name", "email", "avatar"]
+      })
     console.log('hello uncle namaste')
     next();
 })

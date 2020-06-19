@@ -36,7 +36,7 @@ const PostComment = ({post, getPostById, match, createComment, user, likePost, u
       } else {
         likePost(postId,  userId)
       }
-    };
+    }
 
     if(post === null) {
         return <PostCommentWrap><Spinner/></PostCommentWrap>
@@ -81,46 +81,19 @@ const PostComment = ({post, getPostById, match, createComment, user, likePost, u
               <i className="far fa-comment"></i>
               {post.comments.length}
             </button>
-            {user._id === post.user && (
-              <div className="options">
-                <div className="dot"></div>
-                <div className="dot"></div>
-                <div className="dot"></div>
-                {/* {postModel && modelId === post._id && <div className='model'> 
-                   <p className='postDelete' onClick= {() => deletePost(post._id)}>Delete</p>
-                </div>} */}
-              </div>
-            )}
           </div>
         </div>
         </div>
         </div>
-      {/* <div className="post bg-white p-1 my-1">
-        <div>
-          <Link to={`/profiles/${post.user}`}>
-            <img
-             className="round-img"
-              src={post.avatar}
-              alt=""
-            />
-            <h4>{post.name}</h4>
-          </Link>
-        </div>
-        <div>
-          <p className="my-1">
-            {post.text}
-          </p>
-          <p className="post-date">
-                Posted on {post.date.split('').splice(0,10).join('').toString().split('-').join('/')}
-            </p>
-        </div>
-      </div> */}
       
       {/* <PostCommentForm createComment={createComment} match={match}/>
+        */
+      }
 
       <div className="comments">
-        {post.comments.map(comment => (<Comments key={comment._id} comment={comment} postId = {post._id} user = {user}/>))}
-      </div> */}
+        {post.comments.map(comment => (<Comments key={comment._id} comment={comment} postId = {post._id} mainUser = {user}/>))}
+      </div> 
+      
       </PostCommentWrap> 
     )}}
 

@@ -391,12 +391,11 @@ const ProfileWrap = styled.div`
       padding: 0;
       box-shadow: none;
       .profileHeader {
-        padding: 1rem;
+        padding-top: 1rem;
         flex-direction: column;
         width: 100%;
         position: relative;
-        // background: pink;
-        background: #0e9aa7;
+        background: #ff5200;
         .leftHeader {
           margin-right: 0;
           min-width: 100px;
@@ -411,28 +410,40 @@ const ProfileWrap = styled.div`
           align-items: center;
           .profileAbout{
             .company {
-            color: #808080;
-            color: black;
+            color: white;
             text-align: center;
+            margin-bottom: 0.5rem;
           }
           .name {
             text-align: center;
-            color: black;
-            color: #ff5200;
             color: white;
             font-weight: 500;
             font-size: 2rem;
+            margin-bottom: 1rem;
           }
           .userBio {
             text-align: center;
+            color: white;
           }
           }
           
           .socialIcons {
             margin-top: auto;
-            width: 90%;
+            width: 100%;
+            padding: 1rem;
             margin: auto;
             margin-top: 2rem;
+            // background: white;
+            i{
+              height: 60px;
+              width: 60px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 0.5rem;
+              border-radius: 50%;
+              background: white;
+            }
           }
         }
       }

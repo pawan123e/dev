@@ -31,7 +31,7 @@ const Dashboard = ({
   }, [])
 
   if (loading && !auth.user) {
-    return <Spinner />;
+    return <DashboardWrap><Spinner /></DashboardWrap>;
   } else {
     return (
       <DashboardWrap>
