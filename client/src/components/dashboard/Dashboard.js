@@ -168,11 +168,11 @@ const DashboardWrap = styled.div`
     margin-top: 4rem;
     box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.45);
     .experiencePart {
-      padding: 1.5rem;
+      padding: 1.5rem 0;
       border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     }
     .educationPart {
-      padding: 1.5rem;
+      padding: 1.5rem 0;
     }
   }
 

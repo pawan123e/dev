@@ -13,6 +13,9 @@ return (
         <i className="fas fa-plus"></i>
       </Link>
     </div>
+    {education.length === 0 ? <h3 className='noEducation'>No Education added yet.</h3>
+    :
+    <>
     {education.map((edu,idx) => (
       <div className={(idx === (education.length - 1)) ? 'eduPart': 'eduPart yesBorder'} id={edu._id} >
         <div className="eduDetail">
@@ -47,7 +50,10 @@ return (
           </button>
         </div>
       </div>
+      
     ))}
+    </>
+    }
   </EducationWrap> 
 );
 }
@@ -72,8 +78,10 @@ margin: auto;
   }
   .yesBorder{
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-    // padding-bottom: 2rem;
-
+  }
+  .noEducation{
+    margin-top: 1.5rem;
+    font-size: 1rem;
   }
   .eduPart {
     display: flex;
@@ -81,6 +89,7 @@ margin: auto;
     margin-top: 1rem;
     padding-bottom: 0.5rem;
     align-items: center;
+
     .eduDetail{
       .eduSchool{
         font-size: 1rem;
@@ -95,7 +104,4 @@ margin: auto;
     }
   }
 
-  @media(max-width: 450px) {
-    width: 100%;
-  }
 `;

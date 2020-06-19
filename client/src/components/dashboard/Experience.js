@@ -13,7 +13,9 @@ const Experience = ({ experience, deleteExperience }) => {
           <i className="fas fa-plus"></i>
         </Link>
       </div>
-      
+      {experience.length === 0 ? <h3 className='noExperience'>No Experience added yet.</h3>
+    :
+    <>
       {experience.map((exp,idx) => (
         <div className={(idx === (experience.length - 1)) ? 'expPart': 'expPart yesBorder'} id={exp._id} >
           <div className="expDetail">
@@ -50,6 +52,7 @@ const Experience = ({ experience, deleteExperience }) => {
           </div>
         </div>
       ))}
+      </>}
     </ExperienceWrap> 
   );
 };
@@ -78,6 +81,10 @@ margin: auto;
   .yesBorder{
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   }
+  .noExperience{
+    margin-top: 1.5rem;
+    font-size: 1rem;
+  }
   .expPart {
     display: flex;
     justify-content: space-between;
@@ -101,7 +108,4 @@ margin: auto;
     }
   }
 
-  @media(max-width: 450px) {
-    width: 100%;
-  }
 `;
