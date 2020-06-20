@@ -1,134 +1,212 @@
-import React, {useEffect, useState} from 'react'
-import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
-import {getPostById, createComment, likePost, unLikePost, clearPost, setPostModel} from '../../actions/posts'
-import Spinner from '../layout/Spinner'
-import Comments from './Comments'
-import PostCommentForm from './PostCommentForm'
-import moment from 'moment'
-import styled, {css} from 'styled-components';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import {
+  getPostById,
+  createComment,
+  likePost,
+  unLikePost,
+  clearPost,
+  setPostModel
+} from "../../actions/posts";
+import Spinner from "../layout/Spinner";
+import Comments from "./Comments";
+import PostCommentForm from "./PostCommentForm";
+import moment from "moment";
+import styled, { css } from "styled-components";
 
-const PostComment = ({post, getPostById, match, createComment, user, likePost, unLikePost, clearPost, setPostModel, postModel}) => {
-
+const PostComment = ({
+  post,
+  getPostById,
+  match,
+  createComment,
+  user,
+  likePost,
+  unLikePost,
+  clearPost,
+  setPostModel,
+  postModel,
+  history
+}) => {
   const [like, setLike] = useState(false);
   const [wrap, setWrap] = useState(false);
+  const [showCommentForm, setShowCommentForm] = useState(false);
 
-    useEffect(() => {
-     clearPost();
-    }, [])
-
-    useEffect(() => {
-      if(post) {
-        if (post.like.some(like => like.user === user._id)) {
-      setLike(true);
-    } else {
-      setLike(false);
-    }
-      }
-  }, [post]);
-
-    useEffect(() => {
-        getPostById(match.params.id);
-    }, [])
-
-    const checkLike = (postId,  userId) => {
-      if (like) {
-        unLikePost(postId,  userId);
-      } else {
-        likePost(postId,  userId)
-      }
-    }
-
-    useEffect(() => {
-      if(wrap) {
+  useEffect(() => {
+    if (showCommentForm) {
+      history.push("/post/comment");
       const closeModal = e => {
-           setPostModel(false);
-        }
-      const modal = document.querySelector('.modelWrap');
+        setShowCommentForm(false);
+      };
+      const modal = document.querySelector(".postCommentForm");
       modal.addEventListener("click", closeModal);
       return () => modal.addEventListener("click", closeModal);
-      }
-    }, [wrap])
+    }
+  }, [showCommentForm]);
 
-    useEffect(() => {
-      if(postModel) {
-        setWrap(true);
+  useEffect(() => {
+    clearPost();
+  }, []);
+
+  useEffect(() => {
+    if (post) {
+      if (post.like.some(like => like.user === user._id)) {
+        setLike(true);
       } else {
-        setWrap(false);
+        setLike(false);
       }
-    }, [postModel])
+    }
+  }, [post]);
 
-    if(post === null) {
-        return <PostCommentWrap><Spinner/></PostCommentWrap>
+  useEffect(() => {
+    getPostById(match.params.id);
+  }, []);
+
+  const checkLike = (postId, userId) => {
+    if (like) {
+      unLikePost(postId, userId);
     } else {
+      likePost(postId, userId);
+    }
+  };
+
+  useEffect(() => {
+    if (wrap) {
+      const closeModal = e => {
+        setPostModel(false);
+      };
+      const modal = document.querySelector(".modelWrap");
+      modal.addEventListener("click", closeModal);
+      return () => modal.addEventListener("click", closeModal);
+    }
+  }, [wrap]);
+
+  useEffect(() => {
+    if (postModel) {
+      setWrap(true);
+    } else {
+      setWrap(false);
+    }
+  }, [postModel]);
+
+  if (post === null) {
     return (
-        <PostCommentWrap>
-          {wrap && <div className='modelWrap'></div>}
-            <div className='mainWrap'>
-            <Link to='/posts'className="btn">Back To Posts</Link>
-
-            <div className="main">
-              <div className='postSection'>
-        <div className='topSection'>
-          <Link to={`/profiles/${post.user}`} className="leftPortion">
-          <img src={require(`../../../../public/img/users/${post.user.avatar}`)} />
-        </Link>
-        <div className="rightPortion">
-        <Link to={`/profiles/${post.user}`} className="userName">
-              {post.user.name}
+      <PostCommentWrap>
+        <div className='outerPart'>
+          <Spinner />
+        </div>
+      </PostCommentWrap>
+    );
+  } else {
+    return (
+      <PostCommentWrap>
+        {showCommentForm && (
+          <div className="postCommentForm">
+            <div className='commentForm'>
+            <PostCommentForm/>
+            </div>
+          </div>
+        )}
+        <div className="outerPart">
+          {wrap && <div className="modelWrap"></div>}
+          <div className="mainWrap">
+            <Link to="/posts" className="btn">
+              Back To Posts
             </Link>
-        <p className='userEmail'>{post.user.email}</p>
-        </div>
-        </div>
-          <p className="postText">{post.text}</p>
-          <div className='date'>
-              {moment(post.date).format('lll')}
+            <div className="main">
+              <div className="postSection">
+                <div className="topSection">
+                  <Link to={`/profiles/${post.user}`} className="leftPortion">
+                    <img
+                      src={require(`../../../../public/img/users/${post.user.avatar}`)}
+                    />
+                  </Link>
+                  <div className="rightPortion">
+                    <Link to={`/profiles/${post.user}`} className="userName">
+                      {post.user.name}
+                    </Link>
+                    <p className="userEmail">{post.user.email}</p>
+                  </div>
+                </div>
+                <p className="postText">{post.text}</p>
+                <div className="date">{moment(post.date).format("lll")}</div>
+                <div className="check">
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={() => checkLike(post._id, user._id)}
+                  >
+                    <i
+                      className="fas fa-thumbs-up"
+                      style={like ? { color: "#0e9aa7" } : { color: "gray" }}
+                    ></i>
+                    <span>
+                      {post.like.length > 0 && <span>{post.like.length}</span>}
+                    </span>
+                  </button>
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={() => setShowCommentForm(true)}
+                  >
+                    <i className="far fa-comment"></i>
+                    {post.comments.length}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* <PostCommentForm createComment={createComment} match={match}/>
+             */}
+
+            <div className="comments">
+              {post.comments.map(comment => (
+                <Comments
+                  key={comment._id}
+                  comment={comment}
+                  postId={post._id}
+                  mainUser={user}
+                />
+              ))}
+            </div>
           </div>
-          <div className="check">
-            <button
-              type="button"
-              className="btn"
-              onClick={() => checkLike(post._id, user._id)}
-            >
-              <i
-                className="fas fa-thumbs-up"
-                style={like ? { color: "#0e9aa7" } : { color: "gray" }}
-              ></i>
-              <span>
-                {post.like.length > 0 && <span>{post.like.length}</span>}
-              </span>
-            </button>
-            <button type="button" className="btn">
-              <i className="far fa-comment"></i>
-              {post.comments.length}
-            </button>
-          </div>
         </div>
-        </div>
-        
-      
-      {/* <PostCommentForm createComment={createComment} match={match}/>
-        */
-      }
+      </PostCommentWrap>
+    );
+  }
+};
 
-      <div className="comments">
-        {post.comments.map(comment => (<Comments key={comment._id} comment={comment} postId = {post._id} mainUser = {user}/>))}
-      </div> 
-      </div>
-      
-      </PostCommentWrap> 
-    )}}
+const mapStateToProps = state => ({
+  post: state.post.post,
+  user: state.auth.user,
+  postModel: state.post.postModel
+});
 
-const mapStateToProps  = state => ({
-    post: state.post.post,
-    user: state.auth.user,
-    postModel: state.post.postModel
-})
-
-export default connect(mapStateToProps, {getPostById, createComment, likePost, unLikePost, clearPost, setPostModel})(PostComment)
+export default connect(
+  mapStateToProps,
+  { getPostById, createComment, likePost, unLikePost, clearPost, setPostModel }
+)(PostComment);
 
 const PostCommentWrap = styled.div`
-width: 80%;
+width: 100%;
+height: 100%;
+.postCommentForm{
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.3);
+  .commentForm{
+    background: white;
+    height: 500px;
+    width: 40%;
+    margin: auto;
+    margin-top: 3rem;
+    border-radius: 20px;
+  }
+}
+.outerPart{
+  width: 80%;
 margin: auto;
 padding-top: 12vh;
 margin-bottom: 2rem;
@@ -231,10 +309,12 @@ margin-bottom: 2rem;
           border: 0.3px solid rgba(230,230,230, 0.8);
           top: -40px;
           right: 0;
-          ${props => props.modelPosition && css`
-            top: 0;
-            right: 0;
-          `}
+          ${props =>
+            props.modelPosition &&
+            css`
+              top: 0;
+              right: 0;
+            `}
           width: 120px;
           background: white;
           box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.3);
@@ -261,10 +341,18 @@ margin-bottom: 2rem;
 }
 }
 }
+}
 
 @media (max-width: 700px) {
-  width: 100%;
-  padding-top: 7vh;
+  .postCommentForm{ 
+    .commentForm{
+      width: 100%;
+      height: 100vh;
+    }
+  }
+  .outerPart{
+    width: 100%;
+    padding-top: 7vh;
   .mainWrap{
     border: none;
     .btn{
@@ -278,6 +366,6 @@ margin-bottom: 2rem;
     
   }
   }
-  
 }
-`
+}
+`;

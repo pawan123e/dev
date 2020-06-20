@@ -15,7 +15,8 @@ const PostItem = ({
   history,
   postModel,
   setPostModel,
-  modelId
+  modelId,
+  setShowCommentForm
 }) => {
   const goToPost = (e, id) => {
     if(!postModel) {
@@ -111,7 +112,7 @@ const PostItem = ({
                 {post.like.length ? post.like.length : ''}
               </span>
             </button>
-            <button type="button" className="btn">
+            <button type="button" className="btn" onClick = {() => setShowCommentForm(true)}>
               <i className="far fa-comment"></i>
               <span>
                 {post.comments.length  ? post.comments.length : ''}

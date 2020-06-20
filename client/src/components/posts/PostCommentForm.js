@@ -1,18 +1,21 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import styled from 'styled-components'
 
-const PostCommentForm = ({createComment, match}) => {
+const PostCommentForm = (props
+  // {createComment, match, history}
+  ) => {
 
     const [text, setText] = useState('');
     
-    const onsubmit = e => {
-      e.preventDefault();
-      createComment(match.params.id, text)
-      setText('');
-    }
-
+    // const onsubmit = e => {
+    //   e.preventDefault();
+    //   createComment(match.params.id, text)
+    //   setText('');
+    // }
+    
     return (
-        <div className="post-form">
-        <div className="bg-primary p">
+        <PostForm>
+        {/* <div className="bg-primary p">
           <h3>Leave A Comment</h3>
         </div>
         <form className="form my-1" onSubmit = {onsubmit}>
@@ -26,9 +29,21 @@ const PostCommentForm = ({createComment, match}) => {
             required
           ></textarea>
           <input type="submit"className="btn btn-dark my-1" value="Submit" />
-        </form>
-      </div>
+        </form> */}
+      </PostForm>
     )
 }
 
 export default PostCommentForm
+
+const PostForm = styled.div`
+//  background: white;
+//  height: 500px;
+//  width: 50%;
+//  margin: auto;
+//  margin-top: 3rem;
+//  @media (max-width: 700px) { 
+//    height: 100%;
+//    width: 100%;
+//  }
+`

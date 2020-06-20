@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteComment, setPostModel } from "../../actions/posts";
 import styled, { css } from "styled-components";
 import getDate from "../../utils/getDate";
+import PostCommentForm from "./PostCommentForm";
 
 const Comments = ({
   comment: { user, _id, text, date },
@@ -15,6 +16,7 @@ const Comments = ({
   modelId
 }) => {
   const [modelPosition, setModelPosition] = useState(false);
+ 
 
   const showPostModel = (e, id) => {
     var topPos = e.target.getBoundingClientRect().top;

@@ -1,98 +1,138 @@
-import React, {useEffect, useState} from 'react'
-import {connect} from 'react-redux'
-import {getAllPosts, createPost,  clearPost, setPostModel} from '../../actions/posts'
-import Spinner from '../layout/Spinner'
-import PostItem from './PostItem'
-import PostForm from './PostForm'
-import styled from 'styled-components';
-const Post = ({getAllPosts, createPost, clearPost, loading, posts, user, history, postModel, setPostModel}) => {
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import {Redirect} from 'react-router-dom'
+import {
+  getAllPosts,
+  createPost,
+  clearPost,
+  setPostModel
+} from "../../actions/posts";
+import Spinner from "../layout/Spinner";
+import PostItem from "./PostItem";
+import PostForm from "./PostForm";
+import styled from "styled-components";
+import PostCommentForm from "./PostCommentForm";
+const Post = ({
+  getAllPosts,
+  createPost,
+  clearPost,
+  loading,
+  posts,
+  user,
+  history,
+  postModel,
+  setPostModel
+}) => {
+  useEffect(() => {
+    document.title = "Posts";
+    getAllPosts();
+    clearPost();
+  }, [getAllPosts, clearPost]);
 
-    useEffect(() => { 
-            document.title = 'Posts'   
-            getAllPosts();
-            clearPost();        
-    },[getAllPosts, clearPost])
+  const [wrap, setWrap] = useState(false);
+  const [showCommentForm, setShowCommentForm] = useState(false);
 
-    const [wrap, setWrap] = useState(false);
-
-    useEffect(() => {
-      if(wrap) {
+  useEffect(() => {
+    if (wrap) {
       const closeModal = e => {
-           setPostModel(false);
-        }
-      const modal = document.querySelector('.modelWrap');
+        setPostModel(false);
+      };
+      const modal = document.querySelector(".modelWrap");
       modal.addEventListener("click", closeModal);
       return () => modal.addEventListener("click", closeModal);
-      }
-    }, [wrap])
+    }
+  }, [wrap]);
 
-    useEffect(() => {
-      if(postModel) {
-        setWrap(true);
-      } else {
-        setWrap(false);
-      }
-    }, [postModel])
+  useEffect(() => {
+    if (showCommentForm) {
+     history.push('/posts/comment')
+    }
 
-    if(loading && posts.length > 0) {
-      return <Spinner/>
+  }, [showCommentForm]);
+
+  useEffect(() => {
+    if (postModel) {
+      setWrap(true);
     } else {
-      return (
+      setWrap(false);
+    }
+  }, [postModel]);
+
+  if (loading && posts.length > 0) {
+    return <Spinner />;
+  } else {
+    return (
       <PostWrap>
-      {wrap && <div className='modelWrap'></div>}
-      <div className='topSection'>
-      <h1 className="large text-primary"> Posts </h1>
-      <p className="lead"><i className="fas fa-user"></i> Welcome to the community!</p>
-      <PostForm createPost={createPost}/>
-      </div>
-      <div className='posts'>
-      {posts.length > 0  &&  (posts.map(post => <PostItem key={post._id} post={post} user={user} history = {history}/>)) }
-      </div>
-      
+        {showCommentForm && <PostCommentForm />}
+        {wrap && <div className="modelWrap"></div>}
+        <div className="topSection">
+          <h1 className="large text-primary"> Posts </h1>
+          <p className="lead">
+            <i className="fas fa-user"></i> Welcome to the community!
+          </p>
+          <PostForm createPost={createPost} />
+        </div>
+        <div className="posts">
+          {posts.length > 0 &&
+            posts.map(post => (
+              <PostItem
+                key={post._id}
+                post={post}
+                user={user}
+                history={history}
+                setShowCommentForm={setShowCommentForm}
+              />
+            ))}
+        </div>
       </PostWrap>
-    )}}
+    );
+  }
+};
 
 const mapStateToProps = state => ({
-    loading: state.post.loading,
-    posts: state.post.posts,
-    user: state.auth.user,
-    postModel: state.post.postModel
-})
+  loading: state.post.loading,
+  posts: state.post.posts,
+  user: state.auth.user,
+  postModel: state.post.postModel
+});
 
-export default connect(mapStateToProps, {getAllPosts, clearPost, createPost, setPostModel})(Post)
+export default connect(
+  mapStateToProps,
+  { getAllPosts, clearPost, createPost, setPostModel }
+)(Post);
 
 const PostWrap = styled.div`
-padding-top: 10vh;
-width: 100%;
-.modelWrap{
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  z-index: 2;
-}
-.topSection{
-  width: 80%;
-  margin: auto;
-}
-.posts{
-  // padding: 1rem;
-  border: 1px solid rgb(230, 236, 240);
-  border-top: none;
-  margin-bottom: 1rem;
-  width: 80%;
-  margin: auto;
-  margin-bottom: 1rem;
-}
-@media(max-width: 500px) {
+  padding-top: 10vh;
   width: 100%;
-  .topSection{
-    width: 95%;
+  .modelWrap {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: 2;
+  }
+  .topSection {
+    width: 80%;
     margin: auto;
   }
-  .posts{
-    width: 100%;
-    border-bottom: none;
-    margin-bottom: 0;
+  .posts {
+    // padding: 1rem;
+    border: 1px solid rgb(230, 236, 240);
+    border-top: none;
+    margin-bottom: 1rem;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 1rem;
   }
-}
-`
+  @media (max-width: 500px) {
+    width: 100%;
+    .topSection {
+      width: 95%;
+      margin: auto;
+    }
+    .posts {
+      width: 100%;
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+  }
+`;
