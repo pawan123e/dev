@@ -33,16 +33,42 @@ const PostComment = ({
   const [showCommentForm, setShowCommentForm] = useState(false);
 
   useEffect(() => {
-    if (showCommentForm) {
+    if(showCommentForm) {
       history.push("/post/comment");
-      const closeModal = e => {
-        setShowCommentForm(false);
-      };
-      const modal = document.querySelector(".postCommentForm");
-      modal.addEventListener("click", closeModal);
-      return () => modal.addEventListener("click", closeModal);
+      document.body.style.overflow = "hidden";
+    } else {
+      post && history.push(`/posts/${post._id}`);
+      document.body.style.overflow = "auto";
     }
-  }, [showCommentForm]);
+  }, [showCommentForm])
+
+  useEffect(() => {
+    if(showCommentForm) {
+    
+    const closeModal = e => {
+      const element = document.querySelector(".commentForm");
+      if(element) {
+      const positionInfo = element.getBoundingClientRect();
+      const top = positionInfo.top;
+      const bottom = positionInfo.bottom;
+      const left = positionInfo.left;
+      const right = positionInfo.right;
+      if (
+        (e.clientY < top ||
+          e.clientY > bottom ||
+          e.clientX < left ||
+          e.clientX > right) &&
+        e.target.id !== "fileInput"
+      ) {
+        setShowCommentForm(false);
+      }
+    }
+  }
+    const modal = document.querySelector(".postCommentForm");
+    modal.addEventListener("click", closeModal);
+    return () => modal.addEventListener("click", closeModal);
+  }
+  },[showCommentForm])
 
   useEffect(() => {
     clearPost();
@@ -92,7 +118,7 @@ const PostComment = ({
   if (post === null) {
     return (
       <PostCommentWrap>
-        <div className='outerPart'>
+        <div className="outerPart">
           <Spinner />
         </div>
       </PostCommentWrap>
@@ -102,8 +128,8 @@ const PostComment = ({
       <PostCommentWrap>
         {showCommentForm && (
           <div className="postCommentForm">
-            <div className='commentForm'>
-            <PostCommentForm/>
+            <div className="commentForm">
+              <PostCommentForm setShowCommentForm = {setShowCommentForm}/>
             </div>
           </div>
         )}
@@ -345,9 +371,11 @@ margin-bottom: 2rem;
 
 @media (max-width: 700px) {
   .postCommentForm{ 
+    background: transparent;
     .commentForm{
       width: 100%;
       height: 100vh;
+      border-radius: 0;
     }
   }
   .outerPart{

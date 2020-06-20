@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 
-const PostCommentForm = (props
+const PostCommentForm = ({setShowCommentForm}
   // {createComment, match, history}
   ) => {
 
@@ -15,6 +15,10 @@ const PostCommentForm = (props
     
     return (
         <PostForm>
+          <header>
+          <i className="fas fa-times closeBtn" onClick = {() => setShowCommentForm(false)}></i>
+          <i className="fas fa-long-arrow-alt-left back"></i>
+          </header>
         {/* <div className="bg-primary p">
           <h3>Leave A Comment</h3>
         </div>
@@ -46,4 +50,28 @@ const PostForm = styled.div`
 //    height: 100%;
 //    width: 100%;
 //  }
+header{
+  height: 8vh;
+  border-bottom: 0.3px solid rgba(0,0,0,0.4);
+  display: flex;
+  padding: 0 1.5rem;
+  align-items: center;
+  .closeBtn{
+    cursor: pointer;
+    transition: all 0.1s ease;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    &:hover{
+      background: rgba(142,208,248, 0.5);
+    }
+  }
+  .back{
+    display: none;
+  }
+}
 `
