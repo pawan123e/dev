@@ -209,7 +209,7 @@ const PostCardWrap = styled.div`
           span {
             position: absolute;
             top: 0;
-            left: 25px;
+            left: 25px
           }
         }
       }
