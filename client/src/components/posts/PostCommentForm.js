@@ -17,7 +17,7 @@ const PostCommentForm = ({setShowCommentForm}
         <PostForm>
           <header>
           <i className="fas fa-times closeBtn" onClick = {() => setShowCommentForm(false)}></i>
-          <i className="fas fa-long-arrow-alt-left back"></i>
+          <i className="fas fa-long-arrow-alt-left back" onClick = {() => setShowCommentForm(false)}></i>
           </header>
         {/* <div className="bg-primary p">
           <h3>Leave A Comment</h3>
@@ -56,7 +56,7 @@ header{
   display: flex;
   padding: 0 1.5rem;
   align-items: center;
-  .closeBtn{
+  .closeBtn {
     cursor: pointer;
     transition: all 0.1s ease;
     border-radius: 50%;
@@ -74,4 +74,16 @@ header{
     display: none;
   }
 }
+
+@media (max-width: 500px) { 
+  header{
+      .closeBtn{
+        display: none;
+      }
+      .back{
+        display: block;
+        font-size: 1.4rem;
+      }
+    }
+  }
 `
