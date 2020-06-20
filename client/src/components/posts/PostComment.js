@@ -224,7 +224,6 @@ height: 100%;
   background: rgba(0, 0, 0, 0.3);
   .commentForm{
     background: white;
-    height: 100%;
     max-height: 90%;
     overflow: hidden;
     width: 40%;
@@ -377,7 +376,8 @@ margin-bottom: 2rem;
     background: transparent;
     .commentForm{
       width: 100%;
-      // height: 100vh;
+      height: 100%;
+      max-height: auto;
       border-radius: 0;
     }
   }
@@ -393,6 +393,9 @@ margin-bottom: 2rem;
     .postSection{
       padding: 0.8rem 1rem;
       padding-bottom: 0;
+      .postText{
+        font-size: 1.2rem;
+      }
     }
     
   }

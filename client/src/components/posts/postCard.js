@@ -121,7 +121,7 @@ const PostCardWrap = styled.div`
       margin-top: 0.54rem;
       padding: 0 0.5rem;
       // position: relative;
-      z-index: 2;
+      z-index: 1;
       .model {
         position: absolute;
         border: 0.3px solid rgba(230, 230, 230, 0.8);

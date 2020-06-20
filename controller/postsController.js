@@ -87,7 +87,8 @@ exports.unlikePost = asyncError(async (req, res, next) => {
 });
 
 exports.createComment = asyncError(async (req, res, next) => {
-  const post = await Post.findById(req.params.id);
+  let post = await Post.findById(req.params.id);
+  console.log('hello did we reach here')
 
   if (!post) {
     return next(new AppError("Invalid postId", 404));
