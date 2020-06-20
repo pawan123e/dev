@@ -224,11 +224,13 @@ height: 100%;
   background: rgba(0, 0, 0, 0.3);
   .commentForm{
     background: white;
-    height: 500px;
+    height: 100%;
+    max-height: 90%;
+    overflow: hidden;
     width: 40%;
     margin: auto;
     margin-top: 3rem;
-    border-radius: 20px;
+    border-radius: 14px;
   }
 }
 .outerPart{
@@ -299,6 +301,7 @@ margin-bottom: 2rem;
     .postText {
       font-size: 1.5rem;
       margin-top: 1rem;
+      white-space: pre-line;
     }
     .date{
       color: #657786;
@@ -374,7 +377,7 @@ margin-bottom: 2rem;
     background: transparent;
     .commentForm{
       width: 100%;
-      height: 100vh;
+      // height: 100vh;
       border-radius: 0;
     }
   }

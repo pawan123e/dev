@@ -25,7 +25,6 @@ const PostItem = ({
 }) => {
   const goToPost = (e, id) => {
     if (!postModel) {
-      console.log(e.target);
       ["main", "upper", "date", "cardText", "check"].forEach(
         classlist =>
           e.target.classList.contains(classlist) && history.push(`/posts/${id}`)

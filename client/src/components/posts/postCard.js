@@ -16,12 +16,13 @@ const PostCard = ({
   checkLike,
   setShowCommentForm,
   badges, 
-  postId
+  postId,
+  options = true
 }) => {
   return (
     <PostCardWrap modelPosition={modelPosition} badges = {badges}>
       <div onClick={e => badges && goToPost(e, card._id)} className="main">
-        {user._id === card.user._id && (
+        {options && user._id === card.user._id && (
           <div className="options" onClick={e => showPostModel(e, card._id)}>
             <div className="dot"></div>
             <div className="dot"></div>
@@ -82,6 +83,8 @@ const PostCardWrap = styled.div`
   * {
     box-sizing: border-box;
   }
+  padding: 0;
+  margin: 0;
   .main {
     padding: 0.8rem 1rem;
     display: flex;
@@ -167,11 +170,15 @@ const PostCardWrap = styled.div`
       margin-left: 1rem;
       position: relative;
       width: 100%;
+
       .cardText {
         padding-right: 1rem;
+        font-size: 1rem;
+        white-space: pre-line;
       }
       .upper {
         display: flex;
+        align-items: center;
         width: 100%;
         .userName {
           text-decoration: none;
@@ -182,6 +189,7 @@ const PostCardWrap = styled.div`
         }
         .date {
           color: #808080;
+        //   margin-top: 0.5rem;
         }
       }
       .check {
