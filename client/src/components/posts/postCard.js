@@ -170,14 +170,12 @@ const PostCardWrap = styled.div`
       margin-left: 1rem;
       position: relative;
       width: 100%;
-      background: red;
 
       .cardText {
         padding-right: 2rem;
         font-size: 1rem;
         white-space: pre-line;
         word-wrap: break-word;
-        background: yellow;
       }
       .upper {
         display: flex;
