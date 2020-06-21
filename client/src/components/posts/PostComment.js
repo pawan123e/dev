@@ -224,11 +224,7 @@ height: 100%;
   background: rgba(0, 0, 0, 0.3);
   .commentForm{
     background: white;
-    // max-height: 90%;
-    // min-height: 40%;
-    // height: auto;
     height: 80%;
-    // max-height: 90%;
     overflow: hidden;
     width: 40%;
     margin: auto;
@@ -373,6 +369,22 @@ margin-bottom: 2rem;
 }
 }
 }
+}
+
+@media (max-width: 1200px) { 
+  .postCommentForm{
+    .commentForm{
+       width: 50%;
+    }
+  }
+}
+
+@media (max-width: 900px) { 
+  .postCommentForm{
+    .commentForm{
+       width: 60%;
+    }
+  }
 }
 
 @media (max-width: 700px) {

@@ -85,6 +85,7 @@ const PostCardWrap = styled.div`
   }
   padding: 0;
   margin: 0;
+  width: 100vw;
   .main {
     padding: 0.8rem 1rem;
     display: flex;
@@ -120,7 +121,6 @@ const PostCardWrap = styled.div`
       margin-left: auto;
       margin-top: 0.54rem;
       padding: 0 0.5rem;
-      // position: relative;
       z-index: 1;
       .model {
         position: absolute;
@@ -170,11 +170,14 @@ const PostCardWrap = styled.div`
       margin-left: 1rem;
       position: relative;
       width: 100%;
+      background: red;
 
       .cardText {
-        padding-right: 1rem;
+        padding-right: 2rem;
         font-size: 1rem;
         white-space: pre-line;
+        word-wrap: break-word;
+        background: yellow;
       }
       .upper {
         display: flex;

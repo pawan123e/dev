@@ -22,6 +22,9 @@ const PostCommentForm = ({ setShowCommentForm, post, user, createComment }) =>
     return (
       <PostForm>
         <form onSubmit={onsubmit}>
+        <button className="btn" type="submit">
+            Reply
+          </button>
           <header>
             <i
               className="fas fa-times closeBtn"
@@ -33,9 +36,7 @@ const PostCommentForm = ({ setShowCommentForm, post, user, createComment }) =>
             ></i>
           </header>
           <main>
-          {/* <button className="btn" type="submit">
-            Reply
-          </button> */}
+          
             {console.log("post from postCommentForm.js", post)}
             <PostCard card={post} options={false} getDate={getDate} />
 
@@ -92,8 +93,17 @@ const PostForm = styled.div`
   height: 100%;
   form{
   height: 100%;
+  position: relative;
+  .btn {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    background: #0e9aa7;
+    color: white;
+    border-radius: 25px;
+  }
   header {
-    height: 8vh;
+    height: 50px;
     border-bottom: 0.3px solid rgba(0, 0, 0, 0.4);
     display: flex;
     padding: 0 1.5rem;
@@ -117,22 +127,9 @@ const PostForm = styled.div`
     }
   }
   main {
-    // max-height: 90%;
-    // min-height: 80%;
-    // height: 80%;
-    max-height: 80%;
-    background: yellow;
+    max-height: 78%;
     overflow: auto;
     width: 100%;
-    // position: relative;
-    // .btn {
-    //   position: absolute;
-    //   right: 20px;
-    //   bottom: -80px;
-    //   background: #0e9aa7;
-    //   color: white;
-    //   border-radius: 25px;
-    // }
     .reply {
       margin-top: 1rem;
       padding: 0.8rem 1rem;
@@ -172,6 +169,15 @@ const PostForm = styled.div`
   @media (max-width: 500px) {
     width: 100%;
     form{
+      .btn {
+        top: 25px;
+        max-height: 30px;
+        padding: 0 1rem;
+        font-size: 1rem;
+        border-radius: 25px;
+        z-index: 2;
+        transform: translate(0, -50%);
+      }
     header {
       .closeBtn {
         display: none;
@@ -182,17 +188,7 @@ const PostForm = styled.div`
       }
     }
     main {
-      // height: auto;
-      // overflow: visible;
       max-height: 92%;
-      .btn {
-        top: -40px;
-        max-height: 30px;
-        padding: 0 1rem;
-        font-size: 1rem;
-        border-radius: 25px;
-        z-index: 2;
-      }
     }
   }
 }
