@@ -224,7 +224,11 @@ height: 100%;
   background: rgba(0, 0, 0, 0.3);
   .commentForm{
     background: white;
-    max-height: 90%;
+    // max-height: 90%;
+    // min-height: 40%;
+    // height: auto;
+    height: 80%;
+    // max-height: 90%;
     overflow: hidden;
     width: 40%;
     margin: auto;
@@ -373,12 +377,16 @@ margin-bottom: 2rem;
 
 @media (max-width: 700px) {
   .postCommentForm{ 
-    background: transparent;
+    // min-height: 100vh;
+    // height: auto;
+
     .commentForm{
+      // overflow: visible;
+     height: 100%;
+      
       width: 100%;
-      height: 100%;
-      max-height: auto;
       border-radius: 0;
+      margin-top: 0;
     }
   }
   .outerPart{
@@ -403,3 +411,4 @@ margin-bottom: 2rem;
 }
 }
 `;
+
