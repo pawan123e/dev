@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import PostCard from "./PostCard";
+import PostCard from './PostCard';
 import { connect } from "react-redux";
 import getDate from "../../utils/getDate";
 import { createComment } from "../../actions/posts";
-// import {
-//   post
-// } from "../../actions/posts";
+
 const PostCommentForm = ({ setShowCommentForm, post, user, createComment }) =>
-  // {createComment, match, history}
   {
     const [text, setText] = useState("");
 
     const onsubmit = e => {
-      console.log("onsubmitting");
       e.preventDefault();
       createComment(post._id, text);
       setShowCommentForm(false)
@@ -37,7 +33,6 @@ const PostCommentForm = ({ setShowCommentForm, post, user, createComment }) =>
           </header>
           <main>
           
-            {console.log("post from postCommentForm.js", post)}
             <PostCard card={post} options={false} getDate={getDate} />
 
             <div className="reply">
@@ -57,22 +52,6 @@ const PostCommentForm = ({ setShowCommentForm, post, user, createComment }) =>
                 />
               </div>
             </div>
-
-            {/* <div className="bg-primary p">
-          <h3>Leave A Comment</h3>
-        </div>
-        <form className="form my-1" onSubmit = {onsubmit}>
-          <textarea
-            name="text"
-            cols="30"
-            rows="5"
-            placeholder="Comment on this post"
-            value={text}
-            onChange = {(e) => setText(e.target.value)}
-            required
-          ></textarea>
-          <input type="submit"className="btn btn-dark my-1" value="Submit" />
-        </form> */}
           </main>
         </form>
       </PostForm>

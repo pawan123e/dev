@@ -29,7 +29,7 @@ const PostCard = ({
             <div className="dot"></div>
             {postModel && modelId === card._id && (
               <div className="model">
-                <p className="postDelete" onClick={postId ? () => deleteItem(postId, card._id) : () => deleteItem(card._id)}>
+                <p className="postDelete" onClick={postId ? () => deleteItem(postId, card._id) && console.log('it is deleting') : () => deleteItem(card._id)}>
                   Delete
                 </p>
               </div>
