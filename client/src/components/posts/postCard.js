@@ -85,7 +85,7 @@ const PostCardWrap = styled.div`
   }
   padding: 0;
   margin: 0;
-  width: 100vw;
+  width: 100%;
   .main {
     padding: 0.8rem 1rem;
     display: flex;
