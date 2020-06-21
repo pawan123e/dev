@@ -106,22 +106,19 @@ const PostCardWrap = styled.div`
       position: absolute;
       cursor: pointer;
       right: 1rem;
-      bottom: 0.9rem;
       ${props =>
-        !props.badges &&
+        !props.badges ?
         css`
-          top: 0.9rem;
-          right: 1rem;
-        `}
+          top: 1rem;
+        ` : css`bottom: 1rem;`}
       align-self: flex-start;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       margin-left: auto;
-      margin-top: 0.54rem;
+      // margin-top: 0.54rem;
       padding: 0 0.5rem;
-      z-index: 1;
       .model {
         position: absolute;
         border: 0.3px solid rgba(230, 230, 230, 0.8);
@@ -138,7 +135,8 @@ const PostCardWrap = styled.div`
         box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.3);
         border-radius: 8px;
         z-index: 3;
-        p {
+        .postDelete {
+          
           padding: 0.5rem 1rem;
           &:hover {
             background: rgba(240, 240, 240, 0.5);
@@ -169,13 +167,14 @@ const PostCardWrap = styled.div`
     .rightPortion {
       margin-left: 1rem;
       position: relative;
-      width: 100%;
+      max-width: 80%;
 
       .cardText {
-        padding-right: 2rem;
+        margin-right: 1rem;
         font-size: 1rem;
         white-space: pre-line;
         word-wrap: break-word;
+        max-width: 90%;
       }
       .upper {
         display: flex;

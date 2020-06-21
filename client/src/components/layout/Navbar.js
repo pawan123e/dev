@@ -76,7 +76,7 @@ const NavbarWrap = styled.div`
     align-items: center;
     padding: 0 2rem;
     position: fixed;
-    z-index: 2;
+    z-index: 10;
     width: 100%;
     // top: 0;
     border-bottom: solid 1px var(--primary-color);
