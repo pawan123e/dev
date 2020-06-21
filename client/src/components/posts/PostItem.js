@@ -9,7 +9,7 @@ import {
 } from "../../actions/posts";
 import styled, { css } from "styled-components";
 import getDate from "../../utils/getDate";
-import PostCard from "./PostCard";
+import PostCard from "./postCard";
 const PostItem = ({
   post,
   user,

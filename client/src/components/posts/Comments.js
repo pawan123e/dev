@@ -5,7 +5,7 @@ import { deleteComment, setPostModel } from "../../actions/posts";
 import styled, { css } from "styled-components";
 import getDate from "../../utils/getDate";
 import PostCommentForm from "./PostCommentForm";
-import PostCard from './PostCard';
+import PostCard from './postCard';
 
 const Comments = ({
   comment,

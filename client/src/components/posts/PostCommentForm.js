@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import PostCard from './PostCard';
+import PostCard from './postCard';
 import { connect } from "react-redux";
 import getDate from "../../utils/getDate";
 import { createComment } from "../../actions/posts";
