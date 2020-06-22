@@ -111,6 +111,7 @@ const NavbarWrap = styled.div`
          padding: 0;
          opacity: 1;
          height: 8vh;
+         min-height: 50px;
          .hamburger{
              display: block;
              position: absolute;

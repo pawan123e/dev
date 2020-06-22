@@ -1,13 +1,8 @@
 import styled from 'styled-components'
 export default styled.div`
 
-background: whitesmoke;
-padding-top: 11vh;
+padding-top: 14vh;
 padding-bottom: 1rem;
-display: flex;
-justify-content: center;
-min-height: 100vh;
-align-items: center;
  .main{
     box-shadow: 10px 10px 20px 4px rgba(0,0,0,0.5);
    position: relative;
@@ -138,24 +133,7 @@ align-items: center;
         width: 80%;
     }
 }
-@media(max-width: 700px) {
-    padding-top: 14vh;
-    padding-bottom: 1rem;
-    .main {
-        width: 80%;
-        box-shadow: none;
-        border-radius: 0;
-        margin: 0;
-        .upperPart{
-            img{
-                border-radius: 0;
-            }
-        }
-        .accountAlert{ 
-        width: 90%;
-    }
-    }
-}
+
 @media(max-width: 600px) {
     .main {
         width: 90%;
@@ -166,9 +144,17 @@ align-items: center;
 }
 @media(max-width: 525px) {
     background: white;
+    padding-top: 9vh;
     .main {
         width: 100%;
         height: 100%;
+        border-radius: 0;
+        box-shadow: none;
+        .upperPart{
+            img{
+              border-radius: 0;
+            }
+        }
         .lowerPart{
             padding: 0.5rem 1rem;
             .form{
@@ -204,6 +190,11 @@ align-items: center;
                 margin-left: 0;
             }
         }
+    .accountAlert{
+        top: 20px;
+        // left: 10%;
+        width: 80%;
     }
+}
 }
 `
