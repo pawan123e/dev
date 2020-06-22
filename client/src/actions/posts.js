@@ -10,7 +10,9 @@ import {
     DELETE_COMMENT, 
     LIKE_POST, 
     UNLIKE_POST,
-    SET_POST_MODEL
+    SET_POST_MODEL,
+    SHOW_COMMENT_MODAL,
+    UNSHOW_COMMENT_MODAL
  } from './types';
 import {setAlert} from './alert'
 import axios from 'axios'
@@ -57,6 +59,20 @@ export const setPostModel = (value, id) => dispatch => {
     dispatch({
         type: SET_POST_MODEL,
         payload: {value, id}
+    })
+}
+
+export const showCommentModal = (type, id, history) => dispatch => {
+    dispatch({
+        type: SHOW_COMMENT_MODAL,
+        payload: {type, id}
+    })
+        window.history.pushState({}, null, '/compose/comment');
+}
+
+export const unshowCommentModal = () => dispatch => {
+    dispatch({
+        type: UNSHOW_COMMENT_MODAL
     })
 }
 

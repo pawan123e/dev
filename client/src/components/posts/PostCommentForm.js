@@ -5,14 +5,15 @@ import { connect } from "react-redux";
 import getDate from "../../utils/getDate";
 import { createComment } from "../../actions/posts";
 
-const PostCommentForm = ({ setShowCommentForm, post, user, createComment }) =>
+const PostCommentForm = ({ setShowModal, post, user, createComment }) =>
   {
     const [text, setText] = useState("");
 
     const onsubmit = e => {
       e.preventDefault();
       createComment(post._id, text);
-      setShowCommentForm(false)
+      setShowModal(false)
+      // setShowCommentForm(false)
     };
 
     return (
@@ -24,11 +25,11 @@ const PostCommentForm = ({ setShowCommentForm, post, user, createComment }) =>
           <header>
             <i
               className="fas fa-times closeBtn"
-              onClick={() => setShowCommentForm(false)}
+              onClick={() => setShowModal(false)}
             ></i>
             <i
               className="fas fa-long-arrow-alt-left back"
-              onClick={() => setShowCommentForm(false)}
+              onClick={() => setShowModal(false)}
             ></i>
           </header>
           <main>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Switch, Route} from 'react-router-dom';
 
 import Developers from '../layout/Developers'
@@ -21,11 +21,20 @@ import CurrentProfile from '../profiles/CurrentProfile'
 import Posts from '../posts/Post'
 import PostComment from  '../posts/PostComment'
 import DashboardSettings from '../dashboard/DashboardSettings'
+import CommentModal from '../layout/CommentModal'
 
-const Routes = () => {
+import {connect} from 'react-redux';
+
+const Routes = ({commentModal}) => {
+    
+    useEffect(() => {
+        console.log('hiii everyone how it is goind', commentModal)
+    }, [commentModal])
+
     return (
         <section>
         <Alert/>
+        <CommentModal/>
         <Switch>
              <Route exact path="/register" component={Register}/>
              <Route exact path="/login" component={Login}/>
@@ -40,13 +49,18 @@ const Routes = () => {
              <PrivateRoute exact path='/edit-profile' component={EditProfile}/>
              <PrivateRoute exact path='/add-experience' component={AddExperience}/>
              <PrivateRoute exact path='/add-education' component={AddEducation}/>
-             <PrivateRoute exact path={['/posts', '/posts/comment']} component={Posts}/>
-             <PrivateRoute exact path={['/posts/:id', '/post/comment']} component={PostComment}/>
-             
+             <PrivateRoute exact path={commentModal === 'posts' ? ['/compose/comment', '/posts'] : '/posts'} component={Posts}/>
+             <PrivateRoute exact path={commentModal === 'post' ? ['/compose/comment', '/posts/:id']: '/posts/:id'} component={PostComment}/>
+             <PrivateRoute exact path = '/compose/comment' component = {Dashboard}/>
              <Route component={ErrorPage}/>  
         </Switch>
         </section>
     )
 }
 
-export default Routes
+const mapDispatchToProps = state => ({
+    commentModal: state.post.commentModal,
+    commentModalId: state.post.commentModalId
+})
+
+export default connect(mapDispatchToProps)(Routes)

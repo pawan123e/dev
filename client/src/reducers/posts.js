@@ -1,4 +1,4 @@
-import {CREATE_POST, GET_POSTS, POST_ERROR, DELETE_POST, UPDATE_LIKES, GET_POST, CREATE_COMMENT, DELETE_COMMENT, DELETE_PROFILE, LIKE_POST, UNLIKE_POST, CLEAR_POST, SET_POST_MODEL} from '../actions/types';
+import {CREATE_POST, GET_POSTS, POST_ERROR, DELETE_POST, UPDATE_LIKES, GET_POST, CREATE_COMMENT, DELETE_COMMENT, DELETE_PROFILE, LIKE_POST, UNLIKE_POST, CLEAR_POST, SET_POST_MODEL, SHOW_COMMENT_MODAL, UNSHOW_COMMENT_MODAL} from '../actions/types';
 
 const initialState = {
     posts: '',
@@ -6,7 +6,9 @@ const initialState = {
     post: null,
     error: null,
     postModel: false,
-    postModelId: null
+    postModelId: null,
+    commentModal: null, 
+    commentModalId: null
 }
 
 export default (state= initialState, action) => {
@@ -33,6 +35,18 @@ export default (state= initialState, action) => {
                 ...state,
                 postModel: action.payload.value,
                 postModelId: action.payload.id
+            }
+        case SHOW_COMMENT_MODAL: 
+            return {
+                ...state,
+                commentModal: action.payload.type,
+                commentModalId: action.payload.id
+            }
+        case UNSHOW_COMMENT_MODAL: 
+            return {
+                ...state,
+                commentModal: null,
+                commentModalId: null
             }
         case DELETE_POST:
              return {

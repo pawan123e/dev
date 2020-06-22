@@ -7,11 +7,11 @@ import {
   likePost,
   unLikePost,
   clearPost,
-  setPostModel
+  setPostModel,
+  showCommentModal
 } from "../../actions/posts";
 import Spinner from "../layout/Spinner";
 import Comments from "./Comments";
-import PostCommentForm from "./PostCommentForm";
 import moment from "moment";
 import styled, { css } from "styled-components";
 
@@ -19,56 +19,17 @@ const PostComment = ({
   post,
   getPostById,
   match,
-  createComment,
   user,
   likePost,
   unLikePost,
   clearPost,
   setPostModel,
   postModel,
-  history
+  history,
+  showCommentModal
 }) => {
   const [like, setLike] = useState(false);
   const [wrap, setWrap] = useState(false);
-  const [showCommentForm, setShowCommentForm] = useState(false);
-
-  useEffect(() => {
-    if(showCommentForm) {
-      history.push("/post/comment");
-      document.body.style.overflow = "hidden";
-    } else {
-      post && history.push(`/posts/${post._id}`);
-      document.body.style.overflow = "auto";
-    }
-  }, [showCommentForm])
-
-  useEffect(() => {
-    if(showCommentForm) {
-    
-    const closeModal = e => {
-      const element = document.querySelector(".commentForm");
-      if(element) {
-      const positionInfo = element.getBoundingClientRect();
-      const top = positionInfo.top;
-      const bottom = positionInfo.bottom;
-      const left = positionInfo.left;
-      const right = positionInfo.right;
-      if (
-        (e.clientY < top ||
-          e.clientY > bottom ||
-          e.clientX < left ||
-          e.clientX > right) &&
-        e.target.id !== "fileInput"
-      ) {
-        setShowCommentForm(false);
-      }
-    }
-  }
-    const modal = document.querySelector(".postCommentForm");
-    modal.addEventListener("click", closeModal);
-    return () => modal.addEventListener("click", closeModal);
-  }
-  },[showCommentForm])
 
   useEffect(() => {
     clearPost();
@@ -126,13 +87,6 @@ const PostComment = ({
   } else {
     return (
       <PostCommentWrap>
-        {showCommentForm && (
-          <div className="postCommentForm">
-            <div className="commentForm">
-              <PostCommentForm setShowCommentForm = {setShowCommentForm}/>
-            </div>
-          </div>
-        )}
         <div className="outerPart">
           {wrap && <div className="modelWrap"></div>}
           <div className="mainWrap">
@@ -173,7 +127,7 @@ const PostComment = ({
                   <button
                     type="button"
                     className="btn"
-                    onClick={() => setShowCommentForm(true)}
+                    onClick={() => showCommentModal('post', post._id, history)}
                   >
                     <i className="far fa-comment"></i>
                     {post.comments.length}
@@ -181,9 +135,6 @@ const PostComment = ({
                 </div>
               </div>
             </div>
-
-            {/* <PostCommentForm createComment={createComment} match={match}/>
-             */}
 
             <div className="comments">
               {post.comments.map(comment => (
@@ -210,28 +161,12 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getPostById, createComment, likePost, unLikePost, clearPost, setPostModel }
+  { getPostById, createComment, likePost, unLikePost, clearPost, setPostModel, showCommentModal}
 )(PostComment);
 
 const PostCommentWrap = styled.div`
 width: 100%;
 height: 100%;
-.postCommentForm{
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  z-index: 2;
-  background: rgba(0, 0, 0, 0.3);
-  .commentForm{
-    background: white;
-    height: 80%;
-    overflow: hidden;
-    width: 40%;
-    margin: auto;
-    margin-top: 3rem;
-    border-radius: 14px;
-  }
-}
 .outerPart{
   width: 80%;
 margin: auto;
@@ -371,36 +306,8 @@ margin-bottom: 2rem;
 }
 }
 
-@media (max-width: 1200px) { 
-  .postCommentForm{
-    .commentForm{
-       width: 50%;
-    }
-  }
-}
-
-@media (max-width: 900px) { 
-  .postCommentForm{
-    .commentForm{
-       width: 60%;
-    }
-  }
-}
 
 @media (max-width: 700px) {
-  .postCommentForm{ 
-    // min-height: 100vh;
-    // height: auto;
-
-    .commentForm{
-      // overflow: visible;
-     height: 100%;
-      
-      width: 100%;
-      border-radius: 0;
-      margin-top: 0;
-    }
-  }
   .outerPart{
     width: 100%;
     padding-top: 7vh;
