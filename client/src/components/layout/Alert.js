@@ -28,23 +28,27 @@ left: 0;
 width: 98vw;
 height: 7vh;
 z-index: 12;
+background: yellow;
+position: fixed;
 .alert{
     width: 35%;
     margin-left: 1rem;
-    margin-bottom: 2rem;
-    padding: 0.7rem 1.5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
     background: #323232;
     color: white;
     opacity: 1;
     border-radius: 3px;
-    position: fixed;
 }
 @media(max-width: 500px) {
     bottom: 0;
+    width: 100vw;
     .alert{
         width: 100%;
-        height: 100%;
         margin: 0;
+        justify-content: center;
     }
 }
 `
