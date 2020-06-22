@@ -4,7 +4,8 @@ import {
   deletePost,
   likePost,
   unLikePost,
-  setPostModel
+  setPostModel,
+  
 } from "../../actions/posts";
 import getDate from "../../utils/getDate";
 import PostCard from "./postCard";
@@ -19,7 +20,7 @@ const PostItem = ({
   postModel,
   setPostModel,
   modelId,
-  showCommentModal,
+  showCommentModal
 }) => {
   const goToPost = (e, id) => {
     if (!postModel) {

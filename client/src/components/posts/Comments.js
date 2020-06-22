@@ -1,10 +1,7 @@
 import React, { useState, useEffect} from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteComment, setPostModel } from "../../actions/posts";
-import styled, { css } from "styled-components";
 import getDate from "../../utils/getDate";
-import PostCommentForm from "./PostCommentForm";
 import PostCard from './postCard';
 
 const Comments = ({
@@ -21,14 +18,12 @@ const Comments = ({
 
   const showPostModel = (e, id) => {
     var topPos = e.target.getBoundingClientRect().top;
-    console.log("not postMOdel", !postModel);
     setPostModel(!postModel, id);
     if (topPos < 300) {
       setModelPosition(true);
     } else {
       setModelPosition(false);
     }
-    console.log("position of threeDots", topPos);
   };
 
   return (
@@ -43,39 +38,6 @@ const Comments = ({
     getDate={getDate}
     postId = {postId}
     badges = {false}/>
-    // <CommentWrap modelPosition={modelPosition}>
-    //   <div className="mainComment">
-    //     <Link to={`/profiles/${user._id}`} className="leftPortion">
-    //       <img src={require(`../../../../public/img/users/${user.avatar}`)} />
-    //     </Link>
-    //     <div className="rightPortion">
-    //       <div className="upper">
-    //         <Link to={`/profiles/${user._id}`} className="userName">
-    //           {user.name}
-    //         </Link>
-    //         <p className="date">{getDate(date)}</p>
-    //         {mainUser._id === user._id && (
-    //           <div className="options" onClick={e => showPostModel(e, _id)}>
-    //             <div className="dot"></div>
-    //             <div className="dot"></div>
-    //             <div className="dot"></div>
-    //             {postModel && modelId === _id && (
-    //               <div className="model">
-    //                 <p
-    //                   className="postDelete"
-    //                   onClick={() => deleteComment(postId, _id)}
-    //                 >
-    //                   Delete
-    //                 </p>
-    //               </div>
-    //             )}
-    //           </div>
-    //         )}
-    //       </div>
-    //       <p className="text">{text}</p>
-    //     </div>
-    //   </div>
-    // </CommentWrap>
   );
 };
 

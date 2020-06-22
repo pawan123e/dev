@@ -24,10 +24,12 @@ import DashboardSettings from '../dashboard/DashboardSettings'
 import CommentModal from '../layout/CommentModal'
 
 import {connect} from 'react-redux';
+import {unshowCommentModal} from '../../actions/posts';
 
 const Routes = ({commentModal}) => {
     
     useEffect(() => {
+
     }, [commentModal])
 
     return (

@@ -8,7 +8,8 @@ import {
   unLikePost,
   clearPost,
   setPostModel,
-  showCommentModal
+  showCommentModal,
+  unshowCommentModal
 } from "../../actions/posts";
 import Spinner from "../layout/Spinner";
 import Comments from "./Comments";
@@ -26,7 +27,8 @@ const PostComment = ({
   setPostModel,
   postModel,
   history,
-  showCommentModal
+  showCommentModal,
+  unshowCommentModal
 }) => {
   const [like, setLike] = useState(false);
   const [wrap, setWrap] = useState(false);
@@ -35,7 +37,12 @@ const PostComment = ({
     clearPost();
   }, []);
 
-  console.log('will this console print again')
+  useEffect(() => {
+    if(window.location.pathname !== '/compose/comment') {
+      document.body.style.overflow = 'auto'
+      unshowCommentModal()
+    }
+  }, [window.location.pathname])
 
   useEffect(() => {
     if (post) {
@@ -163,7 +170,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getPostById, createComment, likePost, unLikePost, clearPost, setPostModel, showCommentModal}
+  { getPostById, createComment, likePost, unLikePost, clearPost, setPostModel, showCommentModal, unshowCommentModal}
 )(PostComment);
 
 const PostCommentWrap = styled.div`

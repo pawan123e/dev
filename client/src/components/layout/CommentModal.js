@@ -8,16 +8,17 @@ const CommentModal = ({ commentModal, unshowCommentModal, commentModalId }) => {
   const [showModal, setShowModal] = useState(true);
 
   useEffect(() => {
-     if(!showModal) {
-        if (commentModal === "post") {
-            window.history.pushState({}, null, `/posts/${commentModalId}`);
-          } else if (commentModal === "posts") {
-            window.history.pushState({}, null, `/posts`);
-          }
-          unshowCommentModal();
-          document.body.style.overflow = "auto";
-        }
-  }, [showModal])
+    if (!showModal) {
+      if (commentModal === "post") {
+        window.history.pushState({}, null, `/posts/${commentModalId}`);
+      } else if (commentModal === "posts") {
+        window.history.pushState({}, null, `/posts`);
+      }
+      unshowCommentModal();
+      document.body.style.overflow = "auto";
+    }
+  }, [showModal]);
+
 
   useEffect(() => {
     if (commentModal) {
@@ -38,7 +39,7 @@ const CommentModal = ({ commentModal, unshowCommentModal, commentModalId }) => {
               e.clientX > right) &&
             e.target.id !== "fileInput"
           ) {
-              setShowModal(false);
+            setShowModal(false);
           }
         }
       };
@@ -53,7 +54,7 @@ const CommentModal = ({ commentModal, unshowCommentModal, commentModalId }) => {
       <CommentModalWrap>
         <div className="postCommentForm">
           <div className="commentForm">
-            <PostCommentForm setShowModal={setShowModal}/>
+            <PostCommentForm setShowModal={setShowModal} />
           </div>
         </div>
       </CommentModalWrap>
@@ -88,50 +89,49 @@ const CommentModalWrap = styled.div`
       border-radius: 14px;
     }
   }
-  @media (max-width: 1200px) { 
-    .postCommentForm{
-      .commentForm{
-         width: 50%;
+  @media (max-width: 1200px) {
+    .postCommentForm {
+      .commentForm {
+        width: 50%;
       }
     }
   }
-  
-  @media (max-width: 900px) { 
-    .postCommentForm{
-      .commentForm{
-         width: 60%;
+
+  @media (max-width: 900px) {
+    .postCommentForm {
+      .commentForm {
+        width: 60%;
       }
     }
   }
-  
+
   @media (max-width: 700px) {
-    .postCommentForm{ 
-      .commentForm{
-       height: 100%;
+    .postCommentForm {
+      .commentForm {
+        height: 100%;
         width: 100%;
         border-radius: 0;
         margin-top: 0;
       }
     }
-    .outerPart{
+    .outerPart {
       width: 100%;
       padding-top: 7vh;
-    .mainWrap{
-      border: none;
-      .btn{
-        margin-left: 1rem;
-      }
-      .main {
-      .postSection{
-        padding: 0.8rem 1rem;
-        padding-bottom: 0;
-        .postText{
-          font-size: 1.2rem;
+      .mainWrap {
+        border: none;
+        .btn {
+          margin-left: 1rem;
+        }
+        .main {
+          .postSection {
+            padding: 0.8rem 1rem;
+            padding-bottom: 0;
+            .postText {
+              font-size: 1.2rem;
+            }
+          }
         }
       }
-      
     }
-    }
-  }
   }
 `;

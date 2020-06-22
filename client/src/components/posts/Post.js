@@ -6,7 +6,8 @@ import {
   createPost,
   clearPost,
   setPostModel,
-  showCommentModal
+  showCommentModal,
+  unshowCommentModal
 } from "../../actions/posts";
 import Spinner from "../layout/Spinner";
 import PostItem from "./PostItem";
@@ -24,7 +25,8 @@ const Post = ({
   history,
   postModel,
   setPostModel,
-  showCommentModal
+  showCommentModal,
+  unshowCommentModal
 }) => {
   useEffect(() => {
     document.title = "Posts";
@@ -44,6 +46,13 @@ const Post = ({
       return () => modal.addEventListener("click", closeModal);
     }
   }, [wrap]);
+
+  useEffect(() => {
+    if(window.location.pathname !== '/compose/comment') {
+      document.body.style.overflow = "auto";
+      unshowCommentModal()
+    }
+  }, [window.location.pathname])
 
   useEffect(() => {
     if (postModel) {
@@ -93,7 +102,8 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getAllPosts, clearPost, createPost, setPostModel, showCommentModal }
+  { getAllPosts, clearPost, createPost, setPostModel, showCommentModal,
+    unshowCommentModal }
 )(Post);
 
 const PostWrap = styled.div`
