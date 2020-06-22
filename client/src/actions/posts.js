@@ -62,12 +62,14 @@ export const setPostModel = (value, id) => dispatch => {
     })
 }
 
-export const showCommentModal = (type, id, history) => dispatch => {
+export const showCommentModal = (type, id) => dispatch => {
+    console.log('showCommentModal', id)
     dispatch({
         type: SHOW_COMMENT_MODAL,
         payload: {type, id}
     })
         window.history.pushState({}, null, '/compose/comment');
+    
 }
 
 export const unshowCommentModal = () => dispatch => {

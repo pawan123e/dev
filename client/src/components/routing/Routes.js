@@ -28,7 +28,6 @@ import {connect} from 'react-redux';
 const Routes = ({commentModal}) => {
     
     useEffect(() => {
-        console.log('hiii everyone how it is goind', commentModal)
     }, [commentModal])
 
     return (

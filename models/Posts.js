@@ -50,7 +50,6 @@ postSchema.pre(/^find/, function(next) {
         model: "User",
         select: ["name", "email", "avatar"]
       })
-    console.log('hello uncle namaste')
     next();
 })
 

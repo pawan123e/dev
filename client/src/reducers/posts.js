@@ -8,7 +8,7 @@ const initialState = {
     postModel: false,
     postModelId: null,
     commentModal: null, 
-    commentModalId: null
+    commentModalPost: null
 }
 
 export default (state= initialState, action) => {
@@ -40,13 +40,13 @@ export default (state= initialState, action) => {
             return {
                 ...state,
                 commentModal: action.payload.type,
-                commentModalId: action.payload.id
+                commentModalPost: action.payload.id
             }
         case UNSHOW_COMMENT_MODAL: 
             return {
                 ...state,
                 commentModal: null,
-                commentModalId: null
+                commentModalPost: null
             }
         case DELETE_POST:
              return {

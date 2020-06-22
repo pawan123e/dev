@@ -53,7 +53,7 @@ const CommentModal = ({ commentModal, unshowCommentModal, commentModalId }) => {
       <CommentModalWrap>
         <div className="postCommentForm">
           <div className="commentForm">
-            <PostCommentForm setShowModal={setShowModal} />
+            <PostCommentForm setShowModal={setShowModal}/>
           </div>
         </div>
       </CommentModalWrap>

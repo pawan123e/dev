@@ -35,7 +35,7 @@ const prodError = (err, res) =>{
         message: err.message
   }) 
     }  else {
-      console.log('this is the error from errorController line 38', err.message)
+      
        res.status(err.statusCode).json({
             status: err.status,
             message: "Something went wrong",
@@ -51,7 +51,7 @@ const errorControl = (err, req, res, next) =>{
           
       if(process.env.NODE_ENV === 'production'){
         let error = {...err}
-        console.log(error.code);
+        
         error.message = err.message;
         if(error.name === 'CastError') error = castError();
           devError(error, res);
@@ -61,7 +61,7 @@ const errorControl = (err, req, res, next) =>{
       else if(process.env.NODE_ENV === 'development'){
           let error = {...err}
           error.message = err.message;
-          console.log(error.code);
+          
           if(error.code === 11000) error = duplicateData(error);
           if(error.name === 'ValidationError') error = validationError(error);
           if(error.name === 'CastError') error = castError();

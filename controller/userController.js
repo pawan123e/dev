@@ -14,16 +14,6 @@ const filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 
-// const multerStorage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         cb(null, 'public/img/users');
-//     },
-//     filename: (req, file, cb) => {
-//         const ext = file.mimetype.split('/')[1];
-//         cb(null, `user-${req.user._id}-${Date.now()}.${ext}`)
-//     }
-// })
-
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
@@ -77,7 +67,6 @@ exports.getUser = asyncError(async (req, res, next) => {
 
 exports.updateMe = asyncError(async (req, res, next) => {
   const filteredbody = filterObj(req.body, "name", "email");
-  console.log("body of an User model is", req.body);
   if (req.files.avatar) {
     filteredbody.avatar = req.body.avatar;
   }

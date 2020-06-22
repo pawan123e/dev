@@ -35,6 +35,8 @@ const PostComment = ({
     clearPost();
   }, []);
 
+  console.log('will this console print again')
+
   useEffect(() => {
     if (post) {
       if (post.like.some(like => like.user === user._id)) {
@@ -96,13 +98,13 @@ const PostComment = ({
             <div className="main">
               <div className="postSection">
                 <div className="topSection">
-                  <Link to={`/profiles/${post.user}`} className="leftPortion">
+                  <Link to={`/profiles/${post.user._id}`} className="leftPortion">
                     <img
                       src={require(`../../../../public/img/users/${post.user.avatar}`)}
                     />
                   </Link>
                   <div className="rightPortion">
-                    <Link to={`/profiles/${post.user}`} className="userName">
+                    <Link to={`/profiles/${post.user._id}`} className="userName">
                       {post.user.name}
                     </Link>
                     <p className="userEmail">{post.user.email}</p>
@@ -127,7 +129,7 @@ const PostComment = ({
                   <button
                     type="button"
                     className="btn"
-                    onClick={() => showCommentModal('post', post._id, history)}
+                    onClick={() => showCommentModal('post', post)}
                   >
                     <i className="far fa-comment"></i>
                     {post.comments.length}

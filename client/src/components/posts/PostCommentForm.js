@@ -13,7 +13,6 @@ const PostCommentForm = ({ setShowModal, post, user, createComment }) =>
       e.preventDefault();
       createComment(post._id, text);
       setShowModal(false)
-      // setShowCommentForm(false)
     };
 
     return (
@@ -59,8 +58,8 @@ const PostCommentForm = ({ setShowModal, post, user, createComment }) =>
     );
   };
 const mapStateToProps = state => ({
-  post: state.post.post,
-  user: state.auth.user
+  user: state.auth.user,
+  post: state.post.commentModalPost
 });
 
 export default connect(

@@ -1,8 +1,6 @@
 const asyncError = require("../utils/asyncError");
 const AppError = require("../utils/AppError");
 const Post = require("../models/Posts");
-const User = require("../models/User");
-const Profile = require("../models/Profile");
 
 exports.createPosts = asyncError(async (req, res, next) => {
   const newPost = {
@@ -17,7 +15,6 @@ exports.createPosts = asyncError(async (req, res, next) => {
 
 exports.getPosts = asyncError(async (req, res, next) => {
   const posts = await Post.find().sort({ date: -1 });
-  //const posts = await Post.find({user: req.user._id}).sort({date: -1});
   if (!posts) {
     return next(new AppError("No post found", 404));
   }
@@ -88,8 +85,6 @@ exports.unlikePost = asyncError(async (req, res, next) => {
 
 exports.createComment = asyncError(async (req, res, next) => {
   let post = await Post.findById(req.params.id);
-  console.log('hello did we reach here')
-
   if (!post) {
     return next(new AppError("Invalid postId", 404));
   }
@@ -110,7 +105,6 @@ exports.createComment = asyncError(async (req, res, next) => {
 
 exports.removeComment = asyncError(async (req, res, next) => {
   const post = await Post.findById(req.params.id);
-  console.log('post comments in postsController in 133 line', req.params.comment_id, post.comments);
   if (!post) {
     return next(new AppError("Invalid post id", 404));
   }

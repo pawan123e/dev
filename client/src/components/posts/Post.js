@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import {Redirect} from 'react-router-dom'
+
 import {
   getAllPosts,
   createPost,
   clearPost,
-  setPostModel
+  setPostModel,
+  showCommentModal
 } from "../../actions/posts";
 import Spinner from "../layout/Spinner";
 import PostItem from "./PostItem";
 import PostForm from "./PostForm";
 import styled from "styled-components";
-import PostCommentForm from "./PostCommentForm";
+
 const Post = ({
   getAllPosts,
   createPost,
@@ -19,18 +20,19 @@ const Post = ({
   loading,
   posts,
   user,
+  post,
   history,
   postModel,
-  setPostModel
+  setPostModel,
+  showCommentModal
 }) => {
   useEffect(() => {
     document.title = "Posts";
     getAllPosts();
     clearPost();
-  }, [getAllPosts, clearPost]);
+  }, [getAllPosts, clearPost, post]);
 
   const [wrap, setWrap] = useState(false);
-  const [showCommentForm, setShowCommentForm] = useState(false);
 
   useEffect(() => {
     if (wrap) {
@@ -42,13 +44,6 @@ const Post = ({
       return () => modal.addEventListener("click", closeModal);
     }
   }, [wrap]);
-
-  useEffect(() => {
-    if (showCommentForm) {
-     history.push('/posts/comment')
-    }
-
-  }, [showCommentForm]);
 
   useEffect(() => {
     if (postModel) {
@@ -63,7 +58,6 @@ const Post = ({
   } else {
     return (
       <PostWrap>
-        {showCommentForm && <PostCommentForm />}
         {wrap && <div className="modelWrap"></div>}
         <div className="topSection">
           <h1 className="large text-primary"> Posts </h1>
@@ -80,7 +74,7 @@ const Post = ({
                 post={post}
                 user={user}
                 history={history}
-                setShowCommentForm={setShowCommentForm}
+                showCommentModal = {showCommentModal}
               />
             ))}
         </div>
@@ -93,12 +87,13 @@ const mapStateToProps = state => ({
   loading: state.post.loading,
   posts: state.post.posts,
   user: state.auth.user,
-  postModel: state.post.postModel
+  postModel: state.post.postModel,
+  post: state.post.post
 });
 
 export default connect(
   mapStateToProps,
-  { getAllPosts, clearPost, createPost, setPostModel }
+  { getAllPosts, clearPost, createPost, setPostModel, showCommentModal }
 )(Post);
 
 const PostWrap = styled.div`

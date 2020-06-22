@@ -14,10 +14,10 @@ const PostCard = ({
   like,
   getDate,
   checkLike,
-  setShowCommentForm,
+  showCommentModal,
   badges, 
   postId,
-  options = true
+  options = true, 
 }) => {
   return (
     <PostCardWrap modelPosition={modelPosition} badges = {badges}>
@@ -29,7 +29,7 @@ const PostCard = ({
             <div className="dot"></div>
             {postModel && modelId === card._id && (
               <div className="model">
-                <p className="postDelete" onClick={postId ? () => deleteItem(postId, card._id) && console.log('it is deleting') : () => deleteItem(card._id)}>
+                <p className="postDelete" onClick={postId ? () => deleteItem(postId, card._id)  : () => deleteItem(card._id)}>
                   Delete
                 </p>
               </div>
@@ -65,7 +65,7 @@ const PostCard = ({
             <button
               type="button"
               className="btn"
-              onClick={() => setShowCommentForm(true)}
+              onClick={() => showCommentModal('posts', card)}
             >
               <i className="far fa-comment"></i>
               <span>{card.comments.length ? card.comments.length : ""}</span>
