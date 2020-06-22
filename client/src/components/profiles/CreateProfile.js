@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {createProfile} from '../../actions/profile'
+import styled from 'styled-components'
 const CreateProfile = ({createProfile, history}) => {
 
     const [formData, setFormData] = useState({
@@ -30,7 +31,7 @@ const CreateProfile = ({createProfile, history}) => {
     }
 
     return (
-        <>
+        <ProfileWrap>
            <h1 className="large text-primary">
                Create Your Profile
            </h1>
@@ -136,8 +137,14 @@ const CreateProfile = ({createProfile, history}) => {
         <Link className="btn btn-light my-1" to='/dashboard'>Go Back</Link>
 
             </form> 
-        </>
+        </ProfileWrap>
     )
 }
 
 export default connect(null, {createProfile})(CreateProfile)
+
+const ProfileWrap = styled.div`
+padding-top: 12vh;
+width: 80%;
+margin: 0 auto;
+`

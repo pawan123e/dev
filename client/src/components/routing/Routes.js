@@ -22,9 +22,9 @@ import Posts from '../posts/Post'
 import PostComment from  '../posts/PostComment'
 import DashboardSettings from '../dashboard/DashboardSettings'
 import CommentModal from '../layout/CommentModal'
+import ScrollToTop from '../ScrollToTop'
 
 import {connect} from 'react-redux';
-import {unshowCommentModal} from '../../actions/posts';
 
 const Routes = ({commentModal}) => {
     
@@ -36,6 +36,7 @@ const Routes = ({commentModal}) => {
         <section>
         <Alert/>
         <CommentModal/>
+        <ScrollToTop />
         <Switch>
              <Route exact path="/register" component={Register}/>
              <Route exact path="/login" component={Login}/>

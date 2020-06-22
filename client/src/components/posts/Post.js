@@ -48,11 +48,11 @@ const Post = ({
   }, [wrap]);
 
   useEffect(() => {
-    if(window.location.pathname !== '/compose/comment') {
+    if (window.location.pathname !== "/compose/comment") {
       document.body.style.overflow = "auto";
-      unshowCommentModal()
+      unshowCommentModal();
     }
-  }, [window.location.pathname])
+  }, [window.location.pathname]);
 
   useEffect(() => {
     if (postModel) {
@@ -83,7 +83,7 @@ const Post = ({
                 post={post}
                 user={user}
                 history={history}
-                showCommentModal = {showCommentModal}
+                showCommentModal={showCommentModal}
               />
             ))}
         </div>
@@ -102,8 +102,14 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getAllPosts, clearPost, createPost, setPostModel, showCommentModal,
-    unshowCommentModal }
+  {
+    getAllPosts,
+    clearPost,
+    createPost,
+    setPostModel,
+    showCommentModal,
+    unshowCommentModal
+  }
 )(Post);
 
 const PostWrap = styled.div`
@@ -120,7 +126,6 @@ const PostWrap = styled.div`
     margin: auto;
   }
   .posts {
-    // padding: 1rem;
     border: 1px solid rgb(230, 236, 240);
     border-top: none;
     margin-bottom: 1rem;

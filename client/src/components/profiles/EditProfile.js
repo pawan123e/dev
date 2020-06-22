@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {createProfile, getCurrentProfile} from '../../actions/profile'
+import styled from 'styled-components'
 const EditProfile = ({createProfile, profile, loading, getCurrentProfile, history}) => {
 
     const [formData, setFormData] = useState({
@@ -49,7 +50,7 @@ const EditProfile = ({createProfile, profile, loading, getCurrentProfile, histor
     }
     
         return (
-            <>
+            <EditProfileWrap>
                <h1 className="large text-primary">
                    Edit Your Profile
                </h1>
@@ -151,7 +152,7 @@ const EditProfile = ({createProfile, profile, loading, getCurrentProfile, histor
             <Link className="btn btn-light my-1" to='/dashboard'>Go Back</Link>
     
                 </form> 
-            </>
+            </EditProfileWrap>
         )
     }
 
@@ -161,3 +162,14 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, {createProfile, getCurrentProfile})(EditProfile)
+
+const EditProfileWrap = styled.div`
+padding-top: 12vh;
+width: 80%;
+margin: 0 auto;
+@media(max-width: 500px) {
+   h1{ 
+     font-size: 1.5rem;
+   }
+}
+`

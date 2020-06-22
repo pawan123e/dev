@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import { addEducation, getCurrentProfile } from '../../actions/profile';
 import {connect} from 'react-redux'
 import { setAlert } from '../../actions/alert';
+import styled from 'styled-components'
 
 const AddEducation = ({addEducation, history}) => {
 
@@ -26,7 +27,7 @@ const AddEducation = ({addEducation, history}) => {
     }
 
     return (
-        <>
+        <EducationWrap >
            <h1 className="large text-primary">
         Add Your Education
       </h1>
@@ -92,8 +93,19 @@ const AddEducation = ({addEducation, history}) => {
         <input type="submit" className="btn btn-primary my-1" />
         <Link className="btn btn-light my-1" to='/dashboard'>Go Back</Link>
       </form>
-        </>
+        </EducationWrap >
     )
 }
 
 export default connect(null, {addEducation, setAlert, getCurrentProfile})(AddEducation)
+
+const EducationWrap = styled.div`
+padding-top: 12vh;
+width: 80%;
+margin: 0 auto;
+@media(max-width: 500px) {
+  h1{ 
+    font-size: 1.5rem;
+  }
+}
+`
