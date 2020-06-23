@@ -23,12 +23,11 @@ export default connect(mapStateToProps)(Alert)
 
 const AlertWrap = styled.div`
 position: absolute;
-bottom: 5vh;
+bottom: 3vh;
 left: 0;
 width: 98vw;
 height: 7vh;
 z-index: 12;
-background: yellow;
 position: fixed;
 .alert{
     width: 35%;

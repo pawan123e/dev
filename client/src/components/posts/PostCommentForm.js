@@ -33,8 +33,8 @@ const PostCommentForm = ({ setShowModal, post, user, createComment }) =>
           </header>
           <main>
           
-            <PostCard card={post} options={false} getDate={getDate} />
-
+            <div className='sender'><PostCard card={post} options={false} getDate={getDate} /><div className='connectLine'></div></div>
+            
             <div className="reply">
               <div className="left">
                 <img
@@ -109,6 +109,18 @@ const PostForm = styled.div`
     max-height: 78%;
     overflow: auto;
     width: 100%;
+    .sender{
+      position: relative;
+      .connectLine{
+        position: absolute;
+        top: 80px;
+        left: 41px;
+        height: calc(100% - 67.5px);
+        width: 3px;
+        background: gray;
+        transform: translate(-50%, 0);
+      }
+    }
     .reply {
       margin-top: 1rem;
       padding: 0.8rem 1rem;
