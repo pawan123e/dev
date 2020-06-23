@@ -145,7 +145,7 @@ const Register = ({
             Already have an account? <Link to="/login">Sign In</Link>
           </p>
         </div>
-      </div>
+      </div>}
     </AccountWrap>
   );
 };

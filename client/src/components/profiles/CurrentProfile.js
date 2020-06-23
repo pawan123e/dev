@@ -183,7 +183,7 @@ const CurrentProfile = ({ getProfileById, loading, match, profile, error }) => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div>}
           </div>
 
           
