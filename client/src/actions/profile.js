@@ -162,7 +162,7 @@ export const getAllProfiles = () => async dispatch =>{
            payload: res.data
          })
      } catch (err) {
-         console.log('this error is for getallprofiles')
+         
          dispatch({
            type: PROFILE_ERROR,
            payload: err.response.data.message

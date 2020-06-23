@@ -55,7 +55,7 @@ export const getAllPosts = () => async dispatch => {
 }
 
 export const setPostModel = (value, id) => dispatch => {
-    console.log('model value in post.js action in 56', id)
+    
     dispatch({
         type: SET_POST_MODEL,
         payload: {value, id}
@@ -63,7 +63,7 @@ export const setPostModel = (value, id) => dispatch => {
 }
 
 export const showCommentModal = (type, id) => dispatch => {
-    console.log('showCommentModal', id)
+    
     dispatch({
         type: SHOW_COMMENT_MODAL,
         payload: {type, id}
@@ -144,13 +144,13 @@ export const unLikePost = (id, user) => async dispatch => {
 export const getPostById = id => async dispatch => {
     try {
         const res = await axios.get(`/api/posts/${id}`);
-        console.log('this is post', res.data)
+        
         dispatch({
             type: GET_POST,
             payload: res.data
         })
     } catch (err) {
-        console.log(err.response.data.message)
+        
         dispatch({
             type: POST_ERROR,
             payload: err.response.data.message

@@ -46,7 +46,7 @@ export const registerUser = (user) => async dispatch => {
        const body = JSON.stringify(user);
        try {
            const res = await axios.post('/api/users/register', body, config);
-           console.log(res.data)
+           
            dispatch({
                type: REGISTER_SUCCESS,
                payload: res.data
@@ -143,7 +143,7 @@ export const resetPassword = (token, history, user) => async dispatch => {
         })
         history.push('/dashboard')
     } catch (err) {
-        console.log('hello this is the error of reset Password', err.response.data.message)
+        
         dispatch({
             type: LOGIN_FAIL,
             payload: err.response.data.message
@@ -155,7 +155,7 @@ export const updateUser = (userData, history) => async dispatch => {
     const config = {
         headers: {'Content-Type': 'multipart/form-data'}
     }
-    console.log('data', userData);
+    
     try {
         const res = await axios.patch(`/api/users/updateMe`, userData, config);
         dispatch({
@@ -164,7 +164,7 @@ export const updateUser = (userData, history) => async dispatch => {
         })
         history.push('/dashboard')
     } catch (err) {
-        console.log('hello this is the error of reset Password', err.response.data.message)
+        
         dispatch({
             type: CLEAR_ERRORS,
             payload: err.response.data.message

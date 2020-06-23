@@ -41,7 +41,7 @@ const Register = ({
     }
     clearProfile();
     if (error === "User already exists") {
-      console.log('user already exists');
+      
       window.scrollTo(0,0);
       setAlert(true);
       setMessage(error);
@@ -61,14 +61,14 @@ const Register = ({
       setMessage('Password does not match');
       window.scrollTo(0,0);
     } else {
-      console.log("this is register");
+      
       registerUser(user);
     }
   };
 
   return (
     <AccountWrap>
-      {console.log(message)}
+      {
       <div className="main">
       {alert && <div className='accountAlert'> 
         <p className='errorMessage'>{message}</p>

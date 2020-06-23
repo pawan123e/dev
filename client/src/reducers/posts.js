@@ -81,7 +81,7 @@ export default (state= initialState, action) => {
               }
         }
         case LIKE_POST: 
-               console.log(state.post && {...state.post, like: [...state.post.like, action.payload.liking]})
+               
                return {
                    ...state,
                    loading: false,

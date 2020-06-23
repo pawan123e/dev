@@ -10,14 +10,14 @@ const Navbar = ({isAuthenticated, logout, user}) => {
 
     useEffect(() => {
         if(ham) {
-            console.log('ham is true')
+            
            const links = document.querySelector('.links');
-           console.log(links.classList)
+           
            links.classList.add('showUl');
         } else {
-            console.log('ham is false');
+            
             const links = document.querySelector('.links');
-            console.log(links.classList)
+            
             links.classList.remove('showUl');
         }
     }, [ham])

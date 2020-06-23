@@ -82,7 +82,7 @@ const CurrentProfile = ({ getProfileById, loading, match, profile, error }) => {
                 </div>
               </div>
             </div>
-            {console.log("profile email", profile.user)}
+            {
             <div className="profileMain">
               <div className="mainLeft">
                 <h1 className="personalHeading">Personal Details</h1>
