@@ -3,6 +3,8 @@ const AppError = require("../utils/AppError");
 const User = require("../models/User");
 const multer = require("multer");
 const sharp = require("sharp");
+const cloudinary = require("cloudinary");
+const fs = require("fs");
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -58,6 +60,30 @@ exports.resizeUserPhoto = asyncError(async (req, res, next) => {
   next();
 });
 
+
+cloudinary.config({
+  cloud_name: 'pawank123',
+  api_key: 811465533626947,
+  api_secret: 'f2N_ko-qaVSWDOvU8so9NUvRJcM'
+});
+
+const uploads = async (file, folder) => {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.upload(file, (url, err) => {
+      if (err) return reject(err);
+      return resolve({
+        url: url.url,
+        id: url.public_id
+      })
+    },
+    {
+      resource_type: "auto",
+      folder: folder
+    }
+    )
+  });
+};
+
 exports.getUser = asyncError(async (req, res, next) => {
   const user = await User.findById(req.user._id).select("-password");
   res.json({
@@ -66,12 +92,16 @@ exports.getUser = asyncError(async (req, res, next) => {
 });
 
 exports.updateMe = asyncError(async (req, res, next) => {
+  
   const filteredbody = filterObj(req.body, "name", "email");
   if (req.files.avatar) {
-    filteredbody.avatar = req.body.avatar;
+    const photo = await uploads(`public/img/users/${req.body.avatar}`, 'Images')
+    filteredbody.avatar = photo.url;
   }
+ 
   if (req.files.coverPhoto) {
-    filteredbody.coverPhoto = req.body.coverPhoto;
+    const photo = await uploads(`public/img/cover/${req.body.coverPhoto}`, 'Images')
+    filteredbody.coverPhoto = photo.url;
   }
   if (req.body.name) {
     filteredbody.name = req.body.name;

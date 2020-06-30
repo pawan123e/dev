@@ -36,11 +36,11 @@ const userSchema = new mongoose.Schema({
     passwordResetExpires: Date,
     avatar: {
         type: String,
-        default: 'default.png'
+        default: 'http://res.cloudinary.com/pawank123/image/upload/v1593538586/Images/vbrmvhdohujep9usc2ya.jpg'
     },
     coverPhoto: {
         type: String,
-        default: 'default.jpg'
+        default: 'http://res.cloudinary.com/pawank123/image/upload/v1593538591/Images/mpcb04dg7pmlfdndrrcd.jpg'
     },
     date: {
         type: Date,

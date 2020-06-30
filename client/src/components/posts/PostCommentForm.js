@@ -38,7 +38,7 @@ const PostCommentForm = ({ setShowModal, post, user, createComment }) =>
             <div className="reply">
               <div className="left">
                 <img
-                  src={require(`../../../../public/img/users/${user.avatar}`)}
+                  src={user.avatar}
                 />
               </div>
               <div className="right">

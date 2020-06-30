@@ -24,7 +24,7 @@ const CurrentProfile = ({ getProfileById, loading, match, profile, error }) => {
           <div className="wrap">
             <div className="profileHeader">
               <div className="leftHeader">
-                <img src={profile.user && require(`../../../../public/img/users/${profile.user.avatar}`)}alt="profilePic" />
+                <img src={profile.user && profile.user.avatar} alt="profilePic" />
               </div>
               <div className="rightHeader">
                 <div className="profileAbout">

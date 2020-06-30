@@ -5,19 +5,20 @@
     "main": "server.js",
     "engines": {
         "node": "12.9.1"
-      },
+    },
     "scripts": {
         "start": "node server",
         "prodserver": "set NODE_ENV=production&& nodemon server",
         "server": "set NODE_ENV=development&& nodemon server",
         "client": "npm start --prefix client",
-        "dev": "concurrently \"npm run server\" \"npm run client\"",
+        "dev": "concurrently \"npm run prodserver\" \"npm run client\"",
         "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
     },
     "author": "pawan",
     "license": "ISC",
     "dependencies": {
         "bcryptjs": "^2.4.3",
+        "cloudinary": "^1.22.0",
         "compression": "^1.7.4",
         "concurrently": "^4.1.2",
         "crypto": "^1.0.1",

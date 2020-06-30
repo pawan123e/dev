@@ -27,7 +27,7 @@ const Navbar = ({isAuthenticated, logout, user}) => {
         <li onClick = {() => setHam(false)}><Link to='/profiles'> Developers </Link></li>   
         <li onClick = {() => setHam(false)}><Link to='/posts'> Posts </Link></li>   
         <li onClick = {() => setHam(false)}><Link to='/dashboard' className='profileSnapshot'>
-               {user && <img src = {require(`../../../../public/img/users/${user.avatar}`)}/>}
+               {user && <img src = {user.avatar}/>}
            {' '}
             Dashboard</Link></li>
         <li onClick = {() => setHam(false)}>

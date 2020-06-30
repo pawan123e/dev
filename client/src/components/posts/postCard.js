@@ -38,7 +38,7 @@ const PostCard = ({
         )}
         <Link to={`/profiles/${card.user._id}`} className="leftPortion">
           <img
-            src={require(`../../../../public/img/users/${card.user.avatar}`)}
+            src={card.user.avatar}
           />
         </Link>
         <div className="rightPortion">

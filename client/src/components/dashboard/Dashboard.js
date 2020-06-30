@@ -37,12 +37,12 @@ const Dashboard = ({
       <DashboardWrap>
         <div className="card">
           <div className="topPart">
-            <img src={require(`../../../../public/img/cover/${auth.user.coverPhoto}`)} />
+            <img src={auth.user.coverPhoto} />
             <div className="profileImg">
               <img
                 src={
                   auth.user &&
-                  require(`../../../../public/img/users/${auth.user.avatar}`)
+                  auth.user.avatar
                 }
                 alt="profilePic"
               />

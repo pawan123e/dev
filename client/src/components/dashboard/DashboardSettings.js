@@ -82,7 +82,7 @@ const DashboardSettings = ({ auth, history, updateUser }) => {
               <img
                 src={
                   auth.user &&
-                  require(`../../../../public/img/cover/${auth.user.coverPhoto}`)
+                  auth.user.coverPhoto
                 }
                 alt="web"
               />
@@ -114,8 +114,7 @@ const DashboardSettings = ({ auth, history, updateUser }) => {
               <div className="profileImg">
                 <img
                   src={
-                    auth.user &&
-                    require(`../../../../public/img/users/${auth.user.avatar}`)
+                    auth.user && auth.user.avatar
                   }
                   alt="profilePic"
                 />
