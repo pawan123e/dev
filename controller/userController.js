@@ -4,7 +4,6 @@ const User = require("../models/User");
 const multer = require("multer");
 const sharp = require("sharp");
 const cloudinary = require("cloudinary");
-const fs = require("fs");
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
