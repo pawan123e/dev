@@ -107,7 +107,7 @@ const PostComment = ({
                 <div className="topSection">
                   <Link to={`/profiles/${post.user._id}`} className="leftPortion">
                     <img
-                      src={require(`../../../../public/img/users/${post.user.avatar}`)}
+                      src={post.user.avatar}
                     />
                   </Link>
                   <div className="rightPortion">

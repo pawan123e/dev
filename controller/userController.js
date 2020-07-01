@@ -60,13 +60,6 @@ exports.resizeUserPhoto = asyncError(async (req, res, next) => {
   next();
 });
 
-
-cloudinary.config({
-  cloud_name: 'pawank123',
-  api_key: 811465533626947,
-  api_secret: 'f2N_ko-qaVSWDOvU8so9NUvRJcM'
-});
-
 const uploads = async (file, folder) => {
   return new Promise((resolve, reject) => {
     cloudinary.uploader.upload(file, (url, err) => {
@@ -92,6 +85,11 @@ exports.getUser = asyncError(async (req, res, next) => {
 });
 
 exports.updateMe = asyncError(async (req, res, next) => {
+  cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: 811465533626947,
+    api_secret: 'f2N_ko-qaVSWDOvU8so9NUvRJcM'
+  });
   
   const filteredbody = filterObj(req.body, "name", "email");
   if (req.files.avatar) {

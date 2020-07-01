@@ -4,6 +4,7 @@ import DashBoard from "./Dashboard";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { updateUser } from "../../actions/auth";
+import loader from '../../img/loader/smallLoader.svg'
 
 const DashboardSettings = ({ auth, history, updateUser }) => {
   const [user, setUser] = useState({
@@ -15,6 +16,7 @@ const DashboardSettings = ({ auth, history, updateUser }) => {
 
   const [profilePhoto, setProfilePhoto] = useState(false);
   const [coverPhoto, setCoverPhoto] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   const userPhotoRef = useRef();
   const userCoverRef = useRef();
@@ -48,6 +50,7 @@ const DashboardSettings = ({ auth, history, updateUser }) => {
 
   const onsubmit = e => {
     e.preventDefault();
+    setClicked(true);
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
@@ -168,7 +171,8 @@ const DashboardSettings = ({ auth, history, updateUser }) => {
               </div>
             </div>
             <div className="btns">
-              <input type="submit" className="btn" value="Save Settings" />
+              <input type="submit" disabled = {clicked}className="btn" value="Save Settings" />
+             {clicked &&  <img src = {loader} />}
             </div>
           </form>
         </div>
@@ -328,6 +332,12 @@ const DashboardWrap = styled.div`
       }
       .btns {
         margin-left: 5%;
+        display: flex;
+        align-items: center;
+        img {
+          height: 30px;
+          width: auto;
+        }
         .btn {
           background: #ff5200;
           border: none;
