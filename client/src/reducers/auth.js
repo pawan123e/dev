@@ -10,7 +10,8 @@ import {
        DELETE_PROFILE,
        FORGOT_PASSWORD,
        FORGOT_PASSWORD_ERROR,
-       CLEAR_FORGOT_PASSWORD
+       CLEAR_FORGOT_PASSWORD,
+       UPDATED_USER
     } from '../actions/types';
 
 const initialState = {
@@ -62,6 +63,7 @@ export default (state = initialState, action) => {
                 email: null
             }
         case GET_USER: 
+        case UPDATED_USER:
              return {
                  ...state,
                  isAuthenticated: true,
@@ -69,7 +71,7 @@ export default (state = initialState, action) => {
                  user: action.payload,
                  recoverToken:null,
                  email: null
-             } 
+             }      
         case FORGOT_PASSWORD: 
             return {
                 ...state,

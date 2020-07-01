@@ -171,7 +171,7 @@ const DashboardSettings = ({ auth, history, updateUser }) => {
               </div>
             </div>
             <div className="btns">
-              <input type="submit" disabled = {clicked}className="btn" value="Save Settings" />
+              <input type="submit" disabled = {clicked} className={!clicked ? 'btn-orange btn' : 'btn-gray btn'} value="Save Settings" />
              {clicked &&  <img src = {loader} />}
             </div>
           </form>
@@ -339,11 +339,23 @@ const DashboardWrap = styled.div`
           width: auto;
         }
         .btn {
-          background: #ff5200;
           border: none;
           padding: 0.7rem 2rem;
-          color: white;
           border-radius: 5px;
+          color: white;
+          cursor: default;
+        }
+        .btn-orange {
+          background: #ff5200; 
+          cursor: pointer;
+        }
+        .btn-gray {
+          background: #494e54;
+          cursor: default;
+          &:hover{
+            background: #494e54;
+            opacity: 1;
+          }
         }
       }
     }

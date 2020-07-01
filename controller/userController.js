@@ -56,7 +56,6 @@ exports.resizeUserPhoto = asyncError(async (req, res, next) => {
       .jpeg({ quality: 90 })
       .toFile(`public/img/users/${req.body.avatar}`);
   }
-
   next();
 });
 
@@ -108,6 +107,7 @@ exports.updateMe = asyncError(async (req, res, next) => {
     new: true,
     runValidators: true
   });
+
   res.status(200).json({
     status: "success",
     data: {

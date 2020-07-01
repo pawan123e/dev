@@ -160,7 +160,7 @@ export const updateUser = (userData, history) => async dispatch => {
         const res = await axios.patch(`/api/users/updateMe`, userData, config);
         dispatch({
             type: UPDATED_USER,
-            payload: res.data
+            payload: res.data.data.user
         })
         history.push('/dashboard')
     } catch (err) {
