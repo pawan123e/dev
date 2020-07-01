@@ -167,14 +167,11 @@ const PostCardWrap = styled.div`
     .rightPortion {
       margin-left: 1rem;
       position: relative;
-      max-width: 80%;
-
+      width: 90%;
       .cardText {
-        margin-right: 1rem;
         font-size: 1rem;
         white-space: pre-line;
         word-wrap: break-word;
-        max-width: 90%;
       }
       .upper {
         display: flex;
@@ -189,7 +186,6 @@ const PostCardWrap = styled.div`
         }
         .date {
           color: #808080;
-        //   margin-top: 0.5rem;
         }
       }
       .check {
@@ -220,6 +216,9 @@ const PostCardWrap = styled.div`
     .main {
       &:hover {
         background: none;
+      }
+      .rightPortion{
+        width: 70%;
       }
     }
   }
