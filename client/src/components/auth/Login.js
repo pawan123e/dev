@@ -91,11 +91,6 @@ const Login = ({loginUser, error, isAuthenticated, history, clearProfile, clearE
                      <button type="submit" disable = {error}>
                      {loading ? 'Loading...' : 'Login'}
                 </button>
-                {/* <p className="my-1">
-                <Link to='/forgotPassword'>
-                   Forgot Password?
-                </Link>
-            </p> */}
                 </div>
                
             </form>

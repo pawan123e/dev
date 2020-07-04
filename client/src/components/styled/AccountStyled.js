@@ -145,6 +145,9 @@ padding-bottom: 1rem;
 @media(max-width: 525px) {
     background: white;
     padding-top: 9vh;
+    input::placeholder {
+        color:white;
+        }
     .main {
         width: 100%;
         height: 100%;
@@ -171,6 +174,7 @@ padding-bottom: 1rem;
                             width: 100%;
                             padding: 0.5rem 0.2rem;
                         }
+                        
                         .line{
                             width: 100%;
                         }
