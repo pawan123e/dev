@@ -103,14 +103,16 @@ const NavbarWrap = styled.div`
         }
     }
   }
-  @media(max-width: 700px) {
+
+  @media(max-width: 850px) {
       .navbar{
          flex-direction: column; 
          border: none;
          display: flex;
          padding: 0;
          opacity: 1;
-         height: 60px
+         height: 8vh;
+         min-height: 50px;
          .hamburger{
              display: block;
              position: absolute;
@@ -139,12 +141,12 @@ const NavbarWrap = styled.div`
              min-height: 100vh;
              background: #343a40;
              justify-content: space-between;
-             align-items: space-around;
+             align-items: space-between;
              margin-bottom: 0;
              padding: 8rem 0;
              opacity: 1;
              clip-path: circle(100px at 90% -10%);
-             -webkit-clip-path: circle(100px at 90% -10%);
+             -webkit-clip-path: circle(-100px at 90% -10%);
              transition: all 1s ease-out;
              li{
                  font-size: 1.5rem;
@@ -157,4 +159,20 @@ const NavbarWrap = styled.div`
          }
       }
   }
+
+  @media(max-height: 450px) {
+    .navbar {
+        .links {
+            padding: 4rem 0;
+            padding-top: 6rem;
+            clip-path: circle(100px at 90% -20%);
+             -webkit-clip-path: circle(-100px at 90% -10%);
+        }
+        .showUl{
+            clip-path: circle(1000px at 90% -10%)!imporant;
+            -webkit-clip-path: circle(1000px at 90% -10%)!important;
+         }
+    }
+}
+
 `
